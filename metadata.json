@@ -1,0 +1,6 @@
+{
+  "name": "Embroidery Digitizing & Vector Art Services",
+  "description": "Professional custom embroidery digitizing, vector art conversion, and custom patches services with an AI-powered instant stitch count estimator.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
