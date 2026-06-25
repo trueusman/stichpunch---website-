@@ -6,17 +6,17 @@ import patchImg from "../assets/images/embroidered_patch_1782158664945.jpg";
 export default function AboutSection() {
   const highlights = [
     {
-      icon: <Award className="h-5 w-5 text-gold-400" />,
+      icon: <Award className="h-5 w-5" style={{ color: "#1cb8df" }} />,
       title: "Master Level Digitizers",
       desc: "Our senior design team comprises visual trade legends with 15+ years hand-drafting paths under Wilcom and Corell layouts."
     },
     {
-      icon: <Watch className="h-5 w-5 text-gold-400" />,
+      icon: <Watch className="h-5 w-5" style={{ color: "#1cb8df" }} />,
       title: "Surgical Speeds",
       desc: "Get digital file proofs back in average 8-hour delivery. Never stall client uniform sewing runs again."
     },
     {
-      icon: <Zap className="h-5 w-5 text-gold-400" />,
+      icon: <Zap className="h-5 w-5" style={{ color: "#1cb8df" }} />,
       title: "Flawless Path Integrity",
       desc: "Every curve is tested via software simulation first to correct density strains, looping jump threads, and long underlays."
     }
@@ -54,9 +54,9 @@ export default function AboutSection() {
   };
 
   return (
-    <section id="about" className="py-24 bg-navy-950 text-white relative overflow-hidden scroll-mt-12">
+    <section id="about" className="py-24 bg-white text-slate-900 relative overflow-hidden scroll-mt-12">
       <div className="absolute inset-0 bg-[#070b14]/50 pointer-events-none" />
-      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-gold-400/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full blur-3xl pointer-events-none" style={{ background: "rgba(28,184,223,0.04)" }} />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
@@ -71,28 +71,29 @@ export default function AboutSection() {
           >
             <motion.span 
               variants={itemVariants}
-              className="inline-block text-xs font-mono font-bold tracking-widest text-gold-300 bg-navy-950 border border-gold-500/20 px-3.5 py-1.5 rounded-full uppercase"
+              className="inline-block text-xs font-mono font-bold tracking-widest px-3.5 py-1.5 rounded-full uppercase"
+              style={{ color: "#1cb8df", background: "rgba(28,184,223,0.08)", border: "1px solid rgba(28,184,223,0.2)" }}
             >
               WHO WE ARE
             </motion.span>
             
             <motion.h2 
               variants={itemVariants}
-              className="font-display font-bold text-3xl sm:text-4xl text-white tracking-tight leading-tight"
+              className="font-display font-bold text-3xl sm:text-4xl text-slate-900 tracking-tight leading-tight"
             >
               Mastering the Collision of Threads &amp; Vector Technology
             </motion.h2>
             
             <motion.p 
               variants={itemVariants}
-              className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl font-light"
+              className="text-slate-600 text-sm sm:text-base leading-relaxed max-w-2xl font-light"
             >
               We started StitchCraft with a simple purpose: to build digital files that execute flawlessly in physical production workshops without pulling stitches or splitting curves. 
             </motion.p>
             
             <motion.p 
               variants={itemVariants}
-              className="text-slate-400 text-xs sm:text-xs leading-relaxed max-w-2xl"
+              className="text-slate-500 text-xs sm:text-xs leading-relaxed max-w-2xl"
             >
               While other sites use generic automatic tracing tools that overload embroidery needles and cause multiple thread breaks, our experts outline and punch every single vector curve and jump thread manually. It is a slow, highly calculated design ritual that saves your physical machines from continuous mechanical wear and ensures perfect stitch registration on any fabric.
             </motion.p>
@@ -104,16 +105,16 @@ export default function AboutSection() {
                   key={idx} 
                   variants={itemVariants}
                   whileHover={{ x: 4 }}
-                  className="flex space-x-4 bg-navy-900/30 p-4 rounded-xl border border-navy-850 hover:bg-navy-900/60 transition-all cursor-default"
+                  className="flex space-x-4 bg-slate-50/30 p-4 rounded-xl border border-navy-850 hover:bg-slate-50/60 transition-all cursor-default"
                 >
-                  <div className="bg-navy-950 p-2.5 rounded-lg border border-navy-800/80 self-start text-gold-400">
+                  <div className="bg-white p-2.5 rounded-lg border border-navy-800/80 self-start" style={{ color: "#1cb8df" }}>
                     {hl.icon}
                   </div>
                   <div>
                     <h4 className="font-display font-semibold text-slate-100 text-sm sm:text-base tracking-wide">
                       {hl.title}
                     </h4>
-                    <p className="text-slate-400 text-xs sm:text-xs mt-1 leading-relaxed">
+                    <p className="text-slate-500 text-xs sm:text-xs mt-1 leading-relaxed">
                       {hl.desc}
                     </p>
                   </div>
@@ -132,9 +133,9 @@ export default function AboutSection() {
           >
             <div className="relative group">
               {/* Overlapping graphics */}
-              <div className="absolute -top-4 -left-4 w-full h-full border border-gold-500/10 rounded-2xl pointer-events-none group-hover:scale-[1.01] transition-transform duration-500" />
+              <div className="absolute -top-4 -left-4 w-full h-full border rounded-2xl pointer-events-none group-hover:scale-[1.01] transition-transform duration-500" style={{ borderColor: "rgba(28,184,223,0.12)" }} />
               
-              <div className="bg-navy-900 border border-navy-850 p-3 rounded-2xl shadow-3xl relative z-10 overflow-hidden">
+              <div className="bg-slate-50 border border-navy-850 p-3 rounded-2xl shadow-3xl relative z-10 overflow-hidden">
                 <img
                   src={patchImg}
                   alt="Craftsmanship patch closeup"
@@ -143,14 +144,14 @@ export default function AboutSection() {
                 />
                 
                 {/* Micro overlay statistics specs on image */}
-                <div className="absolute bottom-6 left-6 right-6 bg-navy-950/95 border border-navy-800 p-4 rounded-xl shadow-lg flex items-center justify-between text-xs font-mono text-slate-300">
+                <div className="absolute bottom-6 left-6 right-6 bg-white/95 border border-navy-800 p-4 rounded-xl shadow-lg flex items-center justify-between text-xs font-mono text-slate-600">
                   <div className="space-y-1">
                     <span className="text-[9px] text-slate-500 block uppercase tracking-wider">STITCH DENSITY</span>
                     <span className="font-bold text-slate-100 text-xs block">12,400 manual paths</span>
                   </div>
                   <div className="text-right">
                     <span className="text-[9px] text-slate-500 block uppercase tracking-wider">STABILIZER GUIDE</span>
-                    <span className="font-bold text-gold-400 text-xs block">Cutaway heavy guide</span>
+                    <span className="font-bold text-xs block" style={{ color: "#1cb8df" }}>Cutaway heavy guide</span>
                   </div>
                 </div>
               </div>

@@ -1,170 +1,108 @@
 import React, { useState } from "react";
-import { Sparkles, Compass, Maximize, Palette, Briefcase, ShieldAlert, Cpu, Activity, CircleDot, Hourglass } from "lucide-react";
+import { Sparkles, Compass, Maximize, Palette, Briefcase, ShieldAlert, Cpu, Activity, CircleDot, X, ZoomIn } from "lucide-react";
 import { CATEGORIES_DATA } from "../data";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 
 export default function CategoriesGrid() {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [lightboxItem, setLightboxItem] = useState<typeof CATEGORIES_DATA[0] | null>(null);
 
-  // Maps icon names to Lucide icons
   const renderCatIcon = (iconName: string) => {
     switch (iconName) {
-      case "Sparkles":
-        return <Sparkles className="h-4 w-4 text-gold-400 group-hover:rotate-12 transition-transform duration-300" />;
-      case "Compass":
-        return <Compass className="h-4 w-4 text-gold-400 group-hover:spin-slow transition-transform" />;
-      case "Maximize":
-        return <Maximize className="h-4 w-4 text-gold-400 group-hover:scale-110 transition-transform" />;
-      case "Palette":
-        return <Palette className="h-4 w-4 text-gold-400 group-hover:rotate-6 transition-transform" />;
-      case "Briefcase":
-        return <Briefcase className="h-4 w-4 text-gold-400" />;
-      case "ShieldAlert":
-        return <ShieldAlert className="h-4 w-4 text-gold-400" />;
-      default:
-        return <Cpu className="h-4 w-4 text-gold-400" />;
-    }
-  };
-
-  // Motion variants for viewport animation triggers
-  const titleVariants = {
-    hidden: { opacity: 0, y: -20 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
-    }
-  };
-
-  const gridVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { 
-        staggerChildren: 0.08
-      }
-    }
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 35 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { type: "spring", stiffness: 90, damping: 15 } 
+      case "Sparkles": return <Sparkles className="h-4 w-4" style={{ color: "#1cb8df" }} />;
+      case "Compass":  return <Compass className="h-4 w-4" style={{ color: "#1cb8df" }} />;
+      case "Maximize": return <Maximize className="h-4 w-4" style={{ color: "#1cb8df" }} />;
+      case "Palette":  return <Palette className="h-4 w-4" style={{ color: "#1cb8df" }} />;
+      case "Briefcase":return <Briefcase className="h-4 w-4" style={{ color: "#1cb8df" }} />;
+      case "ShieldAlert": return <ShieldAlert className="h-4 w-4" style={{ color: "#1cb8df" }} />;
+      default: return <Cpu className="h-4 w-4" style={{ color: "#1cb8df" }} />;
     }
   };
 
   return (
-    <section id="categories" className="py-24 bg-navy-950 relative overflow-hidden scroll-mt-12">
-      
-      {/* CNC Axis Measurement Lines Decorator */}
+    <section id="categories" className="py-24 bg-white relative overflow-hidden scroll-mt-12">
       <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-slate-800 to-transparent" />
-      <div className="absolute top-12 left-12 w-32 h-32 opacity-5 pointer-events-none hidden lg:block">
-        <div className="border border-slate-800 w-full h-full rounded-full border-dashed animate-spin-slow" />
-        <div className="absolute inset-0 flex items-center justify-center font-mono text-[9px] text-slate-500 tracking-wider">
-          CNC_COORDS
-        </div>
-      </div>
- 
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Section Header */}
-        <motion.div 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={titleVariants}
+
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
           className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6"
         >
           <div className="max-w-xl">
-            <span className="text-xs font-mono font-bold tracking-widest text-gold-400 bg-gold-400/10 border border-gold-500/15 px-3 py-1 rounded-full uppercase">
+            <span className="text-xs font-mono font-bold tracking-widest px-3 py-1 rounded-full uppercase" style={{ color: "#1cb8df", background: "rgba(28,184,223,0.08)", border: "1px solid rgba(28,184,223,0.2)" }}>
               Production Styles
             </span>
-            <h2 className="font-display font-bold text-3xl sm:text-4xl text-white mt-4 tracking-tight">
+            <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 mt-4 tracking-tight">
               Specialized Embroidery &amp; Art Layouts
             </h2>
-            <p className="text-slate-350 mt-3 text-sm sm:text-base leading-relaxed">
-              Each garment type presents unique substrate challenges. We calibrate densities, stitch limits, pull-compensation parameters, and lock-down stitches corresponding exactly to standard placement surfaces.
-            </p>
-          </div>
-          <div className="text-slate-400 text-xs font-mono border-t md:border-t-0 md:border-l border-slate-800 pt-3 md:pt-2 md:pl-6 max-w-sm leading-relaxed">
-             Flat hats, tubular collars, heavy canvas jackets, delicate activewear, applique layers, and oversize back panels are digitized and built specifically for zero thread-breaks.
           </div>
         </motion.div>
 
-        {/* Categories Grid */}
-        <motion.div 
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
-          variants={gridVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-55px" }}
-        >
+        {/* Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {CATEGORIES_DATA.map((cat, idx) => {
             const isHovered = hoveredId === cat.id;
             return (
               <motion.div
                 key={cat.id}
-                variants={cardVariants}
-                className="group relative bg-navy-950 rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 h-[26rem] flex flex-col justify-end cursor-pointer"
+                initial={{ opacity: 0, y: 35 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ type: "spring", stiffness: 90, damping: 15, delay: idx * 0.05 }}
+                whileHover={{ y: -6 }}
+                className="group relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 h-[26rem] flex flex-col justify-end cursor-pointer"
                 onMouseEnter={() => setHoveredId(cat.id)}
                 onMouseLeave={() => setHoveredId(null)}
-                whileHover={{ y: -6 }}
+                onClick={() => setLightboxItem(cat)}
               >
-                {/* Category Image Overlay */}
+                {/* Image */}
                 <div className="absolute inset-0 z-0 select-none">
                   <img
                     src={cat.imageUrl}
                     alt={cat.title}
-                    className="w-full h-full object-cover opacity-45 group-hover:opacity-30 group-hover:scale-105 transition-all duration-700 ease-out"
-                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover opacity-45 group-hover:opacity-60 group-hover:scale-105 transition-all duration-700 ease-out"
                   />
-                  {/* Modern dark radial gradients over image */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/45 to-transparent" />
-                  
-                  {/* CAD crosshair coordinate simulator lines that show on hover (next-level animation) */}
-                  <div className={`absolute inset-0 z-10 pointer-events-none transition-opacity duration-300 ${isHovered ? "opacity-100" : "opacity-0"}`}>
-                    {/* Horizontal & Vertical grid crosshair lines */}
-                    <div className="absolute top-1/2 left-0 right-0 h-[1px] bg-gold-400/20 border-dashed border-b" />
-                    <div className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-gold-400/20 border-dashed border-r" />
-                    <div className="absolute bottom-4 left-4 font-mono text-[9px] text-gold-400/60 bg-navy-950/70 py-0.5 px-1.5 rounded">
-                      Y: {100 + (idx * 25)}px | X: {50 + (idx * 15)}px
-                    </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/40 to-transparent" />
+
+                  {/* Click to zoom hint */}
+                  <div className={`absolute top-4 right-4 bg-black/50 backdrop-blur-sm p-2 rounded-full transition-opacity duration-300 ${isHovered ? "opacity-100" : "opacity-0"}`}>
+                    <ZoomIn className="h-4 w-4 text-slate-900" />
                   </div>
                 </div>
 
-                {/* Simulated Stitch Machine Sequence Runner (Next-Level Visual) */}
+                {/* Running bar on hover */}
                 {isHovered && (
-                  <div className="absolute top-0 inset-x-0 h-1 bg-navy-900 overflow-hidden z-20">
-                    <motion.div 
-                      className="h-full bg-gradient-to-r from-teal-400 via-gold-400 to-amber-500"
+                  <div className="absolute top-0 inset-x-0 h-1 bg-slate-50 overflow-hidden z-20">
+                    <motion.div
+                      className="h-full"
+                      style={{ background: "#1cb8df", position: "absolute", width: "30%" }}
                       initial={{ left: "-100%" }}
                       animate={{ left: "100%" }}
-                      transition={{ 
-                        repeat: Infinity, 
-                        duration: 1.8, 
-                        ease: "easeInOut" 
-                      }}
-                      style={{ position: "absolute", width: "30%" }}
+                      transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
                     />
                   </div>
                 )}
 
-                {/* Category Content Overlay */}
-                <div className="relative z-10 p-6 sm:p-8 space-y-3.5 w-full bg-gradient-to-t from-navy-950 via-navy-950/90 to-transparent">
-                  <div className="flex items-center justify-between">
+                {/* Content — always show title & tag, show description only on hover */}
+                <div className="relative z-10 p-6 sm:p-8 w-full bg-gradient-to-t from-navy-950 via-navy-950/90 to-transparent">
+
+                  {/* Tag + Running badge */}
+                  <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center space-x-2">
-                      <div className="bg-navy-900/90 border border-gold-500/20 p-2.5 rounded-xl backdrop-blur-sm self-start group-hover:border-gold-300/40 transition-colors">
+                      <div className="bg-slate-50/90 border p-2 rounded-xl backdrop-blur-sm" style={{ borderColor: "rgba(28,184,223,0.25)" }}>
                         {renderCatIcon(cat.iconName)}
                       </div>
-                      <span className="text-[10px] font-mono tracking-wider text-gold-300 uppercase bg-navy-900/80 px-2.5 py-1 rounded-lg border border-navy-850">
+                      <span className="text-[10px] font-mono tracking-wider uppercase px-2.5 py-1 rounded-lg" style={{ color: "#1cb8df", background: "rgba(28,184,223,0.08)", border: "1px solid rgba(28,184,223,0.2)" }}>
                         {cat.tag}
                       </span>
                     </div>
-
                     {isHovered && (
-                      <motion.div 
+                      <motion.div
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         className="flex items-center space-x-1.5 text-teal-400 text-[10px] font-mono bg-teal-500/10 border border-teal-500/20 py-0.5 px-2 rounded-full"
@@ -175,53 +113,100 @@ export default function CategoriesGrid() {
                     )}
                   </div>
 
-                  <h3 className="font-display font-bold text-xl sm:text-2xl text-white tracking-tight group-hover:text-gold-300 transition-colors">
+                  {/* Title — always visible */}
+                  <h3 className="font-display font-bold text-xl sm:text-2xl text-slate-900 tracking-tight transition-colors" style={{ color: isHovered ? "#f96f1f" : undefined }}>
                     {cat.title}
                   </h3>
 
-                  <p className="text-slate-350 text-xs sm:text-sm leading-relaxed">
-                    {cat.description}
-                  </p>
-
-                  {/* Expanded metadata shown on hover */}
-                  <div className="pt-3 border-t border-navy-850 mt-3 transition-colors group-hover:border-navy-800">
-                    <span className="text-[9px] font-mono uppercase text-slate-500 tracking-widest block">
-                      Stitch CAD Architecture
-                    </span>
-                    <span className="text-xs text-gold-300 block font-light mt-1 flex items-center gap-1.5 leading-relaxed">
-                      <CircleDot className="h-3.5 w-3.5 text-gold-500 flex-shrink-0 animate-pulse" />
-                      {cat.technique}
-                    </span>
-                  </div>
-
-                  {/* Subtle interactive simulation completion bar */}
-                  {isHovered && (
-                    <motion.div 
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      className="pt-2"
-                    >
-                      <div className="flex items-center justify-between text-[9px] font-mono text-slate-500 mb-1">
-                        <span>Simulation progress</span>
-                        <span>100% CAD Optimized</span>
-                      </div>
-                      <div className="w-full bg-navy-900 h-1 rounded-full overflow-hidden">
-                        <motion.div 
-                          className="bg-gold-400 h-full rounded-full"
-                          initial={{ width: 0 }}
-                          animate={{ width: "100%" }}
-                          transition={{ duration: 1.2, ease: "easeOut" }}
-                        />
-                      </div>
-                    </motion.div>
-                  )}
+                  {/* Description + technique — only on hover */}
+                  <AnimatePresence>
+                    {isHovered && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.25 }}
+                        className="overflow-hidden"
+                      >
+                        <p className="text-slate-500 text-xs sm:text-sm leading-relaxed mt-2 line-clamp-2">
+                          {cat.description}
+                        </p>
+                        <div className="pt-3 border-t border-navy-800 mt-3">
+                          <span className="text-[9px] font-mono uppercase text-slate-500 tracking-widest block">
+                            Stitch CAD Architecture
+                          </span>
+                          <div className="flex items-center gap-1.5 mt-1">
+                            <CircleDot className="h-3 w-3 flex-shrink-0 animate-pulse" style={{ color: "#1cb8df" }} />
+                            <span className="text-xs line-clamp-1" style={{ color: "#1cb8df" }}>{cat.technique}</span>
+                          </div>
+                        </div>
+                        <div className="pt-2 mt-1">
+                          <div className="flex items-center justify-between text-[9px] font-mono text-slate-500 mb-1">
+                            <span>Simulation progress</span>
+                            <span>100% CAD Optimized</span>
+                          </div>
+                          <div className="w-full bg-slate-50 h-1 rounded-full overflow-hidden">
+                            <motion.div
+                              className="h-full rounded-full"
+                              style={{ background: "#1cb8df" }}
+                              initial={{ width: 0 }}
+                              animate={{ width: "100%" }}
+                              transition={{ duration: 1.2, ease: "easeOut" }}
+                            />
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               </motion.div>
             );
           })}
-        </motion.div>
-
+        </div>
       </div>
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {lightboxItem && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+            style={{ backdropFilter: "blur(12px)", background: "rgba(0,0,0,0.85)" }}
+            onClick={() => setLightboxItem(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 120, damping: 18 }}
+              className="relative max-w-4xl w-full rounded-2xl overflow-hidden shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={lightboxItem.imageUrl}
+                alt={lightboxItem.title}
+                className="w-full max-h-[80vh] object-cover"
+              />
+              {/* Info overlay at bottom */}
+              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 to-transparent p-6">
+                <span className="text-[10px] font-mono uppercase tracking-widest" style={{ color: "#1cb8df" }}>{lightboxItem.tag}</span>
+                <h3 className="text-slate-900 font-bold text-2xl mt-1">{lightboxItem.title}</h3>
+                <p className="text-slate-600 text-sm mt-1">{lightboxItem.description}</p>
+              </div>
+              {/* Close button */}
+              <button
+                onClick={() => setLightboxItem(null)}
+                className="absolute top-4 right-4 bg-black/60 hover:bg-black/80 text-slate-900 p-2 rounded-full transition-all backdrop-blur-sm"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

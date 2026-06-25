@@ -4,11 +4,14 @@ import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import ServicesList from "./components/ServicesList";
+import WhyChooseUs from "./components/WhyChooseUs";
 import PricingPlans from "./components/PricingPlans";
 import CategoriesGrid from "./components/CategoriesGrid";
 import PortfolioShowcase from "./components/PortfolioShowcase";
+import Testimonials from "./components/Testimonials";
 import FormatExplainer from "./components/FormatExplainer";
 import AboutSection from "./components/AboutSection";
+import CtaBanner from "./components/CtaBanner";
 import OrderForm from "./components/OrderForm";
 import FooterSection from "./components/FooterSection";
 import CookieCard from "./components/CookieCard";
@@ -61,22 +64,31 @@ export default function App() {
         {/* Row 2: Diagnostic Summary & Core Service Divisions */}
         <ServicesList onQuoteClick={handleScrollToQuote} />
 
-        {/* Row 2.5: Pricing Plans & Custom Pro Plan */}
+        {/* Row 2.5: Why Choose Us trust builders */}
+        <WhyChooseUs />
+
+        {/* Row 3: Pricing Plans & Custom Pro Plan */}
         <PricingPlans onQuoteClick={handleScrollToQuote} />
 
-        {/* Row 3: Specialized Categories grid */}
+        {/* Row 4: Specialized Categories grid */}
         <CategoriesGrid />
 
-        {/* Row 4: Design Portfolio and slider */}
+        {/* Row 5: Design Portfolio and slider */}
         <PortfolioShowcase />
 
-        {/* Row 5: Accepted Machine & Vector File format details */}
+        {/* Row 6: Client Testimonials */}
+        <Testimonials />
+
+        {/* Row 7: Accepted Machine & Vector File format details */}
         <FormatExplainer />
 
-        {/* Row 6: About the Digitizing brand */}
+        {/* Row 8: About the Digitizing brand */}
         <AboutSection />
 
-        {/* Row 7: Order Intake & Interactive AI Station */}
+        {/* CTA Banner before order form */}
+        <CtaBanner onQuoteClick={handleScrollToQuote} />
+
+        {/* Row 9: Order Intake & Interactive AI Station */}
         <OrderForm />
 
       </main>

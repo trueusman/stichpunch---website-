@@ -1,137 +1,95 @@
 import React from "react";
-import logoImg from "../assets/images/stichpunch.jpeg";
 import { Mail, Phone, Facebook, Linkedin, Instagram, Twitter } from "lucide-react";
+import logoImg from "../assets/images/stichpunch.png";
 
 export default function FooterSection() {
-  const currentYear = new Date().getFullYear();
+  const currentYear = 2018;
 
   return (
-    <footer className="bg-navy-950 text-slate-400 border-t border-navy-900 pt-16 pb-8 text-xs sm:text-sm">
+    <footer className="bg-[#0a0f1e] text-slate-400 border-t border-slate-800 pt-16 pb-8 text-xs sm:text-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          
-          {/* Col 1: Brand Info */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+
+          {/* Brand */}
           <div className="space-y-4">
-            <a href="#home" className="flex items-center group">
-              <img src={logoImg} alt="Stitch Punch Logo" className="h-14 w-14 object-contain group-hover:scale-105 transition-transform duration-300" />
+            <a href="#home" className="flex items-center gap-3 group">
+              <img src={logoImg} alt="Stich Punch" className="h-14 w-14 object-contain group-hover:scale-105 transition-transform" />
+              <div>
+                <span className="font-black text-lg text-white block">
+                  <span className="text-blue-400">Stich</span>
+                  <span className="text-[#1cb8df]"> Punch</span>
+                </span>
+                <span className="text-[10px] font-mono text-slate-500 tracking-widest uppercase">Digitizing & Vector</span>
+              </div>
             </a>
-            <p className="text-slate-400 text-xs leading-relaxed">
-              Industrial grade embroidery digitizing &amp; manual vector path recreations. Built for seamless workshop execution.
+            <p className="text-slate-500 text-xs leading-relaxed">
+              Industrial grade embroidery digitizing & manual vector path recreations. Built for seamless workshop execution.
             </p>
-            {/* Social Links */}
-            <div className="flex items-center space-x-3 pt-2">
-              <a href="https://facebook.com" target="_blank" rel="noreferrer" className="bg-navy-900 hover:bg-navy-850 hover:text-white p-2 rounded-lg border border-navy-800 transition-all text-slate-400" aria-label="Facebook">
-                <Facebook className="h-4 w-4" />
-              </a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="bg-navy-900 hover:bg-navy-850 hover:text-white p-2 rounded-lg border border-navy-800 transition-all text-slate-400" aria-label="LinkedIn">
-                <Linkedin className="h-4 w-4" />
-              </a>
-              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="bg-navy-900 hover:bg-navy-850 hover:text-white p-2 rounded-lg border border-navy-800 transition-all text-slate-400" aria-label="Instagram">
-                <Instagram className="h-4 w-4" />
-              </a>
-              <a href="https://twitter.com" target="_blank" rel="noreferrer" className="bg-navy-900 hover:bg-navy-850 hover:text-white p-2 rounded-lg border border-navy-800 transition-all text-slate-400" aria-label="Twitter (X)">
-                <Twitter className="h-4 w-4" />
-              </a>
+            <div className="flex items-center gap-2 pt-1">
+              {[
+                { href: "https://facebook.com", icon: <Facebook className="h-4 w-4" /> },
+                { href: "https://linkedin.com", icon: <Linkedin className="h-4 w-4" /> },
+                { href: "https://instagram.com", icon: <Instagram className="h-4 w-4" /> },
+                { href: "https://twitter.com", icon: <Twitter className="h-4 w-4" /> },
+              ].map((s, i) => (
+                <a key={i} href={s.href} target="_blank" rel="noreferrer"
+                  className="bg-slate-800 hover:bg-[#1cb8df] hover:text-black text-slate-400 p-2 rounded-lg transition-all"
+                >
+                  {s.icon}
+                </a>
+              ))}
             </div>
           </div>
 
-          {/* Col 2: Services Links */}
+          {/* Services */}
           <div className="space-y-4">
-            <h4 className="font-display font-bold text-slate-200 text-xs sm:text-sm uppercase tracking-wider">
-              Design Divisions
-            </h4>
-            <ul className="space-y-2.5 text-xs text-slate-450 text-slate-400">
-              <li>
-                <a href="#services" className="hover:text-gold-400 transition-colors">
-                  Premium Embroidery Digitizing
-                </a>
-              </li>
-              <li>
-                <a href="#services" className="hover:text-gold-400 transition-colors">
-                  Manual Vector Art Reconstruction
-                </a>
-              </li>
-              <li>
-                <a href="#services" className="hover:text-gold-400 transition-colors">
-                  Custom Embroidered Patches
-                </a>
-              </li>
-              <li>
-                <a href="#categories" className="hover:text-gold-400 transition-colors">
-                  3D Puff Caps &amp; Specialties
-                </a>
-              </li>
-              <li>
-                <a href="#categories" className="hover:text-gold-400 transition-colors">
-                  Full Jacket Back Engineering
-                </a>
-              </li>
+            <h4 className="font-bold text-white text-sm uppercase tracking-wider">Services</h4>
+            <ul className="space-y-2.5 text-xs text-slate-500">
+              {["Premium Embroidery Digitizing", "Manual Vector Art Reconstruction", "Custom Embroidered Patches", "3D Puff Caps & Specialties", "Full Jacket Back Engineering"].map((s, i) => (
+                <li key={i}><a href="#services" className="hover:text-[#1cb8df] transition-colors">{s}</a></li>
+              ))}
             </ul>
           </div>
 
-          {/* Col 3: Quick Navigation */}
+          {/* Quick Links */}
           <div className="space-y-4">
-            <h4 className="font-display font-bold text-slate-200 text-xs sm:text-sm uppercase tracking-wider">
-              Quick Links
-            </h4>
-            <ul className="space-y-2.5 text-xs">
-              <li>
-                <a href="#home" className="hover:text-gold-400 transition-colors">
-                  Return Home
-                </a>
-              </li>
-              <li>
-                <a href="#portfolio" className="hover:text-gold-400 transition-colors">
-                  Production Portfolio
-                </a>
-              </li>
-              <li>
-                <a href="#formats" className="hover:text-gold-400 transition-colors">
-                  Supported Machine Formats
-                </a>
-              </li>
-              <li>
-                <a href="#about" className="hover:text-gold-400 transition-colors">
-                  Craft Philosophy
-                </a>
-              </li>
-              <li>
-                <a href="#contact" className="hover:text-gold-400 transition-colors">
-                  Submit Inquiries
-                </a>
-              </li>
+            <h4 className="font-bold text-white text-sm uppercase tracking-wider">Quick Links</h4>
+            <ul className="space-y-2.5 text-xs text-slate-500">
+              {[
+                { label: "Home", href: "#home" },
+                { label: "Portfolio", href: "#portfolio" },
+                { label: "File Formats", href: "#formats" },
+                { label: "About", href: "#about" },
+                { label: "Contact", href: "#contact" },
+              ].map((l, i) => (
+                <li key={i}><a href={l.href} className="hover:text-[#1cb8df] transition-colors">{l.label}</a></li>
+              ))}
             </ul>
           </div>
 
-          {/* Col 4: Contact Information */}
+          {/* Contact */}
           <div className="space-y-4">
-            <h4 className="font-display font-bold text-slate-200 text-xs sm:text-sm uppercase tracking-wider">
-              Contact Us
-            </h4>
-            <div className="space-y-3 text-xs leading-relaxed">
-              <div className="flex items-center space-x-2.5">
-                <Phone className="h-4 w-4 text-gold-400 flex-shrink-0" />
-                <a href="tel:+12135926467" className="hover:text-gold-400 transition-colors">+1 (213) 592-6467</a>
+            <h4 className="font-bold text-white text-sm uppercase tracking-wider">Contact Us</h4>
+            <div className="space-y-3 text-xs">
+              <div className="flex items-center gap-2.5">
+                <Phone className="h-4 w-4 text-[#1cb8df] flex-shrink-0" />
+                <a href="tel:+12135926467" className="hover:text-[#1cb8df] transition-colors">+1 (213) 592-6467</a>
               </div>
-              <div className="flex items-center space-x-2.5">
-                <Mail className="h-4 w-4 text-gold-400 flex-shrink-0" />
-                <a href="mailto:sales@stichpunch.com" className="hover:text-gold-400 transition-colors">sales@stichpunch.com</a>
+              <div className="flex items-center gap-2.5">
+                <Mail className="h-4 w-4 text-[#1cb8df] flex-shrink-0" />
+                <a href="mailto:sales@stichpunch.com" className="hover:text-[#1cb8df] transition-colors">sales@stichpunch.com</a>
               </div>
             </div>
           </div>
 
         </div>
 
-        {/* Bottom copyright band */}
-        <div className="border-t border-navy-900 pt-8 mt-12 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-          <div>
-            &copy; {currentYear} StitchCraft Digitizing. All rights reserved.
-          </div>
-          <div className="flex space-x-5">
-            <a href="#formats" className="hover:text-slate-350 transition-colors">Formats Policy</a>
-            <a href="#home" className="hover:text-slate-350 transition-colors">Terms of Service</a>
-            <a href="#home" className="hover:text-slate-350 transition-colors">Privacy Agreement</a>
+        {/* Bottom */}
+        <div className="border-t border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-600 gap-3">
+          <span>&copy; {currentYear} Stich Punch. All rights reserved.</span>
+          <div className="flex gap-5">
+            <a href="#" className="hover:text-slate-400 transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-slate-400 transition-colors">Terms of Service</a>
           </div>
         </div>
 

@@ -16,7 +16,7 @@ const digitizingPlans = [
     buttonLabel: "Order Now",
     features: [
       "Clean stitch quality for all fabrics",
-      "Delivered in DST, EMB, PDF,  JPG / PNG formats",
+      "Delivered in DST, EMB, PDF, JPG / PNG formats",
       "8–12 hour standard turnaround",
       "Free minor edits included",
       "Source file provided",
@@ -64,7 +64,7 @@ const vectorPlans = [
     buttonLabel: "Order Now",
     features: [
       "Clean bezier node paths",
-      "Delivered in  JPG / PNG AI, SVG, EPS, PDF, formats",
+      "Delivered in AI, SVG, EPS, PDF, JPG / PNG formats",
       "8–12 hour standard turnaround",
       "Free minor edits included",
       "Source file provided",
@@ -107,7 +107,7 @@ export default function PricingPlans({ onQuoteClick }: PricingPlansProps) {
   const plans = activeTab === "digitizing" ? digitizingPlans : vectorPlans;
 
   return (
-    <section id="pricing" className="py-24 bg-navy-950 relative scroll-mt-12 overflow-hidden">
+    <section id="pricing" className="py-24 bg-white relative scroll-mt-12 overflow-hidden">
       {/* Subtle dot grid */}
       <div className="absolute inset-0 bg-[radial-gradient(rgba(249,111,31,0.04)_1.5px,transparent_1.5px)] [background-size:20px_20px] pointer-events-none" />
 
@@ -115,24 +115,39 @@ export default function PricingPlans({ onQuoteClick }: PricingPlansProps) {
 
         {/* Section header */}
         <div className="text-center mb-10">
-          <span className="text-xs font-mono font-bold tracking-widest text-gold-400 bg-gold-500/10 border border-gold-500/15 px-3.5 py-1.5 rounded-full uppercase">
+          <span
+            className="text-xs font-mono font-bold tracking-widest px-3.5 py-1.5 rounded-full uppercase"
+            style={{
+              color: "#f96f1f",
+              background: "rgba(249,111,31,0.08)",
+              border: "1px solid rgba(249,111,31,0.2)",
+            }}
+          >
             Pricing Plans
           </span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-white mt-4 tracking-tight leading-tight">
-            Select Your Optimal Design Architecture
+          <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 mt-4 tracking-tight leading-tight">
+            Simple, Transparent Pricing
           </h2>
+          <p className="text-slate-500 mt-3 text-sm sm:text-base">
+            No hidden fees. Pay once, get production-ready files.
+          </p>
         </div>
 
         {/* Tab switcher */}
         <div className="flex justify-center mb-12">
-          <div className="flex bg-white/5 border border-white/10 rounded-full p-1 gap-1">
+          <div className="flex bg-slate-100 border border-slate-200 rounded-full p-1 gap-1">
             <button
               onClick={() => setActiveTab("digitizing")}
               className={`px-8 py-2.5 rounded-full text-sm font-bold transition-all duration-300 ${
                 activeTab === "digitizing"
-                  ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-navy-950 shadow-lg shadow-yellow-500/40"
-                  : "text-slate-400 hover:text-white"
+                  ? "text-white shadow-lg"
+                  : "text-slate-500 hover:text-slate-800"
               }`}
+              style={
+                activeTab === "digitizing"
+                  ? { background: "linear-gradient(135deg, #f96f1f, #e55e0e)" }
+                  : undefined
+              }
             >
               Digitizing
             </button>
@@ -140,9 +155,14 @@ export default function PricingPlans({ onQuoteClick }: PricingPlansProps) {
               onClick={() => setActiveTab("vector")}
               className={`px-8 py-2.5 rounded-full text-sm font-bold transition-all duration-300 ${
                 activeTab === "vector"
-                  ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-navy-950 shadow-lg shadow-yellow-500/40"
-                  : "text-slate-400 hover:text-white"
+                  ? "text-white shadow-lg"
+                  : "text-slate-500 hover:text-slate-800"
               }`}
+              style={
+                activeTab === "vector"
+                  ? { background: "linear-gradient(135deg, #f96f1f, #e55e0e)" }
+                  : undefined
+              }
             >
               Vector
             </button>
@@ -165,15 +185,30 @@ export default function PricingPlans({ onQuoteClick }: PricingPlansProps) {
                 <motion.div
                   key={plan.id}
                   whileHover={{ y: -6 }}
-                  className="rounded-2xl overflow-hidden shadow-2xl flex flex-col bg-gradient-to-b from-yellow-400 via-yellow-500 to-yellow-600 border-2 border-yellow-300/60 relative"
+                  className="rounded-2xl overflow-hidden shadow-2xl flex flex-col relative"
+                  style={{
+                    background: "linear-gradient(160deg, #f96f1f 0%, #e55e0e 55%, #c44d0a 100%)",
+                    border: "2px solid rgba(249,111,31,0.5)",
+                  }}
                 >
-                  <div className="p-8 flex flex-col flex-1">
-                    <h3 className="text-xl font-bold text-white mb-4 leading-snug">{plan.title}</h3>
+                  {/* Most Popular badge */}
+                  <div className="absolute top-4 right-4">
+                    <span className="bg-white text-[#f96f1f] text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full shadow-md">
+                      Most Popular
+                    </span>
+                  </div>
+
+                  <div className="p-8 flex flex-col flex-1 pt-14">
+                    <h3 className="text-xl font-bold text-white mb-4 leading-snug pr-4">
+                      {plan.title}
+                    </h3>
 
                     {/* Price */}
                     <div className="mb-6">
                       {plan.oldPrice && (
-                        <span className="text-purple-300 line-through text-lg mr-2">{plan.oldPrice}</span>
+                        <span className="text-orange-200 line-through text-lg mr-2">
+                          {plan.oldPrice}
+                        </span>
                       )}
                       <span className="text-4xl font-extrabold text-white">{plan.newPrice}</span>
                     </div>
@@ -181,7 +216,8 @@ export default function PricingPlans({ onQuoteClick }: PricingPlansProps) {
                     {/* CTA */}
                     <button
                       onClick={onQuoteClick}
-                      className="w-full bg-white text-purple-700 font-bold rounded-full py-3 mb-8 hover:bg-purple-50 transition-colors text-sm tracking-wide shadow-md"
+                      className="w-full bg-white font-bold rounded-full py-3 mb-8 hover:bg-orange-50 transition-colors text-sm tracking-wide shadow-md"
+                      style={{ color: "#f96f1f" }}
                     >
                       {plan.buttonLabel}
                     </button>
@@ -189,7 +225,7 @@ export default function PricingPlans({ onQuoteClick }: PricingPlansProps) {
                     {/* Features */}
                     <ul className="space-y-3 flex-1">
                       {plan.features.map((f, i) => (
-                        <li key={i} className="flex items-start gap-2.5 text-sm text-purple-100">
+                        <li key={i} className="flex items-start gap-2.5 text-sm text-orange-100">
                           <CheckCircle2 className="w-4 h-4 text-white flex-shrink-0 mt-0.5" />
                           {f}
                         </li>
@@ -202,23 +238,39 @@ export default function PricingPlans({ onQuoteClick }: PricingPlansProps) {
                 <motion.div
                   key={plan.id}
                   whileHover={{ y: -6 }}
-                  className="rounded-2xl overflow-hidden shadow-lg flex flex-col bg-navy-900 border border-slate-700/60"
+                  className="rounded-2xl overflow-hidden shadow-lg flex flex-col bg-white border border-slate-200 hover:border-[#1cb8df]/40 transition-all duration-300"
                 >
                   <div className="p-8 flex flex-col flex-1">
-                    <h3 className="text-xl font-bold text-white mb-4 leading-snug">{plan.title}</h3>
+                    <h3 className="text-xl font-bold text-slate-900 mb-4 leading-snug">
+                      {plan.title}
+                    </h3>
 
                     {/* Price */}
                     <div className="mb-6">
                       {plan.oldPrice && (
-                        <span className="text-slate-500 line-through text-lg mr-2">{plan.oldPrice}</span>
+                        <span className="text-slate-400 line-through text-lg mr-2">
+                          {plan.oldPrice}
+                        </span>
                       )}
-                      <span className="text-3xl font-extrabold text-white">{plan.newPrice}</span>
+                      <span className="text-3xl font-extrabold text-slate-900">{plan.newPrice}</span>
                     </div>
 
                     {/* CTA */}
                     <button
                       onClick={onQuoteClick}
-                      className="w-full border border-slate-600 hover:border-purple-500 text-white font-bold rounded-full py-3 mb-8 hover:bg-purple-500/10 transition-all text-sm tracking-wide"
+                      className="w-full font-bold rounded-full py-3 mb-8 transition-all text-sm tracking-wide border-2"
+                      style={{
+                        borderColor: "#1cb8df",
+                        color: "#1cb8df",
+                      }}
+                      onMouseEnter={(e) => {
+                        (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#1cb8df";
+                        (e.currentTarget as HTMLButtonElement).style.color = "#ffffff";
+                      }}
+                      onMouseLeave={(e) => {
+                        (e.currentTarget as HTMLButtonElement).style.backgroundColor = "transparent";
+                        (e.currentTarget as HTMLButtonElement).style.color = "#1cb8df";
+                      }}
                     >
                       {plan.buttonLabel}
                     </button>
@@ -226,8 +278,11 @@ export default function PricingPlans({ onQuoteClick }: PricingPlansProps) {
                     {/* Features */}
                     <ul className="space-y-3 flex-1">
                       {plan.features.map((f, i) => (
-                        <li key={i} className="flex items-start gap-2.5 text-sm text-slate-300">
-                          <CheckCircle2 className="w-4 h-4 text-purple-500 flex-shrink-0 mt-0.5" />
+                        <li key={i} className="flex items-start gap-2.5 text-sm text-slate-600">
+                          <CheckCircle2
+                            className="w-4 h-4 flex-shrink-0 mt-0.5"
+                            style={{ color: "#1cb8df" }}
+                          />
                           {f}
                         </li>
                       ))}

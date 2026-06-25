@@ -82,7 +82,7 @@ export const SERVICES_DATA: ServiceItem[] = [
 export const CATEGORIES_DATA: CategoryItem[] = [
   {
     id: "3d-puff",
-    title: "3D Puff Logo",
+    title: "Custom Embroidery Logo",
     tag: "High Density Caps",
     description: "3D foam underlay embroidery.",
     technique: "Foam cutting satin stitches.",
@@ -91,7 +91,7 @@ export const CATEGORIES_DATA: CategoryItem[] = [
   },
   {
     id: "custom-embroidery",
-    title: "Custom Embroidery Setup",
+    title: "Custom Embroidery Logo",
     tag: "Technical Garments",
     description: "Stitch maps for all garment types.",
     technique: "Pull-compensation & lock-down paths.",

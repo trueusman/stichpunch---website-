@@ -149,18 +149,18 @@ export default function OrderForm() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-navy-950 scroll-mt-12">
+    <section id="contact" className="py-24 bg-white scroll-mt-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <span className="text-xs font-mono font-bold tracking-widest text-gold-400 bg-gold-500/10 border border-gold-500/15 px-3 py-1 rounded-full uppercase">
+          <span className="text-xs font-mono font-bold tracking-widest px-3 py-1 rounded-full uppercase" style={{ color: "#1cb8df", background: "rgba(28,184,223,0.08)", border: "1px solid rgba(28,184,223,0.2)" }}>
             Order Desk
           </span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-white mt-3">
+          <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 mt-3">
             Get an Accurate Quote &amp; Digital File Report
           </h2>
-          <p className="text-slate-350 mt-4 text-base">
+          <p className="text-slate-500 mt-4 text-base">
             Upload your graphics now. Submit a manual request to our digitizing desk.
           </p>
         </div>
@@ -168,9 +168,9 @@ export default function OrderForm() {
         <div className="max-w-4xl mx-auto">
           
           {/* Input Form Controls & Drag File Upload */}
-          <div className="bg-navy-900 p-6 sm:p-8 rounded-2xl border border-slate-800 shadow-2xl space-y-6">
+          <div className="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-2xl space-y-6">
             
-            <h3 className="font-display font-bold text-lg text-white pb-3 border-b border-slate-800">
+            <h3 className="font-display font-bold text-lg text-slate-900 pb-3 border-b border-slate-200">
               Contact & Custom Specifications
             </h3>
 
@@ -194,7 +194,7 @@ export default function OrderForm() {
               {/* Core Client Contacts */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <label className="text-xs font-mono font-bold text-slate-300 uppercase tracking-widest block mb-1">Your Name *</label>
+                  <label className="text-xs font-mono font-bold text-slate-600 uppercase tracking-widest block mb-1">Your Name *</label>
                   <input
                     type="text"
                     name="name"
@@ -202,11 +202,11 @@ export default function OrderForm() {
                     value={formData.name}
                     onChange={handleTextChange}
                     placeholder="Enter your full name"
-                    className="w-full bg-[#0D0D0D] border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none focus:border-gold-500 focus:ring-2 focus:ring-gold-500/10 transition-all placeholder:text-slate-550"
+                    className="w-full bg-[#0D0D0D] border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 outline-none focus:border-[#1cb8df] focus:ring-2 focus:ring-[#1cb8df]/15 transition-all placeholder:text-slate-550"
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-xs font-mono font-bold text-slate-300 uppercase tracking-widest block mb-1">Email Address *</label>
+                  <label className="text-xs font-mono font-bold text-slate-600 uppercase tracking-widest block mb-1">Email Address *</label>
                   <input
                     type="email"
                     name="email"
@@ -214,36 +214,36 @@ export default function OrderForm() {
                     value={formData.email}
                     onChange={handleTextChange}
                     placeholder="name@company.com"
-                    className="w-full bg-[#0D0D0D] border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none focus:border-gold-500 focus:ring-2 focus:ring-gold-500/10 transition-all placeholder:text-slate-550"
+                    className="w-full bg-[#0D0D0D] border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 outline-none focus:border-[#1cb8df] focus:ring-2 focus:ring-[#1cb8df]/15 transition-all placeholder:text-slate-550"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <label className="text-xs font-mono font-bold text-slate-300 uppercase tracking-widest block mb-1">Phone Number (Optional)</label>
+                  <label className="text-xs font-mono font-bold text-slate-600 uppercase tracking-widest block mb-1">Phone Number (Optional)</label>
                   <input
                     type="tel"
                     name="phone"
                     value={formData.phone}
                     onChange={handleTextChange}
                     placeholder="+1 (555) 000-0000"
-                    className="w-full bg-[#0D0D0D] border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none focus:border-gold-500 focus:ring-2 focus:ring-gold-500/10 transition-all placeholder:text-slate-550"
+                    className="w-full bg-[#0D0D0D] border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 outline-none focus:border-[#1cb8df] focus:ring-2 focus:ring-[#1cb8df]/15 transition-all placeholder:text-slate-550"
                   />
                 </div>
                 
                 <div className="space-y-1">
-                  <label className="text-xs font-mono font-bold text-slate-300 uppercase tracking-widest block mb-1">Service Division</label>
+                  <label className="text-xs font-mono font-bold text-slate-600 uppercase tracking-widest block mb-1">Service Division</label>
                   <select
                     name="serviceType"
                     value={formData.serviceType}
                     onChange={handleTextChange}
-                    className="w-full bg-[#0D0D0D] border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none focus:border-gold-500 focus:ring-2 focus:ring-gold-500/10 transition-all cursor-pointer"
+                    className="w-full bg-[#0D0D0D] border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 outline-none focus:border-[#1cb8df] focus:ring-2 focus:ring-[#1cb8df]/15 transition-all cursor-pointer"
                   >
-                    <option value="Digitizing" className="bg-navy-900 text-white">Embroidery Digitizing Only</option>
-                    <option value="Vector Art" className="bg-navy-900 text-white">Vector Conversion Only</option>
-                    <option value="Both" className="bg-navy-900 text-white">Both (Digitizing + Vector)</option>
-                    <option value="Custom Patches" className="bg-navy-900 text-white">Physical / Digital Patches Setup</option>
+                    <option value="Digitizing" className="bg-slate-50 text-slate-900">Embroidery Digitizing Only</option>
+                    <option value="Vector Art" className="bg-slate-50 text-slate-900">Vector Conversion Only</option>
+                    <option value="Both" className="bg-slate-50 text-slate-900">Both (Digitizing + Vector)</option>
+                    <option value="Custom Patches" className="bg-slate-50 text-slate-900">Physical / Digital Patches Setup</option>
                   </select>
                 </div>
               </div>
@@ -251,9 +251,9 @@ export default function OrderForm() {
               {/* Physical Dimension Spec Settings */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <label className="text-xs font-mono font-bold text-slate-300 uppercase tracking-widest flex items-center justify-between mb-1">
+                  <label className="text-xs font-mono font-bold text-slate-600 uppercase tracking-widest flex items-center justify-between mb-1">
                     <span>Width/Size (Inches)</span>
-                    <span className="text-[10px] text-gold-400 font-bold capitalize hover:underline cursor-pointer">Help?</span>
+                    <span className="text-[10px] font-bold capitalize hover:underline cursor-pointer" style={{ color: "#1cb8df" }}>Help?</span>
                   </label>
                   <input
                     type="number"
@@ -264,31 +264,31 @@ export default function OrderForm() {
                     value={formData.sizeInches}
                     onChange={handleTextChange}
                     placeholder="3.5"
-                    className="w-full bg-[#0D0D0D] border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none focus:border-gold-500 focus:ring-2 focus:ring-gold-500/10 transition-all placeholder:text-slate-555"
+                    className="w-full bg-[#0D0D0D] border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 outline-none focus:border-[#1cb8df] focus:ring-2 focus:ring-[#1cb8df]/15 transition-all placeholder:text-slate-555"
                   />
                 </div>
                 
                 <div className="space-y-1">
-                  <label className="text-xs font-mono font-bold text-slate-300 uppercase tracking-widest block mb-1">Garment Placement Location</label>
+                  <label className="text-xs font-mono font-bold text-slate-600 uppercase tracking-widest block mb-1">Garment Placement Location</label>
                   <select
                     name="placement"
                     value={formData.placement}
                     onChange={handleTextChange}
-                    className="w-full bg-[#0D0D0D] border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none focus:border-gold-500 focus:ring-2 focus:ring-gold-500/10 transition-all cursor-pointer"
+                    className="w-full bg-[#0D0D0D] border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 outline-none focus:border-[#1cb8df] focus:ring-2 focus:ring-[#1cb8df]/15 transition-all cursor-pointer"
                   >
-                    <option value="Left Chest" className="bg-navy-900 text-white">Left Chest Uniform (Small)</option>
-                    <option value="Structured Cap (Front)" className="bg-navy-900 text-white">Structured Cap (Front Center)</option>
-                    <option value="Unstructured Cap" className="bg-navy-900 text-white">Unstructured Cap (Floppy Front)</option>
-                    <option value="Jacket Back (Oversize)" className="bg-navy-900 text-white">Jacket Back (Oversize Fills)</option>
-                    <option value="Sleeve/Cuff" className="bg-navy-900 text-white">Sleeve / Cuff Ribbon Detail</option>
-                    <option value="Flat Patch" className="bg-navy-900 text-white">Standalone Merrow Patch Emblem</option>
+                    <option value="Left Chest" className="bg-slate-50 text-slate-900">Left Chest Uniform (Small)</option>
+                    <option value="Structured Cap (Front)" className="bg-slate-50 text-slate-900">Structured Cap (Front Center)</option>
+                    <option value="Unstructured Cap" className="bg-slate-50 text-slate-900">Unstructured Cap (Floppy Front)</option>
+                    <option value="Jacket Back (Oversize)" className="bg-slate-50 text-slate-900">Jacket Back (Oversize Fills)</option>
+                    <option value="Sleeve/Cuff" className="bg-slate-50 text-slate-900">Sleeve / Cuff Ribbon Detail</option>
+                    <option value="Flat Patch" className="bg-slate-50 text-slate-900">Standalone Merrow Patch Emblem</option>
                   </select>
                 </div>
               </div>
 
               {/* Drag and Drop File Upload Area */}
               <div className="space-y-1.5 pt-2">
-                <label className="text-xs font-mono font-bold text-slate-300 uppercase tracking-widest block mb-1">
+                <label className="text-xs font-mono font-bold text-slate-600 uppercase tracking-widest block mb-1">
                   Upload Logo Photo / Sketch Artwork
                 </label>
                 
@@ -300,8 +300,8 @@ export default function OrderForm() {
                   onClick={triggerFileSelect}
                   className={`border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition-all ${
                     dragActive
-                      ? "border-gold-500 bg-gold-500/5"
-                      : "border-slate-800 bg-[#0D0D0D] hover:border-gold-500"
+                      ? "border-[#1cb8df] bg-[#1cb8df]/5"
+                      : "border-slate-200 bg-[#0D0D0D] hover:border-[#1cb8df]"
                   }`}
                 >
                   <input
@@ -315,7 +315,7 @@ export default function OrderForm() {
                   {uploadedFile ? (
                     <div className="space-y-2">
                       {/* Logo Preview */}
-                      <div className="h-20 w-20 mx-auto rounded-lg overflow-hidden bg-[#1A1A1A] shadow-inner border border-slate-800 flex items-center justify-center">
+                      <div className="h-20 w-20 mx-auto rounded-lg overflow-hidden bg-[#1A1A1A] shadow-inner border border-slate-200 flex items-center justify-center">
                         <img
                           src={uploadedFile.base64}
                           alt="preview upload"
@@ -323,8 +323,8 @@ export default function OrderForm() {
                           referrerPolicy="no-referrer"
                         />
                       </div>
-                      <div className="text-xs text-slate-300">
-                        <span className="font-bold font-mono text-white block truncate max-w-xs mx-auto text-sm">
+                      <div className="text-xs text-slate-600">
+                        <span className="font-bold font-mono text-slate-900 block truncate max-w-xs mx-auto text-sm">
                           {uploadedFile.name}
                         </span>
                         <span className="text-[10px] text-slate-500 font-bold block mt-0.5">
@@ -345,8 +345,8 @@ export default function OrderForm() {
                   ) : (
                     <div className="space-y-2">
                       <Upload className="h-8 w-8 text-slate-500 mx-auto" />
-                      <div className="text-xs text-slate-400">
-                        <span className="text-white font-bold block text-sm">Drag &amp; drop artwork here</span>
+                      <div className="text-xs text-slate-500">
+                        <span className="text-slate-900 font-bold block text-sm">Drag &amp; drop artwork here</span>
                         <span className="text-slate-500 font-medium block mt-0.5">or click to browse your local device files</span>
                       </div>
                       <span className="text-[10px] text-slate-500 block">Supports high resolution PNG, JPG &amp; SVG up to 8MB</span>
@@ -357,7 +357,7 @@ export default function OrderForm() {
 
               {/* Text note instructions */}
               <div className="space-y-1">
-                <label className="text-xs font-mono font-bold text-slate-300 uppercase tracking-widest block mb-1">
+                <label className="text-xs font-mono font-bold text-slate-600 uppercase tracking-widest block mb-1">
                   Fabric Type &amp; Special Design Notes
                 </label>
                 <textarea
@@ -366,16 +366,19 @@ export default function OrderForm() {
                   value={formData.notes}
                   onChange={handleTextChange}
                   placeholder="e.g. 'Embroidering on pique knit polo shirts. Keep small lettering clear and skip the dark background fills.' "
-                  className="w-full bg-[#0D0D0D] border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none focus:border-gold-500 focus:ring-2 focus:ring-gold-500/10 transition-all placeholder:text-slate-550"
+                  className="w-full bg-[#0D0D0D] border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 outline-none focus:border-[#1cb8df] focus:ring-2 focus:ring-[#1cb8df]/15 transition-all placeholder:text-slate-550"
                 ></textarea>
               </div>
 
               {/* Action buttons mapping to tabs */}
-              <div className="pt-4 border-t border-slate-800">
+              <div className="pt-4 border-t border-slate-200">
                   <button
                     type="submit"
                     disabled={isAnalyzing}
-                    className="w-full bg-gold-500 text-white font-bold py-3.5 px-4 rounded-xl text-center text-sm tracking-wide shadow-md hover:bg-gold-600 active:scale-95 transition-all flex items-center justify-center space-x-2 disabled:opacity-75 cursor-pointer"
+                    className="w-full text-white font-bold py-3.5 px-4 rounded-xl text-center text-sm tracking-wide shadow-md active:scale-95 transition-all flex items-center justify-center space-x-2 disabled:opacity-75 cursor-pointer"
+                    style={{ background: "#f96f1f" }}
+                    onMouseEnter={e => (e.currentTarget.style.filter = "brightness(1.1)")}
+                    onMouseLeave={e => (e.currentTarget.style.filter = "")}
                   >
                     {isAnalyzing ? (
                       <Loader2 className="h-4 w-4 animate-spin" />

@@ -6,7 +6,7 @@ export default function PromoPopup() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShow(true), 10000);
+    const timer = setTimeout(() => setShow(true), 40000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -43,9 +43,9 @@ export default function PromoPopup() {
             <div className="px-8 py-10 text-center flex flex-col items-center gap-5">
 
               {/* Badge */}
-              <div className="flex items-center gap-2 bg-yellow-400/10 border border-yellow-400/20 px-4 py-1.5 rounded-full">
-                <Sparkles className="h-3.5 w-3.5 text-yellow-400 animate-pulse" />
-                <span className="text-[11px] font-mono font-bold tracking-widest text-yellow-400 uppercase">
+              <div className="flex items-center gap-2 bg-[#1cb8df]/10 border border-[#1cb8df]/20 px-4 py-1.5 rounded-full">
+                <Sparkles className="h-3.5 w-3.5 text-[#1cb8df] animate-pulse" />
+                <span className="text-[11px] font-mono font-bold tracking-widest text-[#1cb8df] uppercase">
                   Stitch Punch — Limited Offer
                 </span>
               </div>
