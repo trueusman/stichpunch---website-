@@ -22,12 +22,12 @@ export default function Header({ onQuoteClick, activeSection, onCatPageOpen }: H
 
   const menuItems = [
     { label: "Home", href: "#home" },
+    { label: "About", href: "#about" },
     { label: "Services", href: "#services" },
     { label: "Pricing", href: "#pricing" },
     { label: "Portfolio", href: "#portfolio" },
     { label: "Categories", href: "#cat-preview", hasDropdown: true },
     { label: "File Formats", href: "#formats" },
-    { label: "About", href: "#about" },
     { label: "Contact", href: "#contact" },
   ];
 

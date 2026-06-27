@@ -103,18 +103,32 @@ export default function App() {
 
       <main className="flex-grow">
 
+        {/* 1. Home */}
         <Hero onQuoteClick={handleScrollToQuote} />
 
-        <PortfolioShowcase />
-        <CategoryDetailSections onViewMore={openCatPage} />
+        {/* 2. About — right after Hero */}
+        <AboutSection />
 
+        {/* 3. Services */}
         <ServicesList onQuoteClick={handleScrollToQuote} />
         <WhyChooseUs />
+
+        {/* 4. Pricing */}
         <PricingPlans onQuoteClick={handleScrollToQuote} />
 
-        <Testimonials />
+        {/* 5. Portfolio */}
+        <PortfolioShowcase />
+
+        {/* 6. Categories */}
+        <CategoryDetailSections onViewMore={openCatPage} />
+
+        {/* 7. File Formats */}
         <FormatExplainer />
-        <AboutSection />
+
+        {/* 8. Testimonials */}
+        <Testimonials />
+
+        {/* 9. Contact */}
         <CtaBanner onQuoteClick={handleScrollToQuote} />
         <OrderForm />
         <PaymentSection />

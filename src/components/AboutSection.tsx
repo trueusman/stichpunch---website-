@@ -1,164 +1,202 @@
 import React from "react";
-import { ShieldAlert, Award, Star, Watch, Zap } from "lucide-react";
+import { Award, Clock, Users, Globe, ShieldCheck, Handshake, Star, Package } from "lucide-react";
 import { motion } from "motion/react";
-import patchImg from "../assets/images/embroidered_patch_1782158664945.jpg";
+import logoImg from "../assets/images/stichpunch.png";
+import aboutImg from "../assets/images/about.png";
+
+const stats = [
+  {
+    icon: <Package className="h-6 w-6" style={{ color: "#1cb8df" }} />,
+    value: "100+",
+    label: "Daily Orders",
+    sub: "Completed with care and precision.",
+  },
+  {
+    icon: <Users className="h-6 w-6" style={{ color: "#1cb8df" }} />,
+    value: "5+",
+    label: "Years Experience",
+    sub: "In embroidery digitizing and vector art.",
+  },
+  {
+    icon: <Star className="h-6 w-6" style={{ color: "#1cb8df" }} />,
+    value: "5000+",
+    label: "Satisfied Customers",
+    sub: "Trusted by businesses worldwide.",
+  },
+  {
+    icon: <Globe className="h-6 w-6" style={{ color: "#1cb8df" }} />,
+    value: "50+",
+    label: "Countries Served",
+    sub: "Global clients, local support.",
+  },
+];
+
+const values = [
+  {
+    icon: <Award className="h-6 w-6" style={{ color: "#1cb8df" }} />,
+    title: "Quality First",
+    desc: "We never compromise on quality. Every stitch is carefully crafted.",
+  },
+  {
+    icon: <Clock className="h-6 w-6" style={{ color: "#1cb8df" }} />,
+    title: "Fast Turnaround",
+    desc: "We respect your time and deliver in record time without compromising.",
+  },
+  {
+    icon: <Handshake className="h-6 w-6" style={{ color: "#1cb8df" }} />,
+    title: "Customer Focused",
+    desc: "Our customers are at the heart of everything we do.",
+  },
+  {
+    icon: <ShieldCheck className="h-6 w-6" style={{ color: "#1cb8df" }} />,
+    title: "Secure & Reliable",
+    desc: "Your files are safe with us. We ensure 100% privacy and security.",
+  },
+];
 
 export default function AboutSection() {
-  const highlights = [
-    {
-      icon: <Award className="h-5 w-5" style={{ color: "#1cb8df" }} />,
-      title: "Master Level Digitizers",
-      desc: "Our senior design team comprises visual trade legends with 15+ years hand-drafting paths under Wilcom and Corell layouts."
-    },
-    {
-      icon: <Watch className="h-5 w-5" style={{ color: "#1cb8df" }} />,
-      title: "Surgical Speeds",
-      desc: "Get digital file proofs back in average 2 to 4 hour delivery. Never stall client uniform sewing runs again."
-    },
-    {
-      icon: <Zap className="h-5 w-5" style={{ color: "#1cb8df" }} />,
-      title: "Flawless Path Integrity",
-      desc: "Every curve is tested via software simulation first to correct density strains, looping jump threads, and long underlays."
-    }
-  ];
-
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { 
-        staggerChildren: 0.12, 
-        delayChildren: 0.1 
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, x: -25 },
-    visible: { 
-      opacity: 1, 
-      x: 0, 
-      transition: { type: "spring", stiffness: 90, damping: 16 } 
-    }
-  };
-
-  const imageCardVariants = {
-    hidden: { opacity: 0, scale: 0.96, x: 25 },
-    visible: { 
-      opacity: 1, 
-      scale: 1, 
-      x: 0, 
-      transition: { type: "spring", stiffness: 70, damping: 18, delay: 0.2 } 
-    }
-  };
-
   return (
-    <section id="about" className="py-24 bg-white text-slate-900 relative overflow-hidden scroll-mt-12">
-      <div className="absolute inset-0 bg-[#070b14]/50 pointer-events-none" />
-      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full blur-3xl pointer-events-none" style={{ background: "rgba(28,184,223,0.04)" }} />
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          
-          {/* Left Block Content with stagger anim */}
-          <motion.div 
-            className="lg:col-span-12 xl:col-span-7 space-y-6"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-          >
-            <motion.span 
-              variants={itemVariants}
-              className="inline-block text-xs font-mono font-bold tracking-widest px-3.5 py-1.5 rounded-full uppercase"
-              style={{ color: "#1cb8df", background: "rgba(28,184,223,0.08)", border: "1px solid rgba(28,184,223,0.2)" }}
-            >
-              WHO WE ARE
-            </motion.span>
-            
-            <motion.h2 
-              variants={itemVariants}
-              className="font-display font-bold text-3xl sm:text-4xl text-slate-900 tracking-tight leading-tight"
-            >
-              Mastering the Collision of Threads &amp; Vector Technology
-            </motion.h2>
-            
-            <motion.p 
-              variants={itemVariants}
-              className="text-slate-600 text-sm sm:text-base leading-relaxed max-w-2xl font-light"
-            >
-              We started StitchCraft with a simple purpose: to build digital files that execute flawlessly in physical production workshops without pulling stitches or splitting curves. 
-            </motion.p>
-            
-            <motion.p 
-              variants={itemVariants}
-              className="text-slate-500 text-xs sm:text-xs leading-relaxed max-w-2xl"
-            >
-              While other sites use generic automatic tracing tools that overload embroidery needles and cause multiple thread breaks, our experts outline and punch every single vector curve and jump thread manually. It is a slow, highly calculated design ritual that saves your physical machines from continuous mechanical wear and ensures perfect stitch registration on any fabric.
-            </motion.p>
+    <section id="about" className="scroll-mt-12 bg-white">
 
-            {/* Highlights lists with micro spring entries */}
-            <div className="grid grid-cols-1 gap-4 pt-4">
-              {highlights.map((hl, idx) => (
-                <motion.div 
-                  key={idx} 
-                  variants={itemVariants}
-                  whileHover={{ x: 4 }}
-                  className="flex space-x-4 bg-slate-50/30 p-4 rounded-xl border border-navy-850 hover:bg-slate-50/60 transition-all cursor-default"
-                >
-                  <div className="bg-white p-2.5 rounded-lg border border-navy-800/80 self-start" style={{ color: "#1cb8df" }}>
-                    {hl.icon}
-                  </div>
-                  <div>
-                    <h4 className="font-display font-semibold text-slate-100 text-sm sm:text-base tracking-wide">
-                      {hl.title}
-                    </h4>
-                    <p className="text-slate-500 text-xs sm:text-xs mt-1 leading-relaxed">
-                      {hl.desc}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+      {/* ── Part 1: Story Block ── */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+          {/* Left: Image */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="relative flex items-center justify-center"
+          >
+            {/* Dotted decoration */}
+            <div
+              className="absolute -bottom-4 -left-4 w-40 h-40 pointer-events-none"
+              style={{
+                backgroundImage: "radial-gradient(rgba(249,111,31,0.35) 1.5px, transparent 1.5px)",
+                backgroundSize: "10px 10px",
+              }}
+            />
+            <img
+              src={aboutImg}
+              alt="Embroidery machine stitching SP logo"
+              className="relative z-10 w-full rounded-2xl object-cover shadow-xl"
+              style={{ maxHeight: "480px" }}
+            />
           </motion.div>
 
-          {/* Right Block Media Box with custom zoom reveal */}
-          <motion.div 
-            className="lg:col-span-12 xl:col-span-5 h-full flex flex-col justify-center"
-            variants={imageCardVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+          {/* Right: Text */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+            className="space-y-5"
           >
-            <div className="relative group">
-              {/* Overlapping graphics */}
-              <div className="absolute -top-4 -left-4 w-full h-full border rounded-2xl pointer-events-none group-hover:scale-[1.01] transition-transform duration-500" style={{ borderColor: "rgba(28,184,223,0.12)" }} />
-              
-              <div className="bg-slate-50 border border-navy-850 p-3 rounded-2xl shadow-3xl relative z-10 overflow-hidden">
-                <img
-                  src={patchImg}
-                  alt="Craftsmanship patch closeup"
-                  className="w-full h-[22rem] object-cover rounded-xl transition-transform duration-700 ease-out group-hover:scale-103"
-                  referrerPolicy="no-referrer"
-                />
-                
-                {/* Micro overlay statistics specs on image */}
-                <div className="absolute bottom-6 left-6 right-6 bg-white/95 border border-navy-800 p-4 rounded-xl shadow-lg flex items-center justify-between text-xs font-mono text-slate-600">
-                  <div className="space-y-1">
-                    <span className="text-[9px] text-slate-500 block uppercase tracking-wider">STITCH DENSITY</span>
-                    <span className="font-bold text-slate-100 text-xs block">12,400 manual paths</span>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-[9px] text-slate-500 block uppercase tracking-wider">STABILIZER GUIDE</span>
-                    <span className="font-bold text-xs block" style={{ color: "#1cb8df" }}>Cutaway heavy guide</span>
-                  </div>
-                </div>
+            {/* Badge */}
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-bold tracking-widest uppercase" style={{ color: "#f96f1f" }}>
+                OUR STORY
+              </span>
+              <div className="h-[2px] w-8 rounded" style={{ background: "#f96f1f" }} />
+            </div>
+
+            <h2 className="font-display font-extrabold text-3xl sm:text-4xl leading-tight" style={{ color: "#1B2A6B" }}>
+              Precision. Passion. Perfection.
+            </h2>
+
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+              StichPunch was founded with a simple mission — to provide world-class
+              embroidery digitizing and vector art services with unmatched quality
+              and fast turnaround.
+            </p>
+
+            <p className="text-slate-500 text-sm leading-relaxed">
+              Our team of CAD-calibrated embroidery architects ensures every stitch
+              is perfect, every file is clean, and every client is satisfied.
+            </p>
+
+            {/* Team signature */}
+            <div className="flex items-center gap-3 pt-2">
+              <div
+                className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0"
+                style={{ background: "rgba(249,111,31,0.1)", border: "1.5px solid rgba(249,111,31,0.3)" }}
+              >
+                <img src={logoImg} alt="SP" className="w-7 h-7 object-contain" />
+              </div>
+              <div>
+                <p className="font-bold text-sm" style={{ color: "#1B2A6B" }}>The StichPunch Team</p>
+                <p className="text-xs text-slate-400">Quality You Can Trust, Every Stitch.</p>
               </div>
             </div>
           </motion.div>
 
         </div>
+      </div>
+
+      {/* ── Part 3: Values Grid ── */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+        {/* Values header */}
+        <motion.div
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="flex items-center justify-center gap-3 mb-3">
+            <div className="h-[2px] w-8 rounded" style={{ background: "#f96f1f" }} />
+            <span className="text-xs font-bold tracking-widest uppercase" style={{ color: "#f96f1f" }}>
+              OUR VALUES
+            </span>
+            <div className="h-[2px] w-8 rounded" style={{ background: "#f96f1f" }} />
+          </div>
+          <h3 className="font-display font-extrabold text-2xl sm:text-3xl" style={{ color: "#1B2A6B" }}>
+            The Principles That Drive Us
+          </h3>
+        </motion.div>
+
+        {/* Values 4-col grid */}
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
+          }}
+        >
+          {values.map((val, i) => (
+            <motion.div
+              key={i}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 80, damping: 16 } },
+              }}
+              className="flex flex-col gap-3"
+            >
+              {/* Icon */}
+              <div
+                className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
+                style={{ background: "rgba(28,184,223,0.08)", border: "1px solid rgba(28,184,223,0.2)" }}
+              >
+                {val.icon}
+              </div>
+
+              {/* Title + orange underline */}
+              <div>
+                <p className="font-bold text-sm" style={{ color: "#1B2A6B" }}>{val.title}</p>
+                <div className="h-[2px] w-6 rounded mt-1" style={{ background: "#f96f1f" }} />
+              </div>
+
+              <p className="text-slate-500 text-xs leading-relaxed">{val.desc}</p>
+            </motion.div>
+          ))}
+        </motion.div>
+
       </div>
     </section>
   );

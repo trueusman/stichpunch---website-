@@ -13,14 +13,14 @@ export default function IntroSplash({ onDone }: Props) {
   const [visible, setVisible] = useState(true);
   const [typed, setTyped] = useState("");
 
-  // Typewriter effect — "To " is static below Welcome; brand name types in
+  // Typewriter effect — brand name types in
   useEffect(() => {
     let i = 0;
     const interval = setInterval(() => {
       i++;
       setTyped(TYPE_TEXT.slice(0, i));
       if (i >= TYPE_TEXT.length) clearInterval(interval);
-    }, 55); // speed per character
+    }, 55);
     return () => clearInterval(interval);
   }, []);
 
@@ -42,7 +42,7 @@ export default function IntroSplash({ onDone }: Props) {
           className="fixed inset-0 z-[99999] flex flex-col items-center justify-center gap-6"
           style={{ background: "#0a0f1e" }}
         >
-          {/* Lottie */}
+          {/* Lottie animation */}
           <motion.div
             className="w-52 h-52"
             initial={{ opacity: 0, scale: 0.7 }}
@@ -56,19 +56,17 @@ export default function IntroSplash({ onDone }: Props) {
             />
           </motion.div>
 
-          {/* Welcome text block */}
+          {/* Logo + brand name (typewriter) */}
           <motion.div
             className="flex flex-col items-center gap-3 text-center px-6"
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.4 }}
           >
-            {/* Logo + brand text below Welcome animation */}
             <div className="flex items-center gap-3 mb-1">
               <img src={logoImg} alt="Stich Punch" className="h-12 w-12 object-contain shrink-0" />
               <div className="text-left">
                 <h1 className="font-display font-black text-3xl sm:text-4xl tracking-tight leading-none">
-                  <span className="text-white">To </span>
                   {typed.length <= 5 ? (
                     <span style={{ color: "#f96f1f" }}>{typed}</span>
                   ) : (
@@ -99,6 +97,16 @@ export default function IntroSplash({ onDone }: Props) {
               />
             </div>
           </motion.div>
+
+          {/* "Welcome to Stich Punch" — pinned to bottom-center */}
+          <motion.p
+            className="absolute bottom-10 left-1/2 -translate-x-1/2 text-slate-400 text-sm font-mono tracking-[0.25em] uppercase whitespace-nowrap"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
+          >
+            Welcome to Stich Punch
+          </motion.p>
         </motion.div>
       )}
     </AnimatePresence>
