@@ -105,7 +105,7 @@ app.post("/api/chat-assistant", async (req, res) => {
       "2. Answer the user's question in the very first sentence. " +
       "3. Limit the entire response to a maximum of 2 sentences, or a clean, highly structured bullet list of 2-3 items. " +
       "4. Always bold critical terms with **double asterisks** for swift scanning. " +
-      "5. When relevant, mention StitchCraft's elite 8-12 hour turnaround, zero-puckering alignment, or manual vector redrafting.";
+      "5. When relevant, mention StitchCraft's elite 2-4 hour turnaround, zero-puckering alignment, or manual vector redrafting.";
 
     const response = await generateContentWithRetry(ai, {
       model: "gemini-3.5-flash",
@@ -134,7 +134,7 @@ app.post("/api/chat-assistant", async (req, res) => {
     if (query.includes("hi") || query.includes("hello") || query.includes("hey") || query.includes("good morning") || query.includes("good afternoon")) {
       fallbackReply = "Hello! I am the **StitchCraft AI Assistant**. How can I help you with embroidery digitizing or vector art redraw inquiries today?";
     } else if (query.includes("time") || query.includes("turnaround") || query.includes("fast") || query.includes("how long")) {
-      fallbackReply = "StitchCraft delivers files in just **8-12 hours**! Extremely fast turnaround keeps your embroidery machines running without delay.";
+      fallbackReply = "StitchCraft delivers files in just **2 to 4 hours**! Extremely fast turnaround keeps your embroidery machines running without delay.";
     } else if (query.includes("price") || query.includes("cost") || query.includes("how much") || query.includes("rate") || query.includes("fee")) {
       fallbackReply = "Our simple flat pricing:\n• **Digitizing Starts at $15**\n• **Manual Vector redrafts start at $12**\n• **Full Jacket Backs start at $80**";
     } else if (query.includes("puff") || query.includes(" foam ") || query.includes("3d") || query.includes("cap")) {

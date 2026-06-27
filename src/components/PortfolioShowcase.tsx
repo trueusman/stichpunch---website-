@@ -1,12 +1,24 @@
 import React, { useState } from "react";
-import { Cpu, Eye } from "lucide-react";
+import { Cpu, Eye, Star } from "lucide-react";
 import { PORTFOLIO_DATA } from "../data";
 import { motion, AnimatePresence } from "motion/react";
 
 export default function PortfolioShowcase() {
   const [activeFilter, setActiveFilter] = useState<"all" | "embroidery" | "vector" | "before_after" | "patches">("all");
+  const [showAll, setShowAll] = useState(false);
 
-  const filteredItems = PORTFOLIO_DATA.filter((item) => {
+  const featuredItems = PORTFOLIO_DATA.filter(i => i.featured);
+
+  // Max 3 per category in featured view
+  const limitedFeatured = (() => {
+    const counts: Record<string, number> = {};
+    return featuredItems.filter(item => {
+      counts[item.category] = (counts[item.category] || 0) + 1;
+      return counts[item.category] <= 3;
+    });
+  })();
+
+  const filteredItems = (showAll ? PORTFOLIO_DATA : limitedFeatured).filter((item) => {
     if (activeFilter === "all") return true;
     return item.category === activeFilter;
   });
@@ -30,12 +42,12 @@ export default function PortfolioShowcase() {
             Our Elite Design Portfolio
           </h2>
           <p className="text-slate-500 mt-4 text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">
-            Inspect authentic production runs modeling our micro-precision specifications. Filter by work type to explore our full range of digitizing and vector artwork.
+            Hand-picked highlights from our best production work. Filter by type or view the full collection.
           </p>
         </motion.div>
 
         {/* Filter Tabs */}
-        <div className="flex flex-wrap justify-center items-center gap-2 mb-14 bg-slate-50 p-2 rounded-2xl max-w-2xl mx-auto shadow-sm border border-slate-200">
+        <div className="flex flex-wrap justify-center items-center gap-2 mb-8 bg-slate-50 p-2 rounded-2xl max-w-2xl mx-auto shadow-sm border border-slate-200">
           {(["all", "embroidery", "vector", "patches", "before_after"] as const).map((filter) => {
             const isActive = activeFilter === filter;
             return (
@@ -55,14 +67,35 @@ export default function PortfolioShowcase() {
                   />
                 )}
                 <span className="relative z-10">
-                  {filter === "all" ? "All Masterpieces" : filter.replace("_", " ")}
+                  {filter === "all" ? "All" : filter.replace("_", " ")}
                 </span>
               </button>
             );
           })}
         </div>
 
-        {/* Portfolio Grid — all cards same style */}
+        {/* Featured / All toggle */}
+        <div className="flex justify-center mb-10">
+          <div className="flex items-center gap-1 bg-slate-100 border border-slate-200 rounded-full p-1 text-xs font-bold">
+            <button
+              onClick={() => setShowAll(false)}
+              className="flex items-center gap-1.5 px-4 py-1.5 rounded-full transition-all"
+              style={!showAll ? { background: "#f96f1f", color: "#fff" } : { color: "#64748b" }}
+            >
+              <Star className="h-3 w-3" />
+              Featured
+            </button>
+            <button
+              onClick={() => setShowAll(true)}
+              className="flex items-center gap-1.5 px-4 py-1.5 rounded-full transition-all"
+              style={showAll ? { background: "#1cb8df", color: "#fff" } : { color: "#64748b" }}
+            >
+              View All ({PORTFOLIO_DATA.length})
+            </button>
+          </div>
+        </div>
+
+        {/* Portfolio Grid */}
         <div className="min-h-96">
           <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <AnimatePresence mode="popLayout">
@@ -83,18 +116,26 @@ export default function PortfolioShowcase() {
                       alt={item.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out opacity-90 group-hover:opacity-100"
                     />
+                    {/* Featured badge */}
+                    {item.featured && (
+                      <div className="absolute top-4 right-4 flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider"
+                        style={{ background: "rgba(249,111,31,0.9)", color: "#fff" }}>
+                        <Star className="h-2.5 w-2.5" />
+                        Featured
+                      </div>
+                    )}
                     <span className="absolute top-4 left-4 text-[10px] font-mono px-3 py-1.5 rounded-lg shadow-lg uppercase tracking-wider border" style={{ background: "rgba(28,184,223,0.12)", color: "#1cb8df", borderColor: "rgba(28,184,223,0.3)" }}>
                       {item.category === "before_after" ? "Vector Redraw" : item.category}
                     </span>
                     {item.stitchCount && (
-                      <div className="absolute bottom-4 left-4 right-4 bg-white/90 text-slate-900 p-3.5 rounded-xl backdrop-blur-sm flex items-center justify-between text-xs border border-navy-800 shadow-lg">
+                      <div className="absolute bottom-4 left-4 right-4 bg-white/90 text-slate-900 p-3.5 rounded-xl backdrop-blur-sm flex items-center justify-between text-xs border border-slate-200 shadow-lg">
                         <div>
                           <span className="text-slate-500 font-mono text-[9px] block uppercase tracking-wider">Stitch Count</span>
                           <span className="font-bold text-sm mt-0.5 block" style={{ color: "#f96f1f" }}>{item.stitchCount}</span>
                         </div>
                         <div>
                           <span className="text-slate-500 font-mono text-[9px] block uppercase tracking-wider">Thread Colors</span>
-                          <span className="font-bold text-slate-200 mt-0.5 text-right block">{item.colors} Colors</span>
+                          <span className="font-bold text-slate-700 mt-0.5 text-right block">{item.colors} Colors</span>
                         </div>
                       </div>
                     )}

@@ -47,7 +47,7 @@ export default function AiAssistantWidget() {
       return "Hello! I am the **StitchCraft AI Assistant**. How can I help you with embroidery digitizing or vector art redraw inquiries today?";
     }
     if (q.includes("how long takes") || q.includes("turnaround") || q.includes("how long") || q.includes("time") || q.includes("fast")) {
-      return "StitchCraft operates on a **surgical turnaround cycle**! Embroidery files are prepared and delivered in **8 to 12 Hours**, and manual vector redrafts in **6 to 12 Hours**.";
+      return "StitchCraft operates on a **surgical turnaround cycle**! Embroidery files are prepared and delivered in **2 to 4 Hours**, and manual vector redrafts in **2 to 4 Hours**.";
     }
     if (q.includes("file formats") || q.includes("delivered") || q.includes("format") || q.includes("dst") || q.includes("emb")) {
       return "We deliver ready-to-sew **DST**, **EXP**, and editable **EMB** files for machines, plus scalable **AI**, **SVG**, and high-res **PDF** file formats.";

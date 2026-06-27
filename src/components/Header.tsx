@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { Menu, X, Mail, Clock, Facebook, Instagram, Twitter, Linkedin } from "lucide-react";
+import React, { useState, useEffect, useRef } from "react";
+import { Menu, X, Mail, Clock, Facebook, Instagram, Twitter, Linkedin, Cpu, Layers, ShieldCheck, ChevronDown, GitCompare } from "lucide-react";
 import logoImg from "../assets/images/stichpunch.png";
 
 interface HeaderProps {
   onQuoteClick: () => void;
   activeSection: string;
+  onCatPageOpen: (cat: "digitizing" | "vector" | "patches" | "before_after") => void;
 }
 
-export default function Header({ onQuoteClick, activeSection }: HeaderProps) {
+export default function Header({ onQuoteClick, activeSection, onCatPageOpen }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [catDropdown, setCatDropdown] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -21,11 +24,38 @@ export default function Header({ onQuoteClick, activeSection }: HeaderProps) {
     { label: "Home", href: "#home" },
     { label: "Services", href: "#services" },
     { label: "Pricing", href: "#pricing" },
-    { label: "Categories", href: "#categories" },
+    { label: "Categories", href: "#categories", hasDropdown: true },
     { label: "Portfolio", href: "#portfolio" },
     { label: "File Formats", href: "#formats" },
     { label: "About", href: "#about" },
     { label: "Contact", href: "#contact" },
+  ];
+
+  const categoryLinks = [
+    {
+      icon: <Cpu className="h-4 w-4" style={{ color: "#1cb8df" }} />,
+      label: "Digitizing",
+      desc: "Precision stitch file creation",
+      pageKey: "digitizing" as const,
+    },
+    {
+      icon: <Layers className="h-4 w-4" style={{ color: "#f96f1f" }} />,
+      label: "Vector Art",
+      desc: "Manual vector path redraw",
+      pageKey: "vector" as const,
+    },
+    {
+      icon: <ShieldCheck className="h-4 w-4" style={{ color: "#22c55e" }} />,
+      label: "Custom Patches",
+      desc: "Embroidered & PVC patches",
+      pageKey: "patches" as const,
+    },
+    {
+      icon: <GitCompare className="h-4 w-4" style={{ color: "#a855f7" }} />,
+      label: "Before & After",
+      desc: "Transformation showcase",
+      pageKey: "before_after" as const,
+    },
   ];
 
   return (
@@ -33,11 +63,9 @@ export default function Header({ onQuoteClick, activeSection }: HeaderProps) {
 
       {/* ── Top Announcement Bar ── */}
       <div className="flex items-center justify-between w-full px-4 sm:px-6 lg:px-8 py-2 text-white text-xs" style={{ backgroundColor: "#f96f1f" }}>
-        {/* Left */}
         <span className="font-semibold hidden lg:block whitespace-nowrap">
-          Welcome to StichPunch — Quality You Can Trust, Every Stitch.
+          Quality You Can Trust, Every Stitch.
         </span>
-        {/* Center */}
         <div className="flex items-center gap-4">
           <a href="mailto:sales@stichpunch.com" className="flex items-center gap-1.5 hover:opacity-80 transition-opacity whitespace-nowrap">
             <Mail className="w-3.5 h-3.5 flex-shrink-0" />
@@ -49,7 +77,6 @@ export default function Header({ onQuoteClick, activeSection }: HeaderProps) {
             <span>Mon – Friday: 9:00 AM – 6:00 PM</span>
           </div>
         </div>
-        {/* Right: socials */}
         <div className="flex items-center gap-3">
           <a href="#" aria-label="Facebook" className="hover:opacity-75 transition-opacity"><Facebook className="w-3.5 h-3.5" /></a>
           <a href="#" aria-label="Instagram" className="hover:opacity-75 transition-opacity"><Instagram className="w-3.5 h-3.5" /></a>
@@ -79,6 +106,66 @@ export default function Header({ onQuoteClick, activeSection }: HeaderProps) {
             <nav className="hidden lg:flex items-center gap-0.5">
               {menuItems.map((item) => {
                 const isActive = activeSection === item.href.slice(1);
+
+                if (item.hasDropdown) {
+                  return (
+                    <div
+                      key={item.href}
+                      ref={dropdownRef}
+                      className="relative"
+                      onMouseEnter={() => setCatDropdown(true)}
+                      onMouseLeave={() => setCatDropdown(false)}
+                    >
+                      <a
+                        href={item.href}
+                        className="flex items-center gap-1 px-4 py-2 text-xs font-bold rounded-lg tracking-wider uppercase transition-all duration-200"
+                        style={{
+                          color: isActive ? "#1B2A6B" : "#64748b",
+                          background: isActive ? "rgba(28,184,223,0.08)" : "transparent",
+                          fontWeight: isActive ? 800 : 600,
+                        }}
+                      >
+                        {item.label}
+                        <ChevronDown className={`h-3 w-3 transition-transform duration-200 ${catDropdown ? "rotate-180" : ""}`} />
+                      </a>
+
+                      {/* Dropdown */}
+                      {catDropdown && (
+                        <div
+                          className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-64 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden z-50"
+                          style={{ boxShadow: "0 20px 60px rgba(0,0,0,0.12)" }}
+                        >
+                          {/* Arrow */}
+                          <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-white border-l border-t border-slate-100 rotate-45" />
+
+                          <div className="p-2 pt-3">
+                            {categoryLinks.map((cat) => (
+                              <button
+                                key={cat.label}
+                                className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition-colors group/item text-left"
+                                onClick={() => { setCatDropdown(false); onCatPageOpen(cat.pageKey); }}
+                              >
+                                <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 bg-slate-100 group-hover/item:bg-white transition-colors">
+                                  {cat.icon}
+                                </div>
+                                <div>
+                                  <p className="text-xs font-bold text-slate-900 tracking-wide">{cat.label}</p>
+                                  <p className="text-[10px] text-slate-400 mt-0.5">{cat.desc}</p>
+                                </div>
+                              </button>
+                            ))}
+                          </div>
+
+                          {/* Footer strip */}
+                          <div className="px-4 py-2.5 border-t border-slate-100 bg-slate-50">
+                            <p className="text-[10px] text-slate-400 font-mono text-center tracking-wider uppercase">2–4 Hour Turnaround</p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+
                 return (
                   <a
                     key={item.href}
@@ -102,10 +189,7 @@ export default function Header({ onQuoteClick, activeSection }: HeaderProps) {
             <div className="flex items-center gap-3">
               <a
                 href="mailto:sales@stichpunch.com"
-                className="hidden sm:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full font-bold text-xs uppercase tracking-widest transition-all duration-300 border-2"
-                style={{ borderColor: "#f96f1f", color: "#f96f1f", background: "transparent" }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#f96f1f"; (e.currentTarget as HTMLElement).style.color = "white"; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "transparent"; (e.currentTarget as HTMLElement).style.color = "#f96f1f"; }}
+                className="hidden sm:inline-flex items-center gap-1.5 font-bold text-xs uppercase tracking-widest email-us-btn"
               >
                 <Mail className="w-3.5 h-3.5" />
                 Email Us

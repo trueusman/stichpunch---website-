@@ -161,7 +161,7 @@ export default function ServicesList({ onQuoteClick }: ServicesProps) {
                 <div className="border-t border-slate-200 pt-5 mt-auto flex items-center gap-2.5 rounded-xl px-4 py-3" style={{ background: "rgba(249,111,31,0.08)", border: "1px solid rgba(249,111,31,0.2)" }}>
                   <Zap className="h-4 w-4 flex-shrink-0" style={{ color: "#f96f1f" }} />
                   <span className="text-xs font-bold tracking-wide" style={{ color: "#f96f1f" }}>
-                    We will ready your logo in just 2 hours
+                    We will ready your logo in just 2 to 4 hours
                   </span>
                 </div>
               </div>
@@ -175,20 +175,20 @@ export default function ServicesList({ onQuoteClick }: ServicesProps) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="rounded-2xl p-8 sm:p-12 text-center text-slate-900 mt-16 shadow-2xl overflow-hidden relative group"
+          className="rounded-2xl p-8 sm:p-12 text-center mt-16 shadow-2xl overflow-hidden relative group"
           style={{ backgroundImage: `url(${patchesBg})`, backgroundSize: "cover", backgroundPosition: "center" }}
         >
           {/* Dark overlay for readability */}
-          <div className="absolute inset-0 bg-white/75 pointer-events-none" />
+          <div className="absolute inset-0 bg-black/55 pointer-events-none" />
           {/* Visual gradient orb structures */}
           <div className="absolute top-0 right-0 w-72 h-72 bg-gradient-to-b from-[#f96f1f]/8 to-transparent rounded-full blur-3xl pointer-events-none group-hover:scale-110 transition-transform duration-1000" />
           <div className="absolute bottom-0 left-0 w-72 h-72 bg-gradient-to-t from-blue-500/5 to-transparent rounded-full blur-3xl pointer-events-none group-hover:scale-110 transition-transform duration-1000" />
           
           <div className="relative z-10 max-w-2xl mx-auto space-y-4">
-            <h3 className="font-display font-medium text-xl sm:text-2xl text-slate-100 tracking-tight">
+            <h3 className="font-display font-medium text-xl sm:text-2xl text-white tracking-tight">
               Unsure if Digitizing or Vector Art is right for you?
             </h3>
-            <p className="text-slate-500 text-xs sm:text-sm leading-relaxed max-w-xl mx-auto">
+            <p className="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-xl mx-auto">
               Our live virtual engine maps clarity coordinates, counts estimated stitches, and diagnoses fabric compatibility before you sew. Experience premium file-ready standards.
             </p>
             <div className="pt-4">

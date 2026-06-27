@@ -41,8 +41,7 @@ export default function Hero({ onQuoteClick }: HeroProps) {
         >
           <source src={heroVideo} type="video/mp4" />
         </video>
-        {/* Dark overlay — same as reference image */}
-        <div className="absolute inset-0" style={{ background: "rgba(10,15,30,0.78)" }} />
+        {/* No overlay — show video clearly */}
       </div>
 
       {/* Content */}
@@ -76,14 +75,14 @@ export default function Hero({ onQuoteClick }: HeroProps) {
               Experience CAD-calibrated stitch architecture, designed for zero thread
               breaks, perfect pull-compensation, and stunning physical density.
               Fast{" "}
-              <span className="font-semibold" style={{ color: "#f96f1f" }}>2 to 12 hour</span>{" "}
+              <span className="font-semibold" style={{ color: "#f96f1f" }}>2 to 4 hour</span>{" "}
               turnaround. Fast service.
             </motion.p>
 
             {/* Bullets — 2x2 grid with sky blue checkmarks */}
             <motion.div variants={item} className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {[
-                "8–12 Hour Super Fast Turnaround",
+                "2–4 Hour Super Fast Turnaround",
                 "100% Manual, CAD-Calibrated Stitch Perfection",
                 "Logo Puckering & Alignment Engineering",
                 "Embroidery File Online Verification & Approval",
@@ -100,28 +99,32 @@ export default function Hero({ onQuoteClick }: HeroProps) {
             </motion.div>
 
             {/* CTAs */}
-            <motion.div variants={item} className="flex flex-wrap gap-3 pt-2">
-              <button
-                onClick={onQuoteClick}
-                className="flex items-center gap-2 text-white font-black px-8 py-4 rounded-xl text-sm uppercase tracking-wider transition-all shadow-lg active:scale-95"
-                style={{ background: "#f96f1f" }}
-                onMouseEnter={e => (e.currentTarget as HTMLElement).style.filter = "brightness(1.1)"}
-                onMouseLeave={e => (e.currentTarget as HTMLElement).style.filter = ""}
-              >
-                <Sparkles className="h-4 w-4" />
+            <motion.div variants={item} className="flex flex-wrap gap-6 pt-2 items-center">
+
+              {/* Get Quote button */}
+              <button onClick={onQuoteClick} className="getquote-btn">
                 Get Quote
-                <ArrowRight className="h-4 w-4" />
               </button>
-              <button
-                onClick={onQuoteClick}
-                className="flex items-center gap-2 border-2 text-white font-bold px-8 py-4 rounded-xl text-sm uppercase tracking-wider transition-all active:scale-95"
-                style={{ borderColor: "rgba(255,255,255,0.35)" }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "#1cb8df"; (e.currentTarget as HTMLElement).style.color = "#1cb8df"; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.35)"; (e.currentTarget as HTMLElement).style.color = "white"; }}
-              >
-                <ShoppingCart className="h-4 w-4" />
-                Order Now
+              {/* Hidden SVG filters still needed for Order Now if used elsewhere */}
+              <svg height={0} width={0} style={{ position: "absolute" }}>
+                <filter id="handDrawnNoise"><feTurbulence result="noise" numOctaves={8} baseFrequency="0.1" type="fractalNoise" /><feDisplacementMap yChannelSelector="G" xChannelSelector="R" scale={3} in2="noise" in="SourceGraphic" /></filter>
+                <filter id="handDrawnNoise2"><feTurbulence result="noise" numOctaves={8} baseFrequency="0.1" seed={1010} type="fractalNoise" /><feDisplacementMap yChannelSelector="G" xChannelSelector="R" scale={3} in2="noise" in="SourceGraphic" /></filter>
+                <filter id="handDrawnNoiset"><feTurbulence result="noise" numOctaves={8} baseFrequency="0.1" type="fractalNoise" /><feDisplacementMap yChannelSelector="G" xChannelSelector="R" scale={6} in2="noise" in="SourceGraphic" /></filter>
+                <filter id="handDrawnNoiset2"><feTurbulence result="noise" numOctaves={8} baseFrequency="0.1" seed={1010} type="fractalNoise" /><feDisplacementMap yChannelSelector="G" xChannelSelector="R" scale={6} in2="noise" in="SourceGraphic" /></filter>
+              </svg>
+
+              {/* Animated circle-expand Order Now button */}
+              <button onClick={onQuoteClick} className="order-animated-btn">
+                <svg viewBox="0 0 24 24" className="order-arr-2" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
+                </svg>
+                <span className="order-text">Order Now</span>
+                <span className="order-circle" />
+                <svg viewBox="0 0 24 24" className="order-arr-1" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
+                </svg>
               </button>
+
             </motion.div>
 
           </motion.div>

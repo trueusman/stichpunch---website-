@@ -28,6 +28,8 @@ export interface PortfolioItem {
   stitchCount?: string;
   colors?: number;
   softwareUsed: string;
+  featured?: boolean;
+  beforeAfterType?: "embroidery" | "vector";
 }
 
 export interface FormatDetails {

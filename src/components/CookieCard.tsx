@@ -36,11 +36,14 @@ export default function CookieCard() {
           exit={{ opacity: 0, y: 30, scale: 0.95 }}
           className="fixed bottom-6 left-6 z-50 pointer-events-auto"
         >
-          <div className="w-[320px] bg-navy-900 rounded-2xl flex flex-col items-center justify-center p-6 gap-3.5 relative overflow-hidden shadow-[2px_2px_20px_rgba(0,0,0,0.4)] border border-slate-800 ring-1 ring-slate-800">
+          <div className="w-[320px] bg-white rounded-2xl flex flex-col items-center justify-center p-6 gap-3.5 relative overflow-hidden shadow-xl border border-slate-200">
+            {/* Top accent bar */}
+            <div className="absolute top-0 inset-x-0 h-1" style={{ background: "linear-gradient(90deg, #f96f1f, #1cb8df)" }} />
+
             {/* Top close cross button */}
             <button
               onClick={() => setIsVisible(false)}
-              className="absolute top-3 right-3 text-slate-450 hover:text-white transition-colors cursor-pointer"
+              className="absolute top-3 right-3 text-slate-400 hover:text-slate-900 transition-colors bg-slate-100 hover:bg-slate-200 rounded-full p-1 cursor-pointer"
               aria-label="Close panel"
             >
               <X className="h-4 w-4" />
@@ -62,33 +65,32 @@ export default function CookieCard() {
               </g>
             </svg>
 
-            {/* Cookie Heading */}
-            <p className="text-xl font-extrabold text-white font-sans tracking-tight">
+            <p className="text-xl font-extrabold text-slate-900 font-sans tracking-tight">
               We use cookies.
             </p>
 
-            {/* Cookie Description */}
-            <p className="text-center text-xs font-semibold text-slate-400 leading-relaxed max-w-[250px]">
+            <p className="text-center text-xs font-semibold text-slate-500 leading-relaxed max-w-[250px]">
               We use cookies to ensure that we give you the best experience on our website. <br />
               <a
                 href="#cookies-policy"
-                className="text-gold-400 hover:text-gold-300 hover:underline inline-block mt-1 font-bold"
+                className="hover:underline inline-block mt-1 font-bold"
+                style={{ color: "#f96f1f" }}
               >
                 Read cookies policies
               </a>
             </p>
 
-            {/* Interactive Button Container */}
             <div className="flex gap-4 flex-row w-full mt-2 justify-center">
               <button
                 onClick={handleAccept}
-                className="w-24 h-9 bg-gold-500 hover:bg-gold-600 text-white hover:scale-105 active:scale-95 cursor-pointer font-bold rounded-full shadow-[0_4px_6px_-1px_rgba(249,111,31,0.3)] transition-all duration-300 text-xs"
+                className="w-24 h-9 text-white hover:scale-105 active:scale-95 cursor-pointer font-bold rounded-full shadow-md transition-all duration-300 text-xs hover:brightness-110"
+                style={{ background: "#f96f1f" }}
               >
                 Allow
               </button>
               <button
                 onClick={handleDecline}
-                className="w-24 h-9 bg-[#0D0D0D] border border-slate-800 hover:bg-slate-950 text-slate-300 hover:scale-105 active:scale-95 cursor-pointer font-bold rounded-full shadow-sm transition-all duration-300 text-xs"
+                className="w-24 h-9 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-600 hover:scale-105 active:scale-95 cursor-pointer font-bold rounded-full shadow-sm transition-all duration-300 text-xs"
               >
                 Decline
               </button>

@@ -5,8 +5,8 @@ import { motion } from "motion/react";
 const reasons = [
   {
     icon: Zap,
-    title: "2 Hour Turnaround",
-    description: "Get your digitized logo back in just 2 hours",
+    title: "2-4 Hour Turnaround",
+    description: "Get your digitized logo back in just 2 to 4 hours",
   },
   {
     icon: CheckCircle,

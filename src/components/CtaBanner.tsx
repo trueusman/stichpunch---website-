@@ -50,7 +50,7 @@ export default function CtaBanner({ onQuoteClick }: CtaBannerProps) {
 
           {/* Sub-text */}
           <p className="text-slate-400 text-sm sm:text-lg leading-relaxed max-w-2xl mx-auto mb-10">
-            Upload your artwork and get a production-ready digitized file in just 2 hours.
+            Upload your artwork and get a production-ready digitized file in just 2 to 4 hours.
             First logo absolutely <span className="text-white font-semibold">FREE</span>.
           </p>
 

@@ -15,7 +15,7 @@ const testimonials: Testimonial[] = [
   {
     name: "Sarah Johnson",
     role: "Apparel Brand Owner",
-    text: "StichPunch delivered my logo digitized perfectly in under 2 hours. The quality was outstanding — zero thread breaks on the first run!",
+    text: "StichPunch delivered my logo digitized perfectly in under 4 hours. The quality was outstanding — zero thread breaks on the first run!",
     stars: 5,
     initials: "SJ",
     avatarColor: "#1cb8df",

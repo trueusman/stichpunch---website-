@@ -65,9 +65,9 @@ export default function CategoriesGrid() {
                   <img
                     src={cat.imageUrl}
                     alt={cat.title}
-                    className="w-full h-full object-cover opacity-45 group-hover:opacity-60 group-hover:scale-105 transition-all duration-700 ease-out"
+                    className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/40 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
                   {/* Click to zoom hint */}
                   <div className={`absolute top-4 right-4 bg-black/50 backdrop-blur-sm p-2 rounded-full transition-opacity duration-300 ${isHovered ? "opacity-100" : "opacity-0"}`}>
@@ -77,7 +77,7 @@ export default function CategoriesGrid() {
 
                 {/* Running bar on hover */}
                 {isHovered && (
-                  <div className="absolute top-0 inset-x-0 h-1 bg-slate-50 overflow-hidden z-20">
+                  <div className="absolute top-0 inset-x-0 h-1 bg-black/20 overflow-hidden z-20">
                     <motion.div
                       className="h-full"
                       style={{ background: "#1cb8df", position: "absolute", width: "30%" }}
@@ -89,12 +89,12 @@ export default function CategoriesGrid() {
                 )}
 
                 {/* Content — always show title & tag, show description only on hover */}
-                <div className="relative z-10 p-6 sm:p-8 w-full bg-gradient-to-t from-navy-950 via-navy-950/90 to-transparent">
+                <div className="relative z-10 p-6 sm:p-8 w-full bg-gradient-to-t from-black/80 via-black/50 to-transparent">
 
                   {/* Tag + Running badge */}
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center space-x-2">
-                      <div className="bg-slate-50/90 border p-2 rounded-xl backdrop-blur-sm" style={{ borderColor: "rgba(28,184,223,0.25)" }}>
+                      <div className="bg-black/40 border p-2 rounded-xl backdrop-blur-sm" style={{ borderColor: "rgba(28,184,223,0.25)" }}>
                         {renderCatIcon(cat.iconName)}
                       </div>
                       <span className="text-[10px] font-mono tracking-wider uppercase px-2.5 py-1 rounded-lg" style={{ color: "#1cb8df", background: "rgba(28,184,223,0.08)", border: "1px solid rgba(28,184,223,0.2)" }}>
@@ -114,7 +114,7 @@ export default function CategoriesGrid() {
                   </div>
 
                   {/* Title — always visible */}
-                  <h3 className="font-display font-bold text-xl sm:text-2xl text-slate-900 tracking-tight transition-colors" style={{ color: isHovered ? "#f96f1f" : undefined }}>
+                  <h3 className="font-display font-bold text-xl sm:text-2xl text-white tracking-tight transition-colors" style={{ color: isHovered ? "#f96f1f" : undefined }}>
                     {cat.title}
                   </h3>
 
@@ -128,10 +128,10 @@ export default function CategoriesGrid() {
                         transition={{ duration: 0.25 }}
                         className="overflow-hidden"
                       >
-                        <p className="text-slate-500 text-xs sm:text-sm leading-relaxed mt-2 line-clamp-2">
+                        <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mt-2 line-clamp-2">
                           {cat.description}
                         </p>
-                        <div className="pt-3 border-t border-navy-800 mt-3">
+                        <div className="pt-3 border-t border-white/20 mt-3">
                           <span className="text-[9px] font-mono uppercase text-slate-500 tracking-widest block">
                             Stitch CAD Architecture
                           </span>
@@ -145,7 +145,7 @@ export default function CategoriesGrid() {
                             <span>Simulation progress</span>
                             <span>100% CAD Optimized</span>
                           </div>
-                          <div className="w-full bg-slate-50 h-1 rounded-full overflow-hidden">
+                          <div className="w-full bg-white/20 h-1 rounded-full overflow-hidden">
                             <motion.div
                               className="h-full rounded-full"
                               style={{ background: "#1cb8df" }}
@@ -188,18 +188,18 @@ export default function CategoriesGrid() {
               <img
                 src={lightboxItem.imageUrl}
                 alt={lightboxItem.title}
-                className="w-full max-h-[80vh] object-cover"
+                className="w-full max-h-[80vh] object-contain bg-black"
               />
               {/* Info overlay at bottom */}
               <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 to-transparent p-6">
                 <span className="text-[10px] font-mono uppercase tracking-widest" style={{ color: "#1cb8df" }}>{lightboxItem.tag}</span>
-                <h3 className="text-slate-900 font-bold text-2xl mt-1">{lightboxItem.title}</h3>
-                <p className="text-slate-600 text-sm mt-1">{lightboxItem.description}</p>
+                <h3 className="text-white font-bold text-2xl mt-1">{lightboxItem.title}</h3>
+                <p className="text-slate-300 text-sm mt-1">{lightboxItem.description}</p>
               </div>
               {/* Close button */}
               <button
                 onClick={() => setLightboxItem(null)}
-                className="absolute top-4 right-4 bg-black/60 hover:bg-black/80 text-slate-900 p-2 rounded-full transition-all backdrop-blur-sm"
+                className="absolute top-4 right-4 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full transition-all backdrop-blur-sm"
               >
                 <X className="h-5 w-5" />
               </button>

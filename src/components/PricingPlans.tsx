@@ -17,7 +17,7 @@ const digitizingPlans = [
     features: [
       "Clean stitch quality for all fabrics",
       "Delivered in DST, EMB, PDF, JPG / PNG formats",
-      "8–12 hour standard turnaround",
+      "2–4 hour standard turnaround",
       "Free minor edits included",
       "Source file provided",
     ],
@@ -32,7 +32,7 @@ const digitizingPlans = [
     features: [
       "Ideal for large jacket or back designs",
       "Sharp and detailed stitch output",
-      "8–12 hour turnaround",
+      "2–4 hour turnaround",
       "Priority delivery available",
       "Source file provided",
     ],
@@ -65,7 +65,7 @@ const vectorPlans = [
     features: [
       "Clean bezier node paths",
       "Delivered in AI, SVG, EPS, PDF, JPG / PNG formats",
-      "8–12 hour standard turnaround",
+      "2–4 hour standard turnaround",
       "Free minor edits included",
       "Source file provided",
     ],
@@ -80,7 +80,7 @@ const vectorPlans = [
     features: [
       "100% manual node path reconstruction",
       "Pantone color matching included",
-      "8–12 hour turnaround",
+      "2–4 hour turnaround",
       "Priority delivery available",
       "Source file provided",
     ],

@@ -13,7 +13,7 @@ export default function AboutSection() {
     {
       icon: <Watch className="h-5 w-5" style={{ color: "#1cb8df" }} />,
       title: "Surgical Speeds",
-      desc: "Get digital file proofs back in average 8-hour delivery. Never stall client uniform sewing runs again."
+      desc: "Get digital file proofs back in average 2 to 4 hour delivery. Never stall client uniform sewing runs again."
     },
     {
       icon: <Zap className="h-5 w-5" style={{ color: "#1cb8df" }} />,
