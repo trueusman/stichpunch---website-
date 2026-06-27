@@ -3,12 +3,96 @@ import path from "path";
 import dotenv from "dotenv";
 import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
+import nodemailer from "nodemailer";
 
 // Load environment variables
 dotenv.config();
 
 const app = express();
 const PORT = 3000;
+
+// ── Nodemailer transporter ──
+function getTransporter() {
+  return nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+  });
+}
+
+async function sendQuoteEmail(data: {
+  name: string; email: string; phone?: string;
+  serviceType: string; sizeInches: string; placement: string;
+  notes?: string; fileName?: string;
+}) {
+  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+    console.warn("[Email] EMAIL_USER or EMAIL_PASS not set — skipping email.");
+    return;
+  }
+  const transporter = getTransporter();
+  const to = process.env.EMAIL_TO || process.env.EMAIL_USER;
+
+  // ── Notification email to YOU ──
+  await transporter.sendMail({
+    from: `"Stich Punch Orders" <${process.env.EMAIL_USER}>`,
+    to,
+    subject: `🧵 New Quote Request from ${data.name}`,
+    html: `
+      <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;">
+        <div style="background:#f96f1f;padding:24px 28px;">
+          <h2 style="color:#fff;margin:0;font-size:22px;">New Quote Request</h2>
+          <p style="color:rgba(255,255,255,0.85);margin:4px 0 0;font-size:13px;">Stich Punch Order Desk</p>
+        </div>
+        <div style="padding:28px;background:#fff;">
+          <table style="width:100%;border-collapse:collapse;font-size:14px;color:#334155;">
+            <tr><td style="padding:8px 0;font-weight:bold;width:160px;color:#64748b;">Name</td><td>${data.name}</td></tr>
+            <tr><td style="padding:8px 0;font-weight:bold;color:#64748b;">Email</td><td>${data.email}</td></tr>
+            <tr><td style="padding:8px 0;font-weight:bold;color:#64748b;">Phone</td><td>${data.phone || "—"}</td></tr>
+            <tr><td style="padding:8px 0;font-weight:bold;color:#64748b;">Service</td><td>${data.serviceType}</td></tr>
+            <tr><td style="padding:8px 0;font-weight:bold;color:#64748b;">Size (inches)</td><td>${data.sizeInches}"</td></tr>
+            <tr><td style="padding:8px 0;font-weight:bold;color:#64748b;">Placement</td><td>${data.placement}</td></tr>
+            <tr><td style="padding:8px 0;font-weight:bold;color:#64748b;">File</td><td>${data.fileName || "None"}</td></tr>
+            <tr><td style="padding:8px 0;font-weight:bold;color:#64748b;vertical-align:top;">Notes</td><td>${data.notes || "—"}</td></tr>
+          </table>
+        </div>
+        <div style="background:#f8fafc;padding:16px 28px;border-top:1px solid #e2e8f0;font-size:12px;color:#94a3b8;text-align:center;">
+          Stich Punch • Digitizing &amp; Vector Art • sales@stichpunch.com
+        </div>
+      </div>
+    `,
+  });
+
+  // ── Confirmation email to CLIENT ──
+  await transporter.sendMail({
+    from: `"Stich Punch" <${process.env.EMAIL_USER}>`,
+    to: data.email,
+    subject: `✅ We received your quote request, ${data.name}!`,
+    html: `
+      <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;">
+        <div style="background:#1B2A6B;padding:24px 28px;">
+          <h2 style="color:#fff;margin:0;font-size:22px;">Quote Request Received!</h2>
+          <p style="color:rgba(255,255,255,0.75);margin:4px 0 0;font-size:13px;">Stich Punch — Digitizing &amp; Vector Art</p>
+        </div>
+        <div style="padding:28px;background:#fff;color:#334155;font-size:14px;line-height:1.7;">
+          <p>Hi <strong>${data.name}</strong>,</p>
+          <p>Thank you for reaching out to <strong>Stich Punch</strong>! We have received your quote request and our team will get back to you within <strong style="color:#f96f1f;">2–4 hours</strong>.</p>
+          <div style="background:#f8fafc;border-left:4px solid #f96f1f;padding:14px 18px;border-radius:6px;margin:18px 0;">
+            <p style="margin:0;font-size:13px;"><strong>Service:</strong> ${data.serviceType}<br/>
+            <strong>Size:</strong> ${data.sizeInches}"<br/>
+            <strong>Placement:</strong> ${data.placement}</p>
+          </div>
+          <p>If you have any questions, reply to this email or contact us at <a href="mailto:sales@stichpunch.com" style="color:#1cb8df;">sales@stichpunch.com</a>.</p>
+          <p style="margin-top:24px;">Best regards,<br/><strong>The Stich Punch Team</strong></p>
+        </div>
+        <div style="background:#f8fafc;padding:16px 28px;border-top:1px solid #e2e8f0;font-size:12px;color:#94a3b8;text-align:center;">
+          Quality You Can Trust, Every Stitch. • sales@stichpunch.com
+        </div>
+      </div>
+    `,
+  });
+}
 
 // Increase request size limits for handling base64 image uploads
 app.use(express.json({ limit: "15mb" }));
@@ -289,7 +373,7 @@ app.post("/api/analyze-artwork", async (req, res) => {
 });
 
 // API: Save customized Orders
-app.post("/api/submit-order", (req, res) => {
+app.post("/api/submit-order", async (req, res) => {
   const { name, email, phone, sizeInches, serviceType, placement, notes, fileData, fileName } = req.body;
   
   if (!name || !email) {
@@ -298,43 +382,42 @@ app.post("/api/submit-order", (req, res) => {
 
   const newOrder = {
     id: "ORD-" + Math.floor(100000 + Math.random() * 900000),
-    name,
-    email,
-    phone: phone || "Not specified",
-    sizeInches: sizeInches || "3",
-    serviceType: serviceType || "Digitizing",
-    placement: placement || "Left Chest",
-    notes: notes || "",
-    fileName: fileName || "logo.png",
-    fileDataLength: fileData ? fileData.length : 0,
-    status: "Pending Estimate",
-    createdAt: new Date().toISOString(),
+    name, email, phone: phone || "Not specified",
+    sizeInches: sizeInches || "3", serviceType: serviceType || "Digitizing",
+    placement: placement || "Left Chest", notes: notes || "",
+    fileName: fileName || "logo.png", fileDataLength: fileData ? fileData.length : 0,
+    status: "Pending Estimate", createdAt: new Date().toISOString(),
   };
 
   dbMemory.orders.push(newOrder);
 
+  // Send emails
+  try {
+    await sendQuoteEmail({ name, email, phone, serviceType, sizeInches: sizeInches || "3", placement, notes, fileName });
+  } catch (err) {
+    console.error("[Email] Failed to send order email:", err);
+  }
+
   res.json({
     success: true,
-    message: "Thank you! Your quote request has been uploaded successfully. Our master digitizers will inspect it shortly.",
+    message: "Thank you! Your quote request has been received. Check your email for confirmation — our team will reply within 2–4 hours.",
     order: newOrder,
   });
 });
 
 // API: Save Contact Submissions
-app.post("/api/submit-contact", (req, res) => {
-  const { name, email, subject, message, fileName, fileData } = req.body;
+app.post("/api/submit-contact", async (req, res) => {
+  const { name, email, phone, subject, message, notes, serviceType, sizeInches, placement, fileName, fileData } = req.body;
 
-  if (!name || !email || !message) {
-    return res.status(400).json({ error: "Name, Email, and message body are required." });
+  if (!name || !email) {
+    return res.status(400).json({ error: "Name and Email are required." });
   }
 
   const queryIdx = "INQ-" + Math.floor(10000 + Math.random() * 90000);
   const newSubmission = {
-    id: queryIdx,
-    name,
-    email,
+    id: queryIdx, name, email,
     subject: subject || "General Inquiry",
-    message,
+    message: message || notes || "",
     fileName: fileName || null,
     fileDataLength: fileData ? fileData.length : 0,
     createdAt: new Date().toISOString(),
@@ -342,9 +425,23 @@ app.post("/api/submit-contact", (req, res) => {
 
   dbMemory.contactSubmissions.push(newSubmission);
 
+  // Send emails
+  try {
+    await sendQuoteEmail({
+      name, email, phone,
+      serviceType: serviceType || subject || "General Inquiry",
+      sizeInches: sizeInches || "—",
+      placement: placement || "—",
+      notes: message || notes,
+      fileName,
+    });
+  } catch (err) {
+    console.error("[Email] Failed to send contact email:", err);
+  }
+
   res.json({
     success: true,
-    message: `Message submitted successfully! Check your inbox. Refer to Inquiry Token: ${queryIdx}`,
+    message: `Thank you ${name}! We received your request. Check your inbox for confirmation — we'll reply within 2–4 hours. (Ref: ${queryIdx})`,
     submission: newSubmission,
   });
 });

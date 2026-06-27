@@ -24,9 +24,9 @@ export default function Header({ onQuoteClick, activeSection, onCatPageOpen }: H
     { label: "Home", href: "#home" },
     { label: "About", href: "#about" },
     { label: "Services", href: "#services" },
-    { label: "Pricing", href: "#pricing" },
     { label: "Portfolio", href: "#portfolio" },
     { label: "Categories", href: "#cat-preview", hasDropdown: true },
+    { label: "Pricing", href: "#pricing" },
     { label: "File Formats", href: "#formats" },
     { label: "Contact", href: "#contact" },
   ];
@@ -62,27 +62,37 @@ export default function Header({ onQuoteClick, activeSection, onCatPageOpen }: H
     <header className="fixed top-0 left-0 w-full z-50">
 
       {/* ── Top Announcement Bar ── */}
-      <div className="flex items-center justify-between w-full px-4 sm:px-6 lg:px-8 py-2 text-white text-xs" style={{ backgroundColor: "#f96f1f" }}>
-        <span className="font-semibold hidden lg:block whitespace-nowrap">
-          Quality You Can Trust, Every Stitch.
+      <div className="flex items-center justify-between w-full px-4 sm:px-6 lg:px-8 py-2.5 text-white text-xs" style={{ backgroundColor: "#f96f1f" }}>
+
+        {/* Left: Announcement */}
+        <span className="font-black hidden lg:flex items-center gap-2 whitespace-nowrap tracking-wide text-[13px]">
+          <svg className="w-4 h-4 flex-shrink-0 opacity-90" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-2.236 9.168-5.515a1 1 0 011 .196V17.32a1 1 0 01-1 .196C16.457 14.236 12.932 12 8.832 12H7a4 4 0 01-1.564-.317z" />
+          </svg>
+          Welcome to StichPunch —{" "}
+          <span className="font-black text-white">Quality You Can Trust, Every Stitch.</span>
         </span>
+
+        {/* Center: Email + Hours */}
         <div className="flex items-center gap-4">
-          <a href="mailto:sales@stichpunch.com" className="flex items-center gap-1.5 hover:opacity-80 transition-opacity whitespace-nowrap">
+          <a href="mailto:sales@stichpunch.com" className="flex items-center gap-1.5 hover:opacity-80 transition-opacity whitespace-nowrap font-bold text-[12px]">
             <Mail className="w-3.5 h-3.5 flex-shrink-0" />
             <span>sales@stichpunch.com</span>
           </a>
           <span className="text-white/50 hidden sm:inline">|</span>
-          <div className="hidden sm:flex items-center gap-1.5 whitespace-nowrap">
+          <div className="hidden sm:flex items-center gap-1.5 whitespace-nowrap font-semibold text-[11px] text-white/90">
             <Clock className="w-3.5 h-3.5 flex-shrink-0" />
-            <span>Mon – Friday: 9:00 AM – 6:00 PM</span>
+            <span>Mon – Fri: 9:00 AM – 6:00 PM</span>
           </div>
         </div>
+
+        {/* Right: Social icons */}
         <div className="flex items-center gap-3">
-          <a href="#" aria-label="Facebook" className="hover:opacity-75 transition-opacity"><Facebook className="w-3.5 h-3.5" /></a>
-          <a href="#" aria-label="Instagram" className="hover:opacity-75 transition-opacity"><Instagram className="w-3.5 h-3.5" /></a>
-          <a href="#" aria-label="Twitter" className="hover:opacity-75 transition-opacity"><Twitter className="w-3.5 h-3.5" /></a>
-          <a href="#" aria-label="LinkedIn" className="hover:opacity-75 transition-opacity"><Linkedin className="w-3.5 h-3.5" /></a>
+          <a href="https://www.facebook.com/photo.php?fbid=122100443643372257&set=a.122100443817372257&type=3&mibextid=rS40aB7S9Ucbxw6v" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:opacity-75 transition-opacity"><Facebook className="w-3.5 h-3.5" /></a>
+          <a href="https://www.instagram.com/stichpunch?igsh=MWdhbzVmbDRoOG1rdw==" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:opacity-75 transition-opacity"><Instagram className="w-3.5 h-3.5" /></a>
+          <a href="https://x.com/stichpunchpk" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="hover:opacity-75 transition-opacity"><Twitter className="w-3.5 h-3.5" /></a>
         </div>
+
       </div>
 
       {/* ── Main Nav ── */}

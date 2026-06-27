@@ -113,14 +113,14 @@ export default function App() {
         <ServicesList onQuoteClick={handleScrollToQuote} />
         <WhyChooseUs />
 
-        {/* 4. Pricing */}
-        <PricingPlans onQuoteClick={handleScrollToQuote} />
-
-        {/* 5. Portfolio */}
+        {/* 4. Portfolio */}
         <PortfolioShowcase />
 
-        {/* 6. Categories */}
+        {/* 5. Categories */}
         <CategoryDetailSections onViewMore={openCatPage} />
+
+        {/* 6. Pricing */}
+        <PricingPlans onQuoteClick={handleScrollToQuote} />
 
         {/* 7. File Formats */}
         <FormatExplainer />

@@ -26,8 +26,8 @@ export default function IntroSplash({ onDone }: Props) {
 
   // Exit timing
   useEffect(() => {
-    const t1 = setTimeout(() => setVisible(false), 2800);
-    const t2 = setTimeout(() => onDone(), 3300);
+    const t1 = setTimeout(() => setVisible(false), 1800);
+    const t2 = setTimeout(() => onDone(), 2200);
     return () => { clearTimeout(t1); clearTimeout(t2); };
   }, [onDone]);
 
@@ -42,20 +42,6 @@ export default function IntroSplash({ onDone }: Props) {
           className="fixed inset-0 z-[99999] flex flex-col items-center justify-center gap-6"
           style={{ background: "#0a0f1e" }}
         >
-          {/* Lottie animation */}
-          <motion.div
-            className="w-52 h-52"
-            initial={{ opacity: 0, scale: 0.7 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4 }}
-          >
-            <DotLottieReact
-              src="https://lottie.host/fe370ec5-cd5d-40b1-9020-d8eb147bd0b6/ZJNA43WBCy.lottie"
-              loop
-              autoplay
-            />
-          </motion.div>
-
           {/* Logo + brand name (typewriter) */}
           <motion.div
             className="flex flex-col items-center gap-3 text-center px-6"
@@ -99,14 +85,6 @@ export default function IntroSplash({ onDone }: Props) {
           </motion.div>
 
           {/* "Welcome to Stich Punch" — pinned to bottom-center */}
-          <motion.p
-            className="absolute bottom-10 left-1/2 -translate-x-1/2 text-slate-400 text-sm font-mono tracking-[0.25em] uppercase whitespace-nowrap"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 0.5 }}
-          >
-            Welcome to Stich Punch
-          </motion.p>
         </motion.div>
       )}
     </AnimatePresence>

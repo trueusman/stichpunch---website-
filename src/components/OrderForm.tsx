@@ -1,10 +1,19 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import emailjs from "@emailjs/browser";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import { AnimatePresence, motion } from "motion/react";
 import {
   Upload, Check, AlertTriangle, Loader2,
   User, Mail, Phone, Grid2x2, Pencil, Shirt,
-  Award, ShieldCheck, Zap, FileText, Send
+  Award, ShieldCheck, Zap, FileText, Send, X
 } from "lucide-react";
-import { motion } from "motion/react";
+
+const EMAILJS_SERVICE_ID  = "service_6c9s29r";
+const EMAILJS_TEMPLATE_ID = "template_j8k2wwo";
+const EMAILJS_PUBLIC_KEY  = "FzUIXwgWXTYZq1AYc";
+
+const CLOUDINARY_CLOUD_NAME   = "dthgf2zms";
+const CLOUDINARY_UPLOAD_PRESET = "stichpunch_upload";
 
 const FEATURES = [
   { icon: <Award className="h-5 w-5" style={{ color: "#f96f1f" }} />, title: "Accurate Pricing", sub: "Transparent & fair quotes" },
@@ -14,6 +23,10 @@ const FEATURES = [
 ];
 
 export default function OrderForm() {
+  // Initialize EmailJS once
+  useEffect(() => {
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+  }, []);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -31,7 +44,24 @@ export default function OrderForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState<string | null>(null);
   const [errorNotice, setErrorNotice] = useState<string | null>(null);
+  const [showPopup, setShowPopup] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Upload image to Cloudinary and return public URL
+  const uploadToCloudinary = async (base64: string, fileName: string): Promise<string> => {
+    const formData = new FormData();
+    formData.append("file", base64);
+    formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+    formData.append("public_id", `orders/${Date.now()}_${fileName}`);
+
+    const res = await fetch(
+      `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
+      { method: "POST", body: formData }
+    );
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error?.message || "Cloudinary upload failed");
+    return data.secure_url;
+  };
 
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -66,21 +96,45 @@ export default function OrderForm() {
     if (!formData.name || !formData.email) { setErrorNotice("Please fill out your Name and Email."); return; }
     setIsSubmitting(true); setSubmitSuccess(null); setErrorNotice(null);
     try {
-      const res = await fetch("/api/submit-contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, fileName: uploadedFile?.name, fileData: uploadedFile?.base64, message: formData.notes || "Inquiring about " + formData.serviceType }),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setSubmitSuccess(data.message);
-        setUploadedFile(null);
-        setFormData({ name: "", email: "", phone: "", serviceType: "Digitizing", sizeInches: "3.5", placement: "Left Chest", notes: "" });
-      } else {
-        setErrorNotice(data.error || "Failed to submit. Please try again.");
+      // 1. Upload image to Cloudinary if provided
+      let imageUrl = "No file uploaded";
+      if (uploadedFile?.base64) {
+        imageUrl = await uploadToCloudinary(uploadedFile.base64, uploadedFile.name);
       }
-    } catch {
-      setErrorNotice("Network error. Please check your connection.");
+
+      // 2. Send email via EmailJS with image URL
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          name:         formData.name,
+          from_name:    formData.name,
+          from_email:   formData.email,
+          phone:        formData.phone || "—",
+          service_type: formData.serviceType,
+          size_inches:  formData.sizeInches,
+          placement:    formData.placement,
+          file_name:    uploadedFile?.name || "No file uploaded",
+          message: `Email: ${formData.email}
+Phone: ${formData.phone || "—"}
+Service: ${formData.serviceType}
+Size: ${formData.sizeInches}"
+Placement: ${formData.placement}
+File: ${uploadedFile?.name || "None"}
+Image Link: ${imageUrl}
+Notes: ${formData.notes || "—"}`,
+        },
+        EMAILJS_PUBLIC_KEY
+      );
+
+      setSubmitSuccess("Thank you! We received your request and will reply within 2–4 hours.");
+      setShowPopup(true);
+      setUploadedFile(null);
+      setFormData({ name: "", email: "", phone: "", serviceType: "Digitizing", sizeInches: "3.5", placement: "Left Chest", notes: "" });
+    } catch (err: any) {
+      console.error("Submit error:", err);
+      const msg = err?.text || err?.message || JSON.stringify(err);
+      setErrorNotice(`Send failed: ${msg}. Or email us at sales@stichpunch.com`);
     } finally {
       setIsSubmitting(false);
     }
@@ -92,6 +146,7 @@ export default function OrderForm() {
   const iconWrap = "absolute left-3 top-1/2 -translate-y-1/2 text-slate-400";
 
   return (
+    <>
     <section id="contact" className="py-20 scroll-mt-12" style={{ background: "#f4f6fb" }}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -160,12 +215,6 @@ export default function OrderForm() {
           <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-5">
 
             {/* Alerts */}
-            {submitSuccess && (
-              <div className="bg-emerald-50 border border-emerald-200 text-emerald-700 p-4 rounded-xl text-sm flex items-start gap-3">
-                <Check className="h-5 w-5 flex-shrink-0 mt-0.5" />
-                <span>{submitSuccess}</span>
-              </div>
-            )}
             {errorNotice && (
               <div className="bg-amber-50 border border-amber-200 text-amber-700 p-4 rounded-xl text-sm flex items-start gap-3">
                 <AlertTriangle className="h-5 w-5 flex-shrink-0 mt-0.5" />
@@ -323,5 +372,65 @@ export default function OrderForm() {
 
       </div>
     </section>
+
+    {/* ── Success Popup ── */}
+    <AnimatePresence>
+      {showPopup && (
+        <motion.div
+          className="fixed inset-0 z-[99999] flex items-center justify-center px-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          {/* Backdrop */}
+          <motion.div className="absolute inset-0 bg-black/60 backdrop-blur-md" />
+
+          {/* Card */}
+          <motion.div
+            className="relative bg-white z-10 rounded-3xl shadow-2xl px-10 py-10 text-center max-w-xs w-full overflow-hidden"
+            initial={{ scale: 0.8, opacity: 0, y: 40 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            transition={{ type: "spring", stiffness: 280, damping: 22 }}
+            onAnimationComplete={() => {
+              // Auto close 3s after lottie has played
+              setTimeout(() => setShowPopup(false), 3000);
+            }}
+          >
+            {/* Top gradient bar */}
+            <div className="absolute top-0 left-0 right-0 h-1" style={{ background: "linear-gradient(90deg, #f96f1f, #1cb8df)" }} />
+
+            {/* Lottie */}
+            <div className="w-48 h-48 mx-auto">
+              <DotLottieReact
+                src="https://lottie.host/0e3311c7-7452-4615-92f6-74cf0698f41d/Crpo81v7ZH.lottie"
+                autoplay
+              />
+            </div>
+
+            <motion.h3
+              className="font-display font-extrabold text-xl mt-2 mb-1"
+              style={{ color: "#1B2A6B" }}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              Quote Submitted!
+            </motion.h3>
+
+            <motion.p
+              className="text-slate-400 text-xs leading-relaxed"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.45 }}
+            >
+              We'll reply within <span className="font-bold" style={{ color: "#f96f1f" }}>2–4 hours</span>
+            </motion.p>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+    </>
   );
 }

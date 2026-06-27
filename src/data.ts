@@ -349,16 +349,6 @@ export const PORTFOLIO_DATA: PortfolioItem[] = [
     beforeAfterType: "vector" as const
   },
   {
-    id: "before-after-vec-jpg",
-    title: "Vector Redraw Before & After",
-    category: "before_after",
-    imageUrl: beforeAfterVectorJpgImg,
-    details: "Original blurry artwork transformed into a crisp production-ready vector file.",
-    softwareUsed: "Adobe Illustrator CC",
-    featured: true,
-    beforeAfterType: "vector" as const
-  },
-  {
     id: "before-after-vec1",
     title: "Vector Restoration",
     category: "before_after",
