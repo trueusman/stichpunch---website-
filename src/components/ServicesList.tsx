@@ -13,13 +13,13 @@ export default function ServicesList({ onQuoteClick }: ServicesProps) {
   const renderIcon = (iconName: string) => {
     switch (iconName) {
       case "Cpu":
-        return <Cpu className="h-6 w-6 text-navy-950 group-hover:rotate-45 transition-transform duration-500" />;
+        return <Cpu className="h-5 w-5 text-navy-950 group-hover:rotate-45 transition-transform duration-500" />;
       case "Layers":
-        return <Layers className="h-6 w-6 text-navy-950 group-hover:scale-110 transition-transform duration-300" />;
+        return <Layers className="h-5 w-5 text-navy-950 group-hover:scale-110 transition-transform duration-300" />;
       case "Shield":
-        return <ShieldCheck className="h-6 w-6 text-navy-950 group-hover:scale-110 transition-transform duration-300" />;
+        return <ShieldCheck className="h-5 w-5 text-navy-950 group-hover:scale-110 transition-transform duration-300" />;
       default:
-        return <Cpu className="h-6 w-6 text-navy-950" />;
+        return <Cpu className="h-5 w-5 text-navy-950" />;
     }
   };
 
@@ -83,7 +83,7 @@ export default function ServicesList({ onQuoteClick }: ServicesProps) {
 
         {/* Services Grid with cascading entry */}
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
           variants={gridVariants}
           initial="hidden"
           whileInView="visible"
@@ -94,15 +94,15 @@ export default function ServicesList({ onQuoteClick }: ServicesProps) {
               key={service.id}
               variants={cardVariants}
               whileHover={{ y: -5, boxShadow: "0 15px 30px -10px rgba(249,111,31,0.2)" }}
-              className="bg-white border border-slate-200 shadow-sm/80 rounded-2xl shadow-md overflow-hidden transition-all duration-300 flex flex-col h-full group hover:border-[#f96f1f]/30"
+              className="bg-white border border-slate-200 shadow-sm/80 rounded-xl shadow-md overflow-hidden transition-all duration-300 flex flex-col h-full group hover:border-[#f96f1f]/30"
             >
               {/* Animated top stripe color accent */}
               <div className="h-[5px] w-full origin-left scale-x-100 transition-transform duration-500" style={{ background: "#f96f1f" }} />
               
-              <div className="p-8 flex flex-col flex-grow">
+              <div className="p-5 flex flex-col flex-grow">
                 {/* Icon & Specs Bar */}
-                <div className="px-4 py-3 rounded-xl flex items-center justify-between mb-6 shadow-sm ring-4 ring-[#f96f1f]/10 group-hover:ring-[#f96f1f]/20 transition-all duration-300 w-full" style={{ background: "#f96f1f" }}>
-                  <div className="flex items-center space-x-3">
+                <div className="px-3 py-2 rounded-lg flex items-center justify-between mb-4 shadow-sm ring-4 ring-[#f96f1f]/10 group-hover:ring-[#f96f1f]/20 transition-all duration-300 w-full" style={{ background: "#f96f1f" }}>
+                  <div className="flex items-center space-x-2">
                     <span className="flex-shrink-0">
                       {renderIcon(service.iconName)}
                     </span>
@@ -120,17 +120,17 @@ export default function ServicesList({ onQuoteClick }: ServicesProps) {
                 </div>
 
                 {/* Service Title */}
-                <h3 className="font-display font-bold text-xl text-slate-900 mb-3 transition-colors group-hover:text-[#f96f1f]">
+                <h3 className="font-display font-bold text-lg text-slate-900 mb-2 transition-colors group-hover:text-[#f96f1f]">
                   {service.title}
                 </h3>
 
                 {/* Main Description */}
-                <p className="text-slate-500 text-xs sm:text-sm leading-relaxed mb-6 flex-grow">
+                <p className="text-slate-500 text-xs leading-relaxed mb-4 flex-grow">
                   {service.description}
                 </p>
 
                 {/* Production Specs box */}
-                <div className="mb-6 bg-slate-50 p-4 rounded-xl border border-slate-200/80">
+                <div className="mb-4 bg-slate-50 p-3 rounded-lg border border-slate-200/80">
                   <div className="flex items-center text-[10px] font-mono text-slate-500 uppercase tracking-wider mb-2.5">
                     <Zap className="h-3 w-3 mr-1.5 flex-shrink-0 animate-pulse" style={{ color: "#1cb8df" }} />
                     <span>Production Strategy</span>
@@ -146,7 +146,7 @@ export default function ServicesList({ onQuoteClick }: ServicesProps) {
                 </div>
 
                 {/* Benefits List */}
-                <div className="space-y-2 mb-6">
+                <div className="space-y-1.5 mb-4">
                   {service.benefits.map((benefit, idx) => (
                     <div key={idx} className="flex items-center space-x-2 text-xs sm:text-sm text-slate-600">
                       <div className="h-4.5 w-4.5 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "rgba(28,184,223,0.1)", border: "1px solid rgba(28,184,223,0.25)" }}>
@@ -158,7 +158,7 @@ export default function ServicesList({ onQuoteClick }: ServicesProps) {
                 </div>
 
                 {/* Turnaround promise banner */}
-                <div className="border-t border-slate-200 pt-5 mt-auto flex items-center gap-2.5 rounded-xl px-4 py-3" style={{ background: "rgba(249,111,31,0.08)", border: "1px solid rgba(249,111,31,0.2)" }}>
+                <div className="border-t border-slate-200 pt-3 mt-auto flex items-center gap-2 rounded-lg px-3 py-2" style={{ background: "rgba(249,111,31,0.08)", border: "1px solid rgba(249,111,31,0.2)" }}>
                   <Zap className="h-4 w-4 flex-shrink-0" style={{ color: "#f96f1f" }} />
                   <span className="text-xs font-bold tracking-wide" style={{ color: "#f96f1f" }}>
                     We will ready your logo in just 2 to 4 hours

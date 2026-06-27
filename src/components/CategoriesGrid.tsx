@@ -44,7 +44,7 @@ export default function CategoriesGrid() {
         </motion.div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {CATEGORIES_DATA.map((cat, idx) => {
             const isHovered = hoveredId === cat.id;
             return (
@@ -55,7 +55,7 @@ export default function CategoriesGrid() {
                 viewport={{ once: true }}
                 transition={{ type: "spring", stiffness: 90, damping: 15, delay: idx * 0.05 }}
                 whileHover={{ y: -6 }}
-                className="group relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 h-[26rem] flex flex-col justify-end cursor-pointer"
+                className="group relative bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 h-[18rem] flex flex-col justify-end cursor-pointer"
                 onMouseEnter={() => setHoveredId(cat.id)}
                 onMouseLeave={() => setHoveredId(null)}
                 onClick={() => setLightboxItem(cat)}
@@ -89,7 +89,7 @@ export default function CategoriesGrid() {
                 )}
 
                 {/* Content — always show title & tag, show description only on hover */}
-                <div className="relative z-10 p-6 sm:p-8 w-full bg-gradient-to-t from-black/80 via-black/50 to-transparent">
+                <div className="relative z-10 p-4 sm:p-5 w-full bg-gradient-to-t from-black/80 via-black/50 to-transparent">
 
                   {/* Tag + Running badge */}
                   <div className="flex items-center justify-between mb-3">
@@ -114,7 +114,7 @@ export default function CategoriesGrid() {
                   </div>
 
                   {/* Title — always visible */}
-                  <h3 className="font-display font-bold text-xl sm:text-2xl text-white tracking-tight transition-colors" style={{ color: isHovered ? "#f96f1f" : undefined }}>
+                  <h3 className="font-display font-bold text-lg sm:text-xl text-white tracking-tight transition-colors" style={{ color: isHovered ? "#f96f1f" : undefined }}>
                     {cat.title}
                   </h3>
 

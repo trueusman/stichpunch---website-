@@ -41,7 +41,15 @@ export default function Hero({ onQuoteClick }: HeroProps) {
         >
           <source src={heroVideo} type="video/mp4" />
         </video>
-        {/* No overlay — show video clearly */}
+        {/* Left gradient so text stays readable over bright video */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(105deg, rgba(10,15,30,0.92) 0%, rgba(10,15,30,0.78) 38%, rgba(10,15,30,0.35) 62%, transparent 85%)",
+          }}
+        />
+        <div className="absolute inset-0 bg-black/20" />
       </div>
 
       {/* Content */}
@@ -55,27 +63,34 @@ export default function Hero({ onQuoteClick }: HeroProps) {
             style={{ paddingTop: "2rem" }}
           >
             {/* Badge */}
-            <motion.div variants={item} className="inline-flex items-center gap-2 border border-white/20 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full w-fit">
+            <motion.div variants={item} className="inline-flex items-center gap-2 border border-white/30 bg-black/45 backdrop-blur-md px-4 py-2 rounded-full w-fit">
               <span className="h-2 w-2 rounded-full animate-pulse" style={{ background: "#1cb8df" }} />
-              <span className="text-[11px] font-mono tracking-widest text-white/80 uppercase font-semibold">
+              <span className="text-[11px] font-mono tracking-widest text-white uppercase font-semibold">
                 CAD-Calibrated Embroidery Architects
               </span>
             </motion.div>
 
             {/* Heading — matches reference exactly */}
-            <motion.h1 variants={item} className="font-display font-black text-5xl sm:text-6xl lg:text-7xl text-white leading-[1.08] tracking-tight">
+            <motion.h1
+              variants={item}
+              className="font-display font-black text-5xl sm:text-6xl lg:text-7xl text-white leading-[1.08] tracking-tight"
+              style={{ textShadow: "0 2px 24px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.8)" }}
+            >
               Premium<br />
-              <span style={{ color: "#f96f1f" }}>Embroidery<br />Digitizing</span>{" "}
-              &amp; Vector<br />
-              Art Services
+              <span style={{ color: "#ff8a3d", textShadow: "0 2px 20px rgba(0,0,0,0.6)" }}>Embroidery<br />Digitizing</span>{" "}
+              <span style={{ color: "#ffffff" }}>&amp; Vector<br />Art Services</span>
             </motion.h1>
 
             {/* Subtext */}
-            <motion.p variants={item} className="text-white/70 text-sm sm:text-base leading-relaxed max-w-xl">
+            <motion.p
+              variants={item}
+              className="text-slate-100 text-sm sm:text-base leading-relaxed max-w-xl font-medium"
+              style={{ textShadow: "0 1px 12px rgba(0,0,0,0.75)" }}
+            >
               Experience CAD-calibrated stitch architecture, designed for zero thread
               breaks, perfect pull-compensation, and stunning physical density.
               Fast{" "}
-              <span className="font-semibold" style={{ color: "#f96f1f" }}>2 to 4 hour</span>{" "}
+              <span className="font-bold" style={{ color: "#ffb066" }}>2 to 4 hour</span>{" "}
               turnaround. Fast service.
             </motion.p>
 
@@ -87,13 +102,13 @@ export default function Hero({ onQuoteClick }: HeroProps) {
                 "Logo Puckering & Alignment Engineering",
                 "Embroidery File Online Verification & Approval",
               ].map((text, i) => (
-                <div key={i} className="flex items-center gap-2.5 text-white/85 text-sm">
-                  <div className="h-5 w-5 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "rgba(28,184,223,0.15)", border: "1.5px solid #1cb8df" }}>
-                    <svg className="h-2.5 w-2.5" fill="none" viewBox="0 0 24 24" stroke="#1cb8df" strokeWidth={3}>
+                <div key={i} className="flex items-center gap-2.5 text-white text-sm">
+                  <div className="h-5 w-5 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "rgba(28,184,223,0.25)", border: "1.5px solid #5dd4f5" }}>
+                    <svg className="h-2.5 w-2.5" fill="none" viewBox="0 0 24 24" stroke="#5dd4f5" strokeWidth={3}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <span className="font-medium">{text}</span>
+                  <span className="font-semibold" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.7)" }}>{text}</span>
                 </div>
               ))}
             </motion.div>

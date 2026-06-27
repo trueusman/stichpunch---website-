@@ -87,13 +87,13 @@ export default function FormatExplainer() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.25 }}
-              className="grid grid-cols-1 md:grid-cols-2 gap-6"
+              className="grid grid-cols-1 md:grid-cols-2 gap-4"
             >
               {renderedFormats.map((format, idx) => (
                 <motion.div
                   key={format.extension + idx}
                   whileHover={{ y: -3, scale: 1.01 }}
-                  className="bg-slate-50 border border-slate-200 rounded-2xl p-6 sm:p-7 flex items-start space-x-4 sm:space-x-5 hover:shadow-xl hover:border-[#1cb8df]/30 transition-all duration-300 relative group overflow-hidden"
+                  className="bg-slate-50 border border-slate-200 rounded-xl p-4 sm:p-5 flex items-start space-x-3 sm:space-x-4 hover:shadow-lg hover:border-[#1cb8df]/30 transition-all duration-300 relative group overflow-hidden"
                 >
                   {/* Subtle design element: corner stitch mark */}
                   <div className="absolute top-0 right-0 w-8 h-8 opacity-10 group-hover:opacity-25 transition-opacity">
@@ -102,7 +102,7 @@ export default function FormatExplainer() {
                   </div>
 
                   {/* Colored Format Dot/Box Badge */}
-                  <div className={`${format.logoColor} text-slate-900 font-mono font-black text-base sm:text-lg rounded-xl w-14 sm:w-16 h-14 sm:h-16 text-center tracking-wider shadow-sm flex-shrink-0 flex items-center justify-center mt-1`}>
+                  <div className={`${format.logoColor} text-slate-900 font-mono font-black text-sm sm:text-base rounded-lg w-11 sm:w-12 h-11 sm:h-12 text-center tracking-wider shadow-sm flex-shrink-0 flex items-center justify-center mt-0.5`}>
                     {format.extension}
                   </div>
 

@@ -92,7 +92,7 @@ export default function Testimonials() {
 
         {/* Cards */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-7"
+          className="grid grid-cols-1 md:grid-cols-3 gap-5"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -103,11 +103,11 @@ export default function Testimonials() {
               key={t.name}
               variants={cardVariants}
               whileHover={{ y: -5, boxShadow: "0 20px 40px -12px rgba(0,0,0,0.12)" }}
-              className="bg-white rounded-2xl shadow-md p-8 flex flex-col gap-5 relative transition-all duration-300"
+              className="bg-white rounded-xl shadow-md p-5 flex flex-col gap-3 relative transition-all duration-300"
             >
               {/* Sky blue quote mark */}
               <Quote
-                className="absolute top-6 right-6 w-9 h-9 opacity-15"
+                className="absolute top-4 right-4 w-7 h-7 opacity-15"
                 style={{ color: "#1cb8df" }}
               />
 
@@ -123,15 +123,15 @@ export default function Testimonials() {
               </div>
 
               {/* Review text */}
-              <p className="text-slate-600 text-sm leading-relaxed flex-1">
+              <p className="text-slate-600 text-xs leading-relaxed flex-1">
                 "{t.text}"
               </p>
 
               {/* Author */}
-              <div className="flex items-center gap-3 border-t border-slate-100 pt-5">
+              <div className="flex items-center gap-2.5 border-t border-slate-100 pt-3">
                 {/* Avatar with initials */}
                 <div
-                  className="w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0 shadow-sm"
+                  className="w-9 h-9 rounded-full flex items-center justify-center text-white font-bold text-xs flex-shrink-0 shadow-sm"
                   style={{ backgroundColor: t.avatarColor }}
                 >
                   {t.initials}

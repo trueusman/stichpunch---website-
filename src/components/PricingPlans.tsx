@@ -177,7 +177,7 @@ export default function PricingPlans({ onQuoteClick }: PricingPlansProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.25 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch"
+            className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl mx-auto items-stretch"
           >
             {plans.map((plan) =>
               plan.featured ? (
@@ -185,7 +185,7 @@ export default function PricingPlans({ onQuoteClick }: PricingPlansProps) {
                 <motion.div
                   key={plan.id}
                   whileHover={{ y: -6 }}
-                  className="rounded-2xl overflow-hidden shadow-2xl flex flex-col relative"
+                  className="rounded-xl overflow-hidden shadow-xl flex flex-col relative"
                   style={{
                     background: "linear-gradient(160deg, #f96f1f 0%, #e55e0e 55%, #c44d0a 100%)",
                     border: "2px solid rgba(249,111,31,0.5)",
@@ -198,34 +198,34 @@ export default function PricingPlans({ onQuoteClick }: PricingPlansProps) {
                     </span>
                   </div>
 
-                  <div className="p-8 flex flex-col flex-1 pt-14">
-                    <h3 className="text-xl font-bold text-white mb-4 leading-snug pr-4">
+                  <div className="p-5 flex flex-col flex-1 pt-12">
+                    <h3 className="text-base font-bold text-white mb-3 leading-snug pr-4">
                       {plan.title}
                     </h3>
 
                     {/* Price */}
-                    <div className="mb-6">
+                    <div className="mb-4">
                       {plan.oldPrice && (
-                        <span className="text-orange-200 line-through text-lg mr-2">
+                        <span className="text-orange-200 line-through text-base mr-2">
                           {plan.oldPrice}
                         </span>
                       )}
-                      <span className="text-4xl font-extrabold text-white">{plan.newPrice}</span>
+                      <span className="text-3xl font-extrabold text-white">{plan.newPrice}</span>
                     </div>
 
                     {/* CTA */}
                     <button
                       onClick={onQuoteClick}
-                      className="w-full bg-white font-bold rounded-full py-3 mb-8 hover:bg-orange-50 transition-colors text-sm tracking-wide shadow-md"
+                      className="w-full bg-white font-bold rounded-full py-2.5 mb-5 hover:bg-orange-50 transition-colors text-sm tracking-wide shadow-md"
                       style={{ color: "#f96f1f" }}
                     >
                       {plan.buttonLabel}
                     </button>
 
                     {/* Features */}
-                    <ul className="space-y-3 flex-1">
+                    <ul className="space-y-2 flex-1">
                       {plan.features.map((f, i) => (
-                        <li key={i} className="flex items-start gap-2.5 text-sm text-orange-100">
+                        <li key={i} className="flex items-start gap-2 text-xs text-orange-100">
                           <CheckCircle2 className="w-4 h-4 text-white flex-shrink-0 mt-0.5" />
                           {f}
                         </li>
@@ -238,27 +238,27 @@ export default function PricingPlans({ onQuoteClick }: PricingPlansProps) {
                 <motion.div
                   key={plan.id}
                   whileHover={{ y: -6 }}
-                  className="rounded-2xl overflow-hidden shadow-lg flex flex-col bg-white border border-slate-200 hover:border-[#1cb8df]/40 transition-all duration-300"
+                  className="rounded-xl overflow-hidden shadow-lg flex flex-col bg-white border border-slate-200 hover:border-[#1cb8df]/40 transition-all duration-300"
                 >
-                  <div className="p-8 flex flex-col flex-1">
-                    <h3 className="text-xl font-bold text-slate-900 mb-4 leading-snug">
+                  <div className="p-5 flex flex-col flex-1">
+                    <h3 className="text-base font-bold text-slate-900 mb-3 leading-snug">
                       {plan.title}
                     </h3>
 
                     {/* Price */}
-                    <div className="mb-6">
+                    <div className="mb-4">
                       {plan.oldPrice && (
-                        <span className="text-slate-400 line-through text-lg mr-2">
+                        <span className="text-slate-400 line-through text-base mr-2">
                           {plan.oldPrice}
                         </span>
                       )}
-                      <span className="text-3xl font-extrabold text-slate-900">{plan.newPrice}</span>
+                      <span className="text-2xl font-extrabold text-slate-900">{plan.newPrice}</span>
                     </div>
 
                     {/* CTA */}
                     <button
                       onClick={onQuoteClick}
-                      className="w-full font-bold rounded-full py-3 mb-8 transition-all text-sm tracking-wide border-2"
+                      className="w-full font-bold rounded-full py-2.5 mb-5 transition-all text-sm tracking-wide border-2"
                       style={{
                         borderColor: "#1cb8df",
                         color: "#1cb8df",
@@ -276,9 +276,9 @@ export default function PricingPlans({ onQuoteClick }: PricingPlansProps) {
                     </button>
 
                     {/* Features */}
-                    <ul className="space-y-3 flex-1">
+                    <ul className="space-y-2 flex-1">
                       {plan.features.map((f, i) => (
-                        <li key={i} className="flex items-start gap-2.5 text-sm text-slate-600">
+                        <li key={i} className="flex items-start gap-2 text-xs text-slate-600">
                           <CheckCircle2
                             className="w-4 h-4 flex-shrink-0 mt-0.5"
                             style={{ color: "#1cb8df" }}

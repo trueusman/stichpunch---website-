@@ -37,7 +37,7 @@ export default function App() {
   // Track scroll position to update header nav highlighted state
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["home", "services", "pricing", "categories", "portfolio", "formats", "about", "contact"];
+      const sections = ["home", "services", "pricing", "portfolio", "cat-preview", "formats", "about", "contact"];
       const scrollPosition = window.scrollY + window.innerHeight / 3;
       for (const section of sections) {
         const el = document.getElementById(section);
@@ -104,14 +104,14 @@ export default function App() {
       <main className="flex-grow">
 
         <Hero onQuoteClick={handleScrollToQuote} />
+
+        <PortfolioShowcase />
+        <CategoryDetailSections onViewMore={openCatPage} />
+
         <ServicesList onQuoteClick={handleScrollToQuote} />
         <WhyChooseUs />
         <PricingPlans onQuoteClick={handleScrollToQuote} />
 
-        {/* 1-row preview per category with View More */}
-        <CategoryDetailSections onViewMore={openCatPage} />
-
-        <PortfolioShowcase />
         <Testimonials />
         <FormatExplainer />
         <AboutSection />

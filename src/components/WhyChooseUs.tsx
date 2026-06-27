@@ -89,7 +89,7 @@ export default function WhyChooseUs() {
 
         {/* 3×2 Grid */}
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -102,24 +102,24 @@ export default function WhyChooseUs() {
                 key={reason.title}
                 variants={cardVariants}
                 whileHover={{ y: -6, boxShadow: "0 18px 36px -10px rgba(28,184,223,0.18)" }}
-                className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm flex flex-col transition-all duration-300 group hover:border-[#1cb8df]/40"
+                className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm flex flex-col transition-all duration-300 group hover:border-[#1cb8df]/40"
               >
                 {/* Top orange accent stripe */}
                 <div className="h-1 w-full" style={{ backgroundColor: "#f96f1f" }} />
 
-                <div className="p-7 flex flex-col flex-1">
+                <div className="p-5 flex flex-col flex-1">
                   {/* Icon */}
                   <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 shadow-sm group-hover:scale-110 transition-transform duration-300"
+                    className="w-10 h-10 rounded-lg flex items-center justify-center mb-3 shadow-sm group-hover:scale-110 transition-transform duration-300"
                     style={{ backgroundColor: "rgba(28,184,223,0.1)", border: "1px solid rgba(28,184,223,0.2)" }}
                   >
-                    <Icon className="w-6 h-6" style={{ color: "#1cb8df" }} />
+                    <Icon className="w-5 h-5" style={{ color: "#1cb8df" }} />
                   </div>
 
-                  <h3 className="font-bold text-slate-900 text-lg mb-2 leading-snug">
+                  <h3 className="font-bold text-slate-900 text-base mb-1.5 leading-snug">
                     {reason.title}
                   </h3>
-                  <p className="text-slate-500 text-sm leading-relaxed">
+                  <p className="text-slate-500 text-xs leading-relaxed">
                     {reason.description}
                   </p>
                 </div>

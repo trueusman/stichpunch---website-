@@ -81,7 +81,7 @@ export default function PaymentSection() {
         </motion.div>
 
         {/* Payment cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           {PAYMENT_METHODS.map((method, i) => (
             <motion.div
               key={method.name}
@@ -89,11 +89,11 @@ export default function PaymentSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.1 }}
-              className="flex flex-col items-center text-center p-8 rounded-2xl bg-slate-50 border border-slate-200 shadow-sm"
+              className="flex flex-col items-center text-center p-5 rounded-xl bg-slate-50 border border-slate-200 shadow-sm"
             >
-              <div className="mb-5">{method.icon}</div>
-              <h3 className="font-display font-bold text-xl text-slate-900 mb-2">{method.name}</h3>
-              <p className="text-slate-500 text-sm leading-relaxed">{method.description}</p>
+              <div className="mb-3">{method.icon}</div>
+              <h3 className="font-display font-bold text-base text-slate-900 mb-1.5">{method.name}</h3>
+              <p className="text-slate-500 text-xs leading-relaxed">{method.description}</p>
             </motion.div>
           ))}
         </div>
