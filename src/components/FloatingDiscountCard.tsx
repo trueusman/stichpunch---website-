@@ -35,11 +35,11 @@ export default function FloatingDiscountCard({ onQuoteClick }: FloatingDiscountC
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          initial={{ x: 400, opacity: 0, scale: 0.8 }}
+          initial={{ x: -400, opacity: 0, scale: 0.8 }}
           animate={{ x: 0, opacity: 1, scale: 1 }}
-          exit={{ x: 400, opacity: 0, scale: 0.8 }}
+          exit={{ x: -400, opacity: 0, scale: 0.8 }}
           transition={{ type: "spring", stiffness: 120, damping: 15 }}
-          className="fixed right-6 bottom-6 z-[9999]"
+          className="fixed left-6 bottom-6 z-[9999]"
         >
           {/* Badge Style Card - Compact & Clean */}
           <motion.div 
@@ -49,24 +49,24 @@ export default function FloatingDiscountCard({ onQuoteClick }: FloatingDiscountC
             whileTap={{ scale: 0.95 }}
           >
             {/* Left Part - Cyan "GET" */}
-            <div className="relative bg-[#1cb8df] text-white px-5 py-3 flex items-center justify-center">
+            <div className="relative bg-[#1cb8df] text-white px-4 py-2 flex items-center justify-center">
               {/* Sparkles decoration */}
               <motion.div
                 animate={{ scale: [1, 1.2, 1], opacity: [0.8, 1, 0.8] }}
                 transition={{ duration: 2, repeat: Infinity }}
                 className="absolute -top-0.5 -left-0.5"
               >
-                <div className="w-1 h-3 bg-white/50 rounded-full rotate-45" />
-                <div className="w-1 h-2 bg-white/50 rounded-full rotate-45 absolute -top-0.5 left-1" />
+                <div className="w-1 h-2.5 bg-white/50 rounded-full rotate-45" />
+                <div className="w-1 h-1.5 bg-white/50 rounded-full rotate-45 absolute -top-0.5 left-0.5" />
               </motion.div>
               
-              <span className="font-black text-lg tracking-tight">GET</span>
+              <span className="font-black text-base tracking-tight">GET</span>
             </div>
 
             {/* Right Part - Orange "30% OFF" */}
-            <div className="relative bg-gradient-to-r from-[#f96f1f] to-[#ff8c42] text-white px-5 py-3 flex flex-col items-center justify-center">
-              <div className="font-black text-2xl leading-none">30%</div>
-              <div className="font-bold text-xs tracking-wider">OFF</div>
+            <div className="relative bg-gradient-to-r from-[#f96f1f] to-[#ff8c42] text-white px-4 py-2 flex flex-col items-center justify-center">
+              <div className="font-black text-xl leading-none">30%</div>
+              <div className="font-bold text-[10px] tracking-wider">OFF</div>
             </div>
 
             {/* Close Button - Clear & Visible */}
@@ -75,12 +75,12 @@ export default function FloatingDiscountCard({ onQuoteClick }: FloatingDiscountC
                 e.stopPropagation();
                 handleClose();
               }}
-              className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-white hover:bg-red-500 hover:text-white text-slate-800 flex items-center justify-center transition-all shadow-xl border-2 border-slate-300 hover:border-red-500 z-10"
+              className="absolute -top-1.5 -right-1.5 w-6 h-6 rounded-full bg-white hover:bg-red-500 hover:text-white text-slate-800 flex items-center justify-center transition-all shadow-xl border-2 border-slate-300 hover:border-red-500 z-10"
               aria-label="Close"
               whileHover={{ scale: 1.2, rotate: 90 }}
               whileTap={{ scale: 0.9 }}
             >
-              <X className="h-5 w-5" strokeWidth={3} />
+              <X className="h-4 w-4" strokeWidth={3} />
             </motion.button>
 
             {/* Pulse ring */}

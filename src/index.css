@@ -345,3 +345,103 @@
   scale: 0.95;
   box-shadow: 0 0 0 4px #f96f1f;
 }
+
+/* ── Animated Hamburger Menu ─────────────────────────── */
+.hamburger {
+  cursor: pointer;
+}
+
+.hamburger input {
+  display: none;
+}
+
+.hamburger svg {
+  height: 2.5em;
+  transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hamburger-line {
+  fill: none;
+  stroke: #1B2A6B;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3;
+  transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+              stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hamburger-line-top-bottom {
+  stroke-dasharray: 12 63;
+}
+
+.hamburger input:checked ~ svg {
+  transform: rotate(-45deg);
+}
+
+.hamburger input:checked ~ svg .hamburger-line-top-bottom {
+  stroke-dasharray: 20 300;
+  stroke-dashoffset: -32.42;
+}
+
+/* ── Nav Link Animations ─────────────────────────── */
+.nav-link {
+  position: relative;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 80%;
+  height: 3px;
+  background: linear-gradient(90deg, #1cb8df, #f96f1f);
+  border-radius: 2px;
+  transition: transform 0.3s ease;
+}
+
+.nav-link:hover::before {
+  transform: translateX(-50%) scaleX(1);
+}
+
+.nav-link:hover {
+  transform: translateY(-2px);
+}
+
+.nav-link.active::before {
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* Mobile Nav Link Animation */
+.mobile-nav-link {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.mobile-nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 4px;
+  height: 0;
+  background: linear-gradient(180deg, #1cb8df, #f96f1f);
+  border-radius: 0 2px 2px 0;
+  transition: height 0.3s ease;
+}
+
+.mobile-nav-link:hover::after,
+.mobile-nav-link.active::after {
+  height: 100%;
+}
+
+.mobile-nav-link:hover {
+  padding-left: 1.5rem;
+}

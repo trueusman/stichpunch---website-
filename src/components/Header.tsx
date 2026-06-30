@@ -128,7 +128,7 @@ export default function Header({ onQuoteClick, activeSection, onCatPageOpen }: H
                     >
                       <a
                         href={item.href}
-                        className="flex items-center gap-1 px-4 py-2 text-xs font-bold rounded-lg tracking-wider uppercase transition-all duration-200"
+                        className={`nav-link flex items-center gap-1 px-4 py-2 text-xs font-bold rounded-lg tracking-wider uppercase transition-all duration-200 ${isActive ? 'active' : ''}`}
                         style={{
                           color: isActive ? "#1B2A6B" : "#64748b",
                           background: isActive ? "rgba(28,184,223,0.08)" : "transparent",
@@ -180,14 +180,12 @@ export default function Header({ onQuoteClick, activeSection, onCatPageOpen }: H
                   <a
                     key={item.href}
                     href={item.href}
-                    className="px-4 py-2 text-xs font-bold rounded-lg tracking-wider uppercase transition-all duration-200"
+                    className={`nav-link px-4 py-2 text-xs font-bold rounded-lg tracking-wider uppercase transition-all duration-200 ${isActive ? 'active' : ''}`}
                     style={{
                       color: isActive ? "#1B2A6B" : "#64748b",
                       background: isActive ? "rgba(28,184,223,0.08)" : "transparent",
                       fontWeight: isActive ? 800 : 600,
                     }}
-                    onMouseEnter={e => { if (!isActive) (e.currentTarget as HTMLElement).style.color = "#1B2A6B"; }}
-                    onMouseLeave={e => { if (!isActive) (e.currentTarget as HTMLElement).style.color = "#64748b"; }}
                   >
                     {item.label}
                   </a>
@@ -195,7 +193,7 @@ export default function Header({ onQuoteClick, activeSection, onCatPageOpen }: H
               })}
             </nav>
 
-            {/* Right: Email Us button */}
+            {/* Right: Email Us button + Animated Hamburger */}
             <div className="flex items-center gap-3">
               <a
                 href="mailto:sales@stichpunch.com"
@@ -204,9 +202,23 @@ export default function Header({ onQuoteClick, activeSection, onCatPageOpen }: H
                 <Mail className="w-3.5 h-3.5" />
                 Email Us
               </a>
-              <button onClick={() => setIsOpen(!isOpen)} className="text-slate-600 hover:text-slate-900 p-2 lg:hidden">
-                {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-              </button>
+              
+              {/* Animated Hamburger Menu */}
+              <label className="hamburger lg:hidden cursor-pointer">
+                <input 
+                  type="checkbox" 
+                  checked={isOpen}
+                  onChange={() => setIsOpen(!isOpen)}
+                  className="hidden"
+                />
+                <svg viewBox="0 0 32 32" className="h-8 w-8 transition-transform duration-600 ease-cubic">
+                  <path 
+                    className="hamburger-line hamburger-line-top-bottom" 
+                    d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22" 
+                  />
+                  <path className="hamburger-line" d="M7 16 27 16" />
+                </svg>
+              </label>
             </div>
 
           </div>
@@ -221,7 +233,7 @@ export default function Header({ onQuoteClick, activeSection, onCatPageOpen }: H
               const isActive = activeSection === item.href.slice(1);
               return (
                 <a key={item.href} href={item.href} onClick={() => setIsOpen(false)}
-                  className="block px-4 py-2.5 rounded-xl text-sm font-semibold transition-all"
+                  className={`mobile-nav-link block px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${isActive ? 'active' : ''}`}
                   style={{ color: isActive ? "#1B2A6B" : "#64748b", background: isActive ? "rgba(28,184,223,0.08)" : "transparent" }}
                 >
                   {item.label}
