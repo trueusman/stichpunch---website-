@@ -11,6 +11,11 @@ import newDig3Img from "./assets/images/imgi_82_logo-digitizing.jpg";
 import newDig4Img from "./assets/images/jrfrefihreihfirdigitizng.jpeg";
 import newDig5Img from "./assets/images/digitizng logo.jpg";
 import newDig6Img from "./assets/images/imgi_165_embroidery-digitizing-1-450x450.jpg";
+import dgImg from "./assets/images/dg.jpg";
+import dg2Img from "./assets/images/dg (2).jpg";
+import degitizingImg from "./assets/images/degitizing.jpg";
+import digitizngImg from "./assets/images/digitizng.jpg";
+import embroideryPuffImg from "./assets/images/embroidery_puff_logo_1782158585504.jpg";
 import jaketBack2Img from "./assets/images/jaket back .jpg";
 import digitiz3dPuffImg from "./assets/images/digitiz 3d puff logo.png";
 import patchesPngImg from "./assets/images/patches.png";
@@ -143,26 +148,26 @@ export const CATEGORIES_DATA: CategoryItem[] = [
 
 export const PORTFOLIO_DATA: PortfolioItem[] = [
   {
-    id: "port-new-dig-6",
-    title: "Logo Digitizing",
+    id: "port-wilcom-dig",
+    title: "Wilcom Logo Digitizing",
     category: "embroidery",
-    imageUrl: newDig4Img,
-    details: "Clean digitized logo with optimized stitch directions and zero puckering output.",
+    imageUrl: wilcomDigitizingImg,
+    details: "Professional Wilcom digitizing with clean stitch paths and production-ready output.",
+    softwareUsed: "Wilcom Embroidery Studio",
+    featured: true
+  },
+  {
+    id: "port-new-dig-1",
+    title: "Professional Embroidery Design",
+    category: "embroidery",
+    imageUrl: newDig1Img,
+    details: "High-quality embroidery digitizing with optimized stitch directions.",
     softwareUsed: "Wilcom Embroidery Studio",
     featured: true
   },
   {
     id: "port-new-dig-3",
-    title: "Logo Digitizing",
-    category: "embroidery",
-    imageUrl: newDig1Img,
-    details: "Professional logo digitizing with clean stitch paths and production-ready output.",
-    softwareUsed: "Wilcom Embroidery Studio",
-    featured: true
-  },
-  {
-    id: "port-new-dig-5",
-    title: "Logo Digitizing",
+    title: "Precision Logo Digitizing",
     category: "embroidery",
     imageUrl: newDig3Img,
     details: "Precision embroidery digitizing with proper underlay and satin column adjustments.",
@@ -170,51 +175,40 @@ export const PORTFOLIO_DATA: PortfolioItem[] = [
     featured: true
   },
   {
-    id: "port-new-dig-6",
-    title: "Logo Digitizing",
+    id: "port-dg-1",
+    title: "Custom Digitizing Work",
     category: "embroidery",
-    imageUrl: newDig4Img,
-    details: "Clean digitized logo with optimized stitch directions and zero puckering output.",
+    imageUrl: dgImg,
+    details: "Custom embroidery design with perfect stitch density and smooth blending.",
     softwareUsed: "Wilcom Embroidery Studio",
     featured: true
   },
   {
-    id: "port-new-dig-7",
-    title: "Logo Digitizing",
+    id: "port-dg-2",
+    title: "Advanced Digitizing",
     category: "embroidery",
-    imageUrl: newDig5Img,
-    details: "Professional logo digitizing with clean stitch paths and production-ready output.",
+    imageUrl: dg2Img,
+    details: "Advanced embroidery techniques with zero puckering guarantee.",
     softwareUsed: "Wilcom Embroidery Studio",
     featured: true
   },
   {
-    id: "port-jaket-back-2",
-    title: "Full Jacket Back Design",
+    id: "port-digitizng",
+    title: "Clean Digitizing Output",
     category: "embroidery",
-    imageUrl: jaketBack2Img,
-    details: "Full jacket back embroidery with detailed coverage and premium thread work.",
+    imageUrl: digitizngImg,
+    details: "Clean and professional digitizing with optimized thread paths.",
     softwareUsed: "Wilcom Embroidery Studio",
     featured: true
   },
   {
-    id: "port-3d-puff",
-    title: "3D Puff Logo",
+    id: "port-embroidery-puff",
+    title: "Puff Embroidery Logo",
     category: "embroidery",
-    imageUrl: digitiz3dPuffImg,
-    details: "3D puff foam embroidery with high-density satin stitches for a bold raised effect on caps and apparel.",
+    imageUrl: embroideryPuffImg,
+    details: "3D puff embroidery with raised foam effect for caps and apparel.",
     softwareUsed: "Wilcom Embroidery Studio",
     featured: true
-  },
-  {
-    id: "port-1",
-    title: "Full Jacket Back Embroidery",
-    category: "embroidery",
-    imageUrl: jacketBackImg,
-    details: "High stitch count full-scale jacket back embroidery. Designed to withstand jeans wash processes without shrinking or wrinkling.",
-    stitchCount: "74,200 Stitches",
-    colors: 9,
-    softwareUsed: "Wilcom Embroidery Studio E4.5",
-    featured: false
   },
   {
     id: "port-new-vec-1",
