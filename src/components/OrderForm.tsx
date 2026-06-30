@@ -7,6 +7,7 @@ import {
   User, Mail, Phone, Grid2x2, Pencil, Shirt,
   Award, ShieldCheck, Zap, FileText, Send, X
 } from "lucide-react";
+import embroideryBg from "../assets/images/12 patches.jpg";
 
 const EMAILJS_SERVICE_ID  = "service_6c9s29r";
 const EMAILJS_TEMPLATE_ID = "template_j8k2wwo";
@@ -133,22 +134,40 @@ Notes: ${formData.notes || "—"}`,
       setFormData({ name: "", email: "", phone: "", serviceType: "Digitizing", sizeInches: "3.5", placement: "Left Chest", notes: "" });
     } catch (err: any) {
       console.error("Submit error:", err);
-      const msg = err?.text || err?.message || JSON.stringify(err);
-      setErrorNotice(`Send failed: ${msg}. Or email us at sales@stichpunch.com`);
+      const msg = err?.text || err?.message || "";
+      
+      // Check if it's a Gmail authentication error
+      if (msg.includes("Invalid grant") || msg.includes("Gmail")) {
+        setErrorNotice("Gmail authentication expired. Please email us directly at sales@stichpunch.com or WhatsApp: +923141162973");
+      } else {
+        setErrorNotice(`Send failed: ${msg || "Unknown error"}. Please email us at sales@stichpunch.com`);
+      }
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const inputBase = "w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-sm text-slate-800 outline-none focus:border-[#1cb8df] focus:ring-2 focus:ring-[#1cb8df]/15 transition-all placeholder:text-slate-400";
-  const selectBase = "w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-sm text-slate-800 outline-none focus:border-[#1cb8df] focus:ring-2 focus:ring-[#1cb8df]/15 transition-all cursor-pointer appearance-none";
-  const labelBase = "text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1.5";
-  const iconWrap = "absolute left-3 top-1/2 -translate-y-1/2 text-slate-400";
+  const inputBase = "w-full bg-white border-2 border-slate-200 rounded-xl pl-11 pr-4 py-4 text-base text-slate-800 font-medium outline-none focus:border-[#1cb8df] focus:ring-2 focus:ring-[#1cb8df]/20 transition-all placeholder:text-slate-400 shadow-sm";
+  const selectBase = "w-full bg-white border-2 border-slate-200 rounded-xl pl-11 pr-4 py-4 text-base text-slate-800 font-medium outline-none focus:border-[#1cb8df] focus:ring-2 focus:ring-[#1cb8df]/20 transition-all cursor-pointer appearance-none shadow-sm";
+  const labelBase = "text-xs font-black text-slate-700 uppercase tracking-widest block mb-2";
+  const iconWrap = "absolute left-4 top-1/2 -translate-y-1/2 text-slate-500";
 
   return (
     <>
-    <section id="contact" className="py-20 scroll-mt-12" style={{ background: "#f4f6fb" }}>
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-20 scroll-mt-12 relative overflow-hidden">
+      {/* Background Image - More Visible */}
+      <div className="absolute inset-0 z-0">
+        <img 
+          src={embroideryBg} 
+          alt="Custom Patches Background" 
+          className="w-full h-full object-cover opacity-50"
+        />
+        <div className="absolute inset-0" style={{ 
+          background: "rgba(255,255,255,0.60)"
+        }} />
+      </div>
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* ── Header ── */}
         <motion.div
@@ -158,14 +177,14 @@ Notes: ${formData.notes || "—"}`,
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <span className="inline-block text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full border mb-4"
-            style={{ color: "#1B2A6B", borderColor: "#c7d2e8", background: "#fff" }}>
+          <span className="inline-block text-sm font-black tracking-widest uppercase px-5 py-2 rounded-full border-2 mb-5 shadow-sm bg-white"
+            style={{ color: "#1B2A6B", borderColor: "#1cb8df" }}>
             ORDER DESK
           </span>
-          <h2 className="font-display font-extrabold text-3xl sm:text-4xl leading-tight" style={{ color: "#1B2A6B" }}>
+          <h2 className="font-display font-black text-4xl sm:text-5xl leading-tight drop-shadow-sm" style={{ color: "#1B2A6B" }}>
             Get an <span style={{ color: "#f96f1f" }}>Accurate Quote</span> &amp; Digital File Report
           </h2>
-          <p className="text-slate-500 mt-3 text-sm sm:text-base">
+          <p className="text-slate-700 font-medium mt-4 text-base sm:text-lg">
             Upload your graphics now. Submit a manual request to our digitizing desk.
           </p>
         </motion.div>
@@ -192,23 +211,23 @@ Notes: ${formData.notes || "—"}`,
           ))}
         </motion.div>
 
-        {/* ── Form Card ── */}
+        {/* ── Form Card with strong glass effect ── */}
         <motion.div
-          className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden"
+          className="bg-white/85 backdrop-blur-lg rounded-3xl shadow-2xl border-2 border-white/60 overflow-hidden"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.15 }}
         >
-          {/* Card Header */}
-          <div className="flex items-center gap-4 px-6 py-5 border-b border-slate-100">
-            <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
-              style={{ background: "rgba(28,184,223,0.08)", border: "1px solid rgba(28,184,223,0.2)" }}>
-              <User className="h-5 w-5" style={{ color: "#1cb8df" }} />
+          {/* Card Header with gradient */}
+          <div className="flex items-center gap-4 px-6 sm:px-8 py-6 border-b-2 border-slate-200 relative overflow-hidden bg-white">
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 relative z-10"
+              style={{ background: "rgba(28,184,223,0.12)", border: "2px solid rgba(28,184,223,0.4)" }}>
+              <User className="h-6 w-6" style={{ color: "#1cb8df" }} />
             </div>
-            <div>
-              <p className="font-bold text-slate-800 text-base">Contact &amp; Custom Specifications</p>
-              <p className="text-xs text-slate-400 mt-0.5">Please provide your details and project requirements.</p>
+            <div className="relative z-10">
+              <p className="font-black text-slate-900 text-lg sm:text-xl">Contact &amp; Custom Specifications</p>
+              <p className="text-sm text-slate-600 mt-1 font-medium">Please provide your details and project requirements.</p>
             </div>
           </div>
 

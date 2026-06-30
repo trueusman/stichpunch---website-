@@ -1,10 +1,8 @@
 import { ServiceItem, CategoryItem, PortfolioItem, FormatDetails } from "./types";
 
 // Import images
-import puffLogoImg from "./assets/images/embroidery_puff_logo_1782158585504.jpg";
 import jacketBackImg from "./assets/images/embroidery_jacket_back_1782158607392.jpg";
 import vectorArtImg from "./assets/images/vector_design_art_1782158629862.jpg";
-import beforeAfterImg from "./assets/images/before_after_stitch_1782158648317.jpg";
 import patchImg from "./assets/images/embroidered_patch_1782158664945.jpg";
 import wilcomDigitizingImg from "./assets/images/wilcom_digitizing_1782163989833.jpg";
 import digitizingImg from "./assets/images/digitizing.jpg";
@@ -15,18 +13,12 @@ import newDig5Img from "./assets/images/digitizng logo.jpg";
 import newDig6Img from "./assets/images/imgi_165_embroidery-digitizing-1-450x450.jpg";
 import jaketBack2Img from "./assets/images/jaket back .jpg";
 import digitiz3dPuffImg from "./assets/images/digitiz 3d puff logo.png";
-import beforeAfterVectorWebpImg from "./assets/images/before after vector.webp";
-import beforeAfterVectorJpgImg from "./assets/images/before after vector.jpg";
-import beforeAfterDigImg from "./assets/images/1234 before after digitizng.jpg";
-import beforeAfterVec2Img from "./assets/images/123 before after vector2.jpg";
-import beforeAfterVec1Img from "./assets/images/123456before after vector1.jpg";
 import patchesPngImg from "./assets/images/patches.png";
 import vectorJpegImg from "./assets/images/vector.jpeg";
 import vector2JpegImg from "./assets/images/vector (2).jpeg";
 import vectorArt2Img from "./assets/images/vector art (2).jpg";
 import vectorArt3Img from "./assets/images/vector art (3).jpg";
 import vectorArt5Img from "./assets/images/vector art 5 .jpg";
-import vectorBeforeAfterImg from "./assets/images/vectore before after.jpg";
 import patchesImg from "./assets/images/patches.jpg";
 import patches2Img from "./assets/images/patches (2).jpg";
 import patches1WebpImg from "./assets/images/patches (1).webp";
@@ -35,6 +27,11 @@ import patches3WebpImg from "./assets/images/patches (3).webp";
 import patches12Img from "./assets/images/12 patches.jpg";
 import leatherPatchesImg from "./assets/images/leather PATCHES.jpg";
 import pvcPatchesImg from "./assets/images/pvc patches.jpeg";
+import beforeAfterVectorImg from "./assets/images/vectore before after.jpg";
+import beforeAfterVec1Img from "./assets/images/123456before after vector1.jpg";
+import beforeAfterVec2Img from "./assets/images/123 before after vector2.jpg";
+import beforeAfterDigImg from "./assets/images/1234 before after digitizng.jpg";
+import beforeAfterStitchImg from "./assets/images/before_after_stitch_1782158648317.jpg";
 
 export const SERVICES_DATA: ServiceItem[] = [
   {
@@ -98,24 +95,6 @@ export const SERVICES_DATA: ServiceItem[] = [
 
 export const CATEGORIES_DATA: CategoryItem[] = [
   {
-    id: "3d-puff",
-    title: "Custom Embroidery Logo",
-    tag: "High Density Caps",
-    description: "3D foam underlay embroidery.",
-    technique: "Foam cutting satin stitches.",
-    iconName: "Sparkles",
-    imageUrl: digitizingImg
-  },
-  {
-    id: "custom-embroidery",
-    title: "Custom Embroidery Logo",
-    tag: "Technical Garments",
-    description: "Stitch maps for all garment types.",
-    technique: "Pull-compensation & lock-down paths.",
-    iconName: "Briefcase",
-    imageUrl: newDig3Img
-  },
-  {
     id: "jacket-back",
     title: "Full Jacket Back",
     tag: "Premium Embroidery",
@@ -164,22 +143,11 @@ export const CATEGORIES_DATA: CategoryItem[] = [
 
 export const PORTFOLIO_DATA: PortfolioItem[] = [
   {
-    id: "port-4",
-    title: "Tactical Snapback Dual Puff Logo",
+    id: "port-new-dig-6",
+    title: "Logo Digitizing",
     category: "embroidery",
-    imageUrl: puffLogoImg,
-    details: "Satin stitch caps with dense dual layers of 3mm high-density puff foam for striking 3D aesthetic definition.",
-    stitchCount: "9,800 Stitches",
-    colors: 2,
-    softwareUsed: "Wilcom E4",
-    featured: true
-  },
-  {
-    id: "port-new-dig-1",
-    title: "Professional Embroidery Digitizing",
-    category: "embroidery",
-    imageUrl: digitizingImg,
-    details: "Clean production-ready digitizing with optimized stitch paths and proper underlay for flawless machine output.",
+    imageUrl: newDig4Img,
+    details: "Clean digitized logo with optimized stitch directions and zero puckering output.",
     softwareUsed: "Wilcom Embroidery Studio",
     featured: true
   },
@@ -189,15 +157,6 @@ export const PORTFOLIO_DATA: PortfolioItem[] = [
     category: "embroidery",
     imageUrl: newDig1Img,
     details: "Professional logo digitizing with clean stitch paths and production-ready output.",
-    softwareUsed: "Wilcom Embroidery Studio",
-    featured: true
-  },
-  {
-    id: "port-new-dig-4",
-    title: "Logo Digitizing",
-    category: "embroidery",
-    imageUrl: newDig1Img,
-    details: "High-quality digitizing with optimized density and flawless machine output.",
     softwareUsed: "Wilcom Embroidery Studio",
     featured: true
   },
@@ -229,24 +188,6 @@ export const PORTFOLIO_DATA: PortfolioItem[] = [
     featured: true
   },
   {
-    id: "port-new-dig-8",
-    title: "Embroidery Digitizing",
-    category: "embroidery",
-    imageUrl: newDig6Img,
-    details: "High-quality embroidery digitizing with precise density control and flawless stitch output.",
-    softwareUsed: "Wilcom Embroidery Studio",
-    featured: true
-  },
-  {
-    id: "port-new-dig-9",
-    title: "Logo Digitizing",
-    category: "embroidery",
-    imageUrl: newDig5Img,
-    details: "Clean logo digitizing with optimized stitch paths and production-ready output.",
-    softwareUsed: "Wilcom Embroidery Studio",
-    featured: true
-  },
-  {
     id: "port-jaket-back-2",
     title: "Full Jacket Back Design",
     category: "embroidery",
@@ -265,15 +206,6 @@ export const PORTFOLIO_DATA: PortfolioItem[] = [
     featured: true
   },
   {
-    id: "port-3d-puff-2",
-    title: "3D Puff Logo Digitizing",
-    category: "embroidery",
-    imageUrl: digitiz3dPuffImg,
-    details: "Precision 3D puff digitizing with foam underlay and clean satin column stitches.",
-    softwareUsed: "Wilcom Embroidery Studio",
-    featured: true
-  },
-  {
     id: "port-1",
     title: "Full Jacket Back Embroidery",
     category: "embroidery",
@@ -283,15 +215,6 @@ export const PORTFOLIO_DATA: PortfolioItem[] = [
     colors: 9,
     softwareUsed: "Wilcom Embroidery Studio E4.5",
     featured: false
-  },
-  {
-    id: "port-2",
-    title: "Cybernetic Mech Hummingbird Vector",
-    category: "vector",
-    imageUrl: vectorArtImg,
-    details: "100% manual vector trace from a low-res hand-drawn charcoal sketch. Created perfect anchor points for high-definition screen printing.",
-    softwareUsed: "Adobe Illustrator CC",
-    featured: true
   },
   {
     id: "port-new-vec-1",
@@ -338,66 +261,59 @@ export const PORTFOLIO_DATA: PortfolioItem[] = [
     softwareUsed: "Adobe Illustrator CC",
     featured: true
   },
+
   {
-    id: "before-after-vec-webp",
-    title: "Vector Art Before & After",
+    id: "port-before-after-1",
+    title: "Before & After Vector Transformation",
     category: "before_after",
-    imageUrl: beforeAfterVectorWebpImg,
-    details: "Low-res raster artwork fully redrawn into clean scalable vector — ready for screen print and vinyl.",
+    imageUrl: beforeAfterVectorImg,
+    details: "Complete transformation from low-resolution raster to clean vector artwork. Shows the power of manual redraw with precise bezier curves and accurate color separation.",
     softwareUsed: "Adobe Illustrator CC",
     featured: true,
-    beforeAfterType: "vector" as const
+    beforeAfterType: "vector"
   },
   {
-    id: "before-after-vec1",
-    title: "Vector Restoration",
+    id: "port-before-after-2",
+    title: "Vector Redraw Comparison",
     category: "before_after",
     imageUrl: beforeAfterVec1Img,
-    details: "Manual vector redraw from a worn original — clean paths, accurate colors, print-ready output.",
+    details: "Professional vector conversion showing the dramatic improvement from pixelated original to crisp, scalable artwork ready for any size production.",
     softwareUsed: "Adobe Illustrator CC",
     featured: true,
-    beforeAfterType: "vector" as const
+    beforeAfterType: "vector"
   },
   {
-    id: "before-after-vec2",
-    title: "Vector Art Conversion",
+    id: "port-before-after-3",
+    title: "Vector Art Before & After",
     category: "before_after",
     imageUrl: beforeAfterVec2Img,
-    details: "Complete vector conversion with smooth bezier curves and perfect color separation.",
+    details: "Manual vector trace demonstrating clean path creation and accurate color matching from rough sketch to production-ready file.",
     softwareUsed: "Adobe Illustrator CC",
     featured: true,
-    beforeAfterType: "vector" as const
+    beforeAfterType: "vector"
   },
   {
-    id: "before-after-dig-1",
-    title: "Embroidery Digitizing Before & After",
+    id: "port-before-after-4",
+    title: "Embroidery Digitizing Transformation",
     category: "before_after",
     imageUrl: beforeAfterDigImg,
-    details: "Artwork converted into a production-ready embroidery stitch file with optimized density and underlay.",
+    details: "Complete digitizing process from artwork to stitch file. Shows proper underlay, optimized stitch directions, and density control.",
     softwareUsed: "Wilcom Embroidery Studio",
     featured: true,
-    beforeAfterType: "embroidery" as const
+    beforeAfterType: "embroidery"
   },
   {
-    id: "before-after-comparitor",
-    title: "Vector Restoration: Low-Res to CNC Ready",
+    id: "port-before-after-5",
+    title: "Stitch File Creation Process",
     category: "before_after",
-    imageUrl: beforeAfterImg,
-    details: "Restructured a highly pixelated retro shield and converted it into pristine geometric vectors for CNC routing and banner printing.",
-    softwareUsed: "CorelDRAW Technical Suite",
+    imageUrl: beforeAfterStitchImg,
+    details: "Professional embroidery digitizing showing the conversion from flat artwork to production-ready stitch file with perfect thread placement.",
+    softwareUsed: "Wilcom Embroidery Studio",
     featured: true,
-    beforeAfterType: "vector" as const
+    beforeAfterType: "embroidery"
   },
-  {
-    id: "port-new-ba-1",
-    title: "Vector Before & After Restoration",
-    category: "before_after",
-    imageUrl: vectorBeforeAfterImg,
-    details: "Full artwork restoration from a worn original — rebuilt with clean paths and production-ready output.",
-    softwareUsed: "Adobe Illustrator CC",
-    featured: true,
-    beforeAfterType: "vector" as const
-  },
+
+
   {
     id: "port-patch-png",
     title: "Custom Embroidered Patch",

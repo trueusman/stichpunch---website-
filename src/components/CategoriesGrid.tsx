@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Sparkles, Compass, Maximize, Palette, Briefcase, ShieldAlert, Cpu, Activity, CircleDot, X, ZoomIn } from "lucide-react";
 import { CATEGORIES_DATA } from "../data";
 import { motion, AnimatePresence } from "motion/react";
+import SectionHeading from "./SectionHeading";
 
 export default function CategoriesGrid() {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
@@ -26,22 +27,13 @@ export default function CategoriesGrid() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6"
-        >
-          <div className="max-w-xl">
-            <span className="text-xs font-mono font-bold tracking-widest px-3 py-1 rounded-full uppercase" style={{ color: "#1cb8df", background: "rgba(28,184,223,0.08)", border: "1px solid rgba(28,184,223,0.2)" }}>
-              Production Styles
-            </span>
-            <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 mt-4 tracking-tight">
-              Specialized Embroidery &amp; Art Layouts
-            </h2>
-          </div>
-        </motion.div>
+        <SectionHeading
+          badge="Production Styles"
+          badgeIcon={Sparkles}
+          title="Specialized Embroidery & Art Layouts"
+          accent="blue"
+          align="center"
+        />
 
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">

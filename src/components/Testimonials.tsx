@@ -1,150 +1,121 @@
 import React from "react";
-import { Star, Quote } from "lucide-react";
-import { motion } from "motion/react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Star } from "lucide-react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "./Testimonials.css";
+import SectionHeading from "./SectionHeading";
 
-interface Testimonial {
-  name: string;
-  role: string;
-  text: string;
-  stars: number;
-  initials: string;
-  avatarColor: string;
-}
-
-const testimonials: Testimonial[] = [
+const reviews = [
   {
-    name: "Sarah Johnson",
-    role: "Apparel Brand Owner",
-    text: "StichPunch delivered my logo digitized perfectly in under 4 hours. The quality was outstanding — zero thread breaks on the first run!",
-    stars: 5,
-    initials: "SJ",
-    avatarColor: "#1cb8df",
+    id: 1,
+    name: "sarah johnson",
+    image: "https://i.pravatar.cc/150?img=47",
+    rating: 5,
+    date: "3 months ago",
+    review: "stichpunch delivered my logo digitized perfectly in under 4 hours the quality was outstanding zero thread breaks on the first run",
   },
   {
-    name: "Mike Torres",
-    role: "Print Shop Manager",
-    text: "I've used many digitizing services but none match StichPunch. Fast, professional, and the vector redraw was pixel perfect.",
-    stars: 5,
-    initials: "MT",
-    avatarColor: "#f96f1f",
+    id: 2,
+    name: "mike torres",
+    image: "https://i.pravatar.cc/150?img=12",
+    rating: 5,
+    date: "6 months ago",
+    review: "ive used many digitizing services but none match stichpunch fast professional and the vector redraw was pixel perfect",
   },
   {
-    name: "Emma Williams",
-    role: "Embroidery Studio Owner",
-    text: "Their team is fantastic. Great designs, excellent customer service, and they handle revisions so quickly. Highly recommended!",
-    stars: 5,
-    initials: "EW",
-    avatarColor: "#1B2A6B",
+    id: 3,
+    name: "emma williams",
+    image: "https://i.pravatar.cc/150?img=32",
+    rating: 5,
+    date: "1 year ago",
+    review: "their team is fantastic great designs excellent customer service and they handle revisions so quickly highly recommended",
+  },
+  {
+    id: 4,
+    name: "james miller",
+    image: "https://i.pravatar.cc/150?img=18",
+    rating: 5,
+    date: "2 months ago",
+    review: "outstanding digitizing quality every stitch was perfect and the turnaround time was impressive will definitely use again",
+  },
+  {
+    id: 5,
+    name: "lisa anderson",
+    image: "https://i.pravatar.cc/150?img=48",
+    rating: 5,
+    date: "5 months ago",
+    review: "loved the work the logo embroidery came out exactly as expected professional team and amazing quality",
+  },
+  {
+    id: 6,
+    name: "david chen",
+    image: "https://i.pravatar.cc/150?img=15",
+    rating: 5,
+    date: "8 months ago",
+    review: "best embroidery digitizing service ive ever used the attention to detail is remarkable and the prices are very reasonable",
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15 },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { type: "spring", stiffness: 80, damping: 16 },
-  },
-};
+const Stars = () => <div className="stars">★★★★★</div>;
 
 export default function Testimonials() {
   return (
-    <section className="py-24 relative overflow-hidden" style={{ backgroundColor: "#f8fafc" }}>
-      {/* Subtle background pattern */}
-      <div className="absolute inset-0 bg-[radial-gradient(rgba(28,184,223,0.04)_1.5px,transparent_1.5px)] [background-size:24px_24px] pointer-events-none" />
+    <section id="testimonials" className="testimonial-section">
+      <SectionHeading
+        badge="Client Reviews"
+        badgeIcon={Star}
+        title="Excellent"
+        subtitle="Based on 200+ Google Reviews"
+        accent="blue"
+        align="center"
+      />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-
-        {/* Section header */}
-        <motion.div
-          className="text-center max-w-2xl mx-auto mb-14"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.55, ease: "easeOut" }}
-        >
-          <span
-            className="text-xs font-mono font-bold tracking-widest px-3.5 py-1.5 rounded-full uppercase"
-            style={{
-              color: "#f96f1f",
-              background: "rgba(249,111,31,0.08)",
-              border: "1px solid rgba(249,111,31,0.2)",
-            }}
-          >
-            Client Reviews
-          </span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 mt-4 tracking-tight leading-tight">
-            What Our Clients Say
-          </h2>
-          <p className="text-slate-500 mt-3 text-sm sm:text-base leading-relaxed">
-            Thousands of businesses trust StichPunch for fast, flawless embroidery
-            digitizing and vector art.
-          </p>
-        </motion.div>
-
-        {/* Cards */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-5"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-        >
-          {testimonials.map((t) => (
-            <motion.div
-              key={t.name}
-              variants={cardVariants}
-              whileHover={{ y: -5, boxShadow: "0 20px 40px -12px rgba(0,0,0,0.12)" }}
-              className="bg-white rounded-xl shadow-md p-5 flex flex-col gap-3 relative transition-all duration-300"
-            >
-              {/* Sky blue quote mark */}
-              <Quote
-                className="absolute top-4 right-4 w-7 h-7 opacity-15"
-                style={{ color: "#1cb8df" }}
-              />
-
-              {/* Stars */}
-              <div className="flex items-center gap-1">
-                {Array.from({ length: t.stars }).map((_, i) => (
-                  <Star
-                    key={i}
-                    className="w-4 h-4 fill-current"
-                    style={{ color: "#f96f1f" }}
-                  />
-                ))}
-              </div>
-
-              {/* Review text */}
-              <p className="text-slate-600 text-xs leading-relaxed flex-1">
-                "{t.text}"
-              </p>
-
-              {/* Author */}
-              <div className="flex items-center gap-2.5 border-t border-slate-100 pt-3">
-                {/* Avatar with initials */}
-                <div
-                  className="w-9 h-9 rounded-full flex items-center justify-center text-white font-bold text-xs flex-shrink-0 shadow-sm"
-                  style={{ backgroundColor: t.avatarColor }}
-                >
-                  {t.initials}
+      <Swiper
+        modules={[Navigation, Pagination, Autoplay]}
+        spaceBetween={24}
+        navigation
+        pagination={{ clickable: true }}
+        autoplay={{
+          delay: 3500,
+          disableOnInteraction: false,
+        }}
+        loop
+        breakpoints={{
+          320: {
+            slidesPerView: 1,
+          },
+          640: {
+            slidesPerView: 2,
+          },
+          1024: {
+            slidesPerView: 4,
+          },
+        }}
+      >
+        {reviews.map((item) => (
+          <SwiperSlide key={item.id}>
+            <div className="review-card">
+              <div className="card-top">
+                <div className="avatar-box">
+                  <img src={item.image} alt={item.name} />
+                  <div className="google-badge">G</div>
                 </div>
-                <div className="flex flex-col leading-tight">
-                  <span className="font-bold text-slate-900 text-sm">{t.name}</span>
-                  <span className="text-xs text-slate-400">{t.role}</span>
+                <div className="user-info">
+                  <h3>{item.name}</h3>
+                  <span className="verified">✔ Verified</span>
+                  <small>{item.date}</small>
                 </div>
               </div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
+              <Stars />
+              <p className="review-text">{item.review}</p>
+              <button className="read-more">Read More</button>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </section>
   );
 }

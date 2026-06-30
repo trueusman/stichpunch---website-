@@ -1,6 +1,7 @@
 import React from "react";
 import { Zap, CheckCircle, Users, Globe, Cpu, Shield } from "lucide-react";
 import { motion } from "motion/react";
+import SectionHeading from "./SectionHeading";
 
 const reasons = [
   {
@@ -10,12 +11,12 @@ const reasons = [
   },
   {
     icon: CheckCircle,
-    title: "100% Satisfaction",
+    title: "97% Satisfaction",
     description: "Unlimited revisions until you're completely happy",
   },
   {
     icon: Users,
-    title: "5000+ Happy Clients",
+    title: "1500+ Happy Clients",
     description: "Trusted by embroiderers worldwide since day one",
   },
   {
@@ -61,31 +62,14 @@ export default function WhyChooseUs() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Section header */}
-        <motion.div
-          className="text-center max-w-2xl mx-auto mb-14"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.55, ease: "easeOut" }}
-        >
-          <span
-            className="text-xs font-mono font-bold tracking-widest px-3.5 py-1.5 rounded-full uppercase"
-            style={{
-              color: "#1cb8df",
-              background: "rgba(28,184,223,0.08)",
-              border: "1px solid rgba(28,184,223,0.2)",
-            }}
-          >
-            Why StichPunch
-          </span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 mt-4 tracking-tight leading-tight">
-            Why Choose Stich Punch?
-          </h2>
-          <p className="text-slate-500 mt-3 text-sm sm:text-base leading-relaxed">
-            We combine speed, precision, and world-class customer care to deliver
-            production-ready files every single time.
-          </p>
-        </motion.div>
+        <SectionHeading
+          badge="Why StichPunch"
+          badgeIcon={CheckCircle}
+          title="Why Choose Stich Punch?"
+          subtitle="We combine speed, precision, and world-class customer care to deliver production-ready files every single time."
+          accent="blue"
+          align="center"
+        />
 
         {/* 3×2 Grid */}
         <motion.div

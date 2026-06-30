@@ -55,7 +55,7 @@ export default function PromoPopup() {
                 <h2 className="text-3xl sm:text-4xl font-black text-slate-900 leading-tight">
                   Get Your First<br />
                   <span className="text-transparent bg-clip-text" style={{ backgroundImage: "linear-gradient(90deg, #f96f1f, #1cb8df)" }}>
-                    Custom Logo
+                    Left Chest Logo
                   </span><br />
                   Absolutely FREE
                 </h2>
@@ -63,13 +63,13 @@ export default function PromoPopup() {
 
               {/* Subtext */}
               <p className="text-slate-500 text-sm leading-relaxed max-w-xs">
-                Try our premium digitizing & vector art service — your first logo is on us. No strings attached.
+                Try our premium digitizing & vector art service — your first left chest logo is on us. No strings attached.
               </p>
 
               {/* CTA buttons */}
               <div className="flex flex-col w-full gap-3 mt-2">
                 <a
-                  href="mailto:sales@stichpunch.com?subject=Free Logo Claim&body=Hi, I want to claim my free custom logo!"
+                  href="mailto:sales@stichpunch.com?subject=Free Left Chest Logo Claim&body=Hi, I want to claim my free left chest logo!"
                   className="w-full text-white font-bold py-3.5 rounded-xl text-sm uppercase tracking-wider transition-all shadow-lg text-center hover:brightness-110"
                   style={{ background: "#f96f1f" }}
                 >

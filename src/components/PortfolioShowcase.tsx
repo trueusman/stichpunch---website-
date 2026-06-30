@@ -1,248 +1,320 @@
-import React, { useState } from "react";
-import { Cpu, Eye, Star, ArrowUpRight } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Cpu, Eye, Star, ArrowUpRight, ChevronLeft, ChevronRight, Sparkles, Pause, Play } from "lucide-react";
 import { PORTFOLIO_DATA } from "../data";
 import { motion, AnimatePresence } from "motion/react";
+import SectionHeading from "./SectionHeading";
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.07, delayChildren: 0.05 },
-  },
+// Select one best featured item per category
+const getFeaturedByCategory = () => {
+  const categories = ["embroidery", "vector", "patches", "before_after"];
+  return categories.map(cat => 
+    PORTFOLIO_DATA.find(item => item.category === cat && item.featured)
+  ).filter(Boolean);
 };
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 28, scale: 0.9 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { type: "spring", stiffness: 130, damping: 18 },
-  },
-  exit: {
-    opacity: 0,
-    scale: 0.88,
-    y: -12,
-    transition: { duration: 0.2 },
-  },
-};
-
-function categoryLabel(category: string) {
-  if (category === "before_after") return "Vector Redraw";
-  return category.charAt(0).toUpperCase() + category.slice(1);
+interface PortfolioShowcaseProps {
+  onCatPageOpen?: (cat: "digitizing" | "vector" | "patches") => void;
 }
 
-export default function PortfolioShowcase() {
-  const [activeFilter, setActiveFilter] = useState<"all" | "embroidery" | "vector" | "before_after" | "patches">("all");
-  const [showAll, setShowAll] = useState(false);
+export default function PortfolioShowcase({ onCatPageOpen }: PortfolioShowcaseProps) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const featuredItems = getFeaturedByCategory();
+  const currentItem = featuredItems[currentIndex];
+  const [isPaused, setIsPaused] = useState(false);
 
-  const featuredItems = PORTFOLIO_DATA.filter((i) => i.featured);
+  // Auto-play functionality
+  useEffect(() => {
+    if (isPaused) return;
+    
+    const autoPlayInterval = setInterval(() => {
+      setCurrentIndex((prev) => (prev === featuredItems.length - 1 ? 0 : prev + 1));
+    }, 5000); // Change slide every 5 seconds
 
-  const limitedFeatured = (() => {
-    const counts: Record<string, number> = {};
-    return featuredItems.filter((item) => {
-      counts[item.category] = (counts[item.category] || 0) + 1;
-      return counts[item.category] <= 3;
-    });
-  })();
+    return () => clearInterval(autoPlayInterval);
+  }, [currentIndex, isPaused, featuredItems.length]);
 
-  const filteredItems = (showAll ? PORTFOLIO_DATA : limitedFeatured).filter((item) => {
-    if (activeFilter === "all") return true;
-    return item.category === activeFilter;
-  });
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev === 0 ? featuredItems.length - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev === featuredItems.length - 1 ? 0 : prev + 1));
+  };
+
+  const openCategoryPage = () => {
+    if (!currentItem || !onCatPageOpen) return;
+    
+    // Map portfolio categories to category page types
+    const categoryMap: Record<string, "digitizing" | "vector" | "patches"> = {
+      "embroidery": "digitizing",
+      "vector": "vector",
+      "patches": "patches",
+      "before_after": "vector" // Before/after usually shows vector work
+    };
+    
+    const catPageType = categoryMap[currentItem.category];
+    if (catPageType) {
+      onCatPageOpen(catPageType);
+    }
+  };
 
   return (
-    <section id="portfolio" className="py-20 bg-white border-t border-b border-slate-200 scroll-mt-12 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="portfolio" className="py-20 bg-gradient-to-b from-white to-slate-50 border-t border-slate-200 scroll-mt-12 overflow-hidden">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Section Header */}
-        <motion.div
-          className="text-center max-w-2xl mx-auto mb-10"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
-        >
-          <span
-            className="text-xs font-mono font-bold tracking-widest px-3 py-1 rounded-full uppercase"
-            style={{ color: "#1cb8df", background: "rgba(28,184,223,0.08)", border: "1px solid rgba(28,184,223,0.2)" }}
-          >
-            Proof of craft
-          </span>
-          <h2 className="font-display font-bold text-2xl sm:text-3xl text-slate-900 mt-3 tracking-tight leading-tight">
-            Our Elite Design Portfolio
-          </h2>
-          <p className="text-slate-500 mt-2 text-xs sm:text-sm max-w-lg mx-auto leading-relaxed">
-            Hand-picked highlights from our best production work. Filter by type or view the full collection.
-          </p>
-        </motion.div>
+        <SectionHeading
+          badge="Featured Work"
+          badgeIcon={Sparkles}
+          title="Our Premium Portfolio Showcase"
+          subtitle="Hand-selected examples of our finest digitizing, vector art, and patch design work."
+          accent="blue"
+          align="center"
+        />
 
-        {/* Filter Tabs */}
-        <div className="flex flex-wrap justify-center items-center gap-1.5 mb-6 bg-slate-50 p-1.5 rounded-xl max-w-xl mx-auto shadow-sm border border-slate-200">
-          {(["all", "embroidery", "vector", "patches", "before_after"] as const).map((filter) => {
-            const isActive = activeFilter === filter;
-            return (
-              <button
-                key={filter}
-                onClick={() => setActiveFilter(filter)}
-                className={`relative px-3.5 py-2 rounded-lg text-[10px] font-bold tracking-wider uppercase transition-colors duration-250 cursor-pointer ${
-                  isActive ? "text-white" : "text-slate-500 hover:text-slate-900"
-                }`}
+        {/* Portfolio Slider */}
+        <div 
+          className="relative"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          <AnimatePresence mode="wait">
+            {currentItem && (
+              <motion.div
+                key={currentItem.id}
+                initial={{ opacity: 0, x: 100, scale: 0.95 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                exit={{ opacity: 0, x: -100, scale: 0.95 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-200 hover:shadow-3xl transition-shadow duration-500"
               >
-                {isActive && (
+                <div className="grid md:grid-cols-2 gap-0">
+                  
+                  {/* Image Side */}
+                  <motion.div 
+                    className="relative aspect-square md:aspect-auto bg-slate-100 overflow-hidden group cursor-pointer"
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.4 }}
+                    onClick={openCategoryPage}
+                  >
+                    <motion.img
+                      src={currentItem.imageUrl}
+                      alt={currentItem.title}
+                      className="w-full h-full object-cover"
+                      initial={{ scale: 1.1 }}
+                      animate={{ scale: 1 }}
+                      transition={{ duration: 0.8, ease: "easeOut" }}
+                    />
+                    
+                    {/* Category Badge */}
+                    <motion.div 
+                      className="absolute top-4 left-4"
+                      initial={{ y: -20, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ delay: 0.3 }}
+                    >
+                      <span
+                        className="text-xs font-mono font-bold px-3 py-1.5 rounded-full uppercase tracking-wider backdrop-blur-md"
+                        style={{ background: "rgba(255,255,255,0.95)", color: "#1cb8df", border: "1px solid rgba(28,184,223,0.3)" }}
+                      >
+                        {currentItem.category}
+                      </span>
+                    </motion.div>
+
+                    {/* Featured Star */}
+                    {currentItem.featured && (
+                      <motion.div 
+                        className="absolute top-4 right-4"
+                        initial={{ scale: 0, rotate: -180 }}
+                        animate={{ scale: 1, rotate: 0 }}
+                        transition={{ delay: 0.4, type: "spring", stiffness: 200 }}
+                      >
+                        <span
+                          className="flex items-center gap-1 px-2.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider backdrop-blur-md"
+                          style={{ background: "rgba(249,111,31,0.95)", color: "#fff" }}
+                        >
+                          <Star className="h-3 w-3 fill-white" />
+                          Featured
+                        </span>
+                      </motion.div>
+                    )}
+
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 via-transparent to-transparent pointer-events-none" />
+                    
+                    {/* Hover Zoom Icon */}
+                    <motion.div 
+                      className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      initial={{ scale: 0.8 }}
+                      whileHover={{ scale: 1 }}
+                    >
+                      <div className="w-16 h-16 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center shadow-xl">
+                        <Eye className="h-8 w-8 text-[#f96f1f]" />
+                      </div>
+                    </motion.div>
+                  </motion.div>
+
+                  {/* Details Side */}
+                  <div className="p-8 md:p-10 flex flex-col justify-center">
+                    
+                    {/* Title */}
+                    <motion.h3 
+                      className="font-display font-bold text-2xl sm:text-3xl text-slate-900 mb-3"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2 }}
+                    >
+                      {currentItem.title}
+                    </motion.h3>
+
+                    {/* Stats Row */}
+                    {(currentItem.stitchCount || currentItem.colors) && (
+                      <motion.div 
+                        className="flex flex-wrap gap-3 mb-4"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.3 }}
+                      >
+                        {currentItem.stitchCount && (
+                          <motion.span 
+                            className="text-xs font-mono px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 border border-slate-200"
+                            whileHover={{ scale: 1.05, backgroundColor: "#1cb8df", color: "#fff", borderColor: "#1cb8df" }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            {currentItem.stitchCount}
+                          </motion.span>
+                        )}
+                        {currentItem.colors && (
+                          <motion.span 
+                            className="text-xs font-mono px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 border border-slate-200"
+                            whileHover={{ scale: 1.05, backgroundColor: "#f96f1f", color: "#fff", borderColor: "#f96f1f" }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            {currentItem.colors} Colors
+                          </motion.span>
+                        )}
+                      </motion.div>
+                    )}
+
+                    {/* Description */}
+                    <motion.p 
+                      className="text-slate-600 text-sm sm:text-base leading-relaxed mb-6"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.4 }}
+                    >
+                      {currentItem.details}
+                    </motion.p>
+
+                    {/* Software Used */}
+                    <motion.div 
+                      className="flex items-center gap-2 mb-6"
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.5 }}
+                    >
+                      <Cpu className="h-5 w-5 text-slate-400" />
+                      <span className="text-sm font-medium text-slate-500">
+                        {currentItem.softwareUsed}
+                      </span>
+                    </motion.div>
+
+                    {/* View Button */}
+                    <motion.button
+                      onClick={openCategoryPage}
+                      className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white text-sm uppercase tracking-wider shadow-lg w-full md:w-auto"
+                      style={{ background: "#f96f1f" }}
+                      whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(249,111,31,0.3)" }}
+                      whileTap={{ scale: 0.95 }}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.6 }}
+                    >
+                      <Eye className="h-4 w-4" />
+                      View Full Details
+                      <ArrowUpRight className="h-4 w-4" />
+                    </motion.button>
+
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Navigation Arrows */}
+          <motion.button
+            onClick={handlePrev}
+            className="absolute left-4 md:-left-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-white rounded-full shadow-2xl border-2 border-slate-200 flex items-center justify-center transition-all z-20 hover:border-[#f96f1f]"
+            whileHover={{ scale: 1.15, x: -8, boxShadow: "0 25px 50px rgba(0,0,0,0.2)" }}
+            whileTap={{ scale: 0.9 }}
+            aria-label="Previous work"
+          >
+            <ChevronLeft className="h-7 w-7 text-slate-700" strokeWidth={3} />
+          </motion.button>
+          
+          <motion.button
+            onClick={handleNext}
+            className="absolute right-4 md:-right-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-white rounded-full shadow-2xl border-2 border-slate-200 flex items-center justify-center transition-all z-20 hover:border-[#f96f1f]"
+            whileHover={{ scale: 1.15, x: 8, boxShadow: "0 25px 50px rgba(0,0,0,0.2)" }}
+            whileTap={{ scale: 0.9 }}
+            aria-label="Next work"
+          >
+            <ChevronRight className="h-7 w-7 text-slate-700" strokeWidth={3} />
+          </motion.button>
+        </div>
+
+        {/* Dots Indicator */}
+        <div className="flex justify-center items-center gap-4 mt-8">
+          
+          {/* Play/Pause Button */}
+          <motion.button
+            onClick={() => setIsPaused(!isPaused)}
+            className="w-10 h-10 rounded-full bg-white border-2 border-slate-200 flex items-center justify-center hover:border-[#f96f1f] transition-colors shadow-md"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            title={isPaused ? "Play slideshow" : "Pause slideshow"}
+          >
+            {isPaused ? (
+              <Play className="h-4 w-4 text-slate-700 ml-0.5" fill="currentColor" />
+            ) : (
+              <Pause className="h-4 w-4 text-slate-700" fill="currentColor" />
+            )}
+          </motion.button>
+
+          {/* Dots */}
+          <div className="flex gap-2">
+            {featuredItems.map((_, idx) => (
+              <motion.button
+                key={idx}
+                onClick={() => {
+                  setCurrentIndex(idx);
+                  setIsPaused(true); // Pause when manually selecting
+                }}
+                className="rounded-full relative overflow-hidden"
+                style={{
+                  width: idx === currentIndex ? "32px" : "8px",
+                  height: "8px",
+                  backgroundColor: idx === currentIndex ? "#f96f1f" : "#cbd5e1",
+                }}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+                transition={{ duration: 0.3 }}
+                aria-label={`Go to slide ${idx + 1}`}
+              >
+                {/* Progress bar for active slide */}
+                {idx === currentIndex && !isPaused && (
                   <motion.div
-                    layoutId="portfolioActiveTab"
-                    className="absolute inset-0 rounded-lg shadow-sm -z-10"
-                    style={{ background: "#f96f1f" }}
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    className="absolute inset-0 bg-[#1cb8df]"
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ duration: 5, ease: "linear" }}
+                    style={{ transformOrigin: "left" }}
                   />
                 )}
-                <span className="relative z-10">
-                  {filter === "all" ? "All" : filter.replace("_", " ")}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Featured / All toggle */}
-        <div className="flex justify-center mb-8">
-          <div className="flex items-center gap-1 bg-slate-100 border border-slate-200 rounded-full p-1 text-[10px] font-bold">
-            <button
-              onClick={() => setShowAll(false)}
-              className="flex items-center gap-1 px-3 py-1 rounded-full transition-all"
-              style={!showAll ? { background: "#f96f1f", color: "#fff" } : { color: "#64748b" }}
-            >
-              <Star className="h-3 w-3" />
-              Featured
-            </button>
-            <button
-              onClick={() => setShowAll(true)}
-              className="flex items-center gap-1 px-3 py-1 rounded-full transition-all"
-              style={showAll ? { background: "#1cb8df", color: "#fff" } : { color: "#64748b" }}
-            >
-              View All ({PORTFOLIO_DATA.length})
-            </button>
+              </motion.button>
+            ))}
           </div>
-        </div>
-
-        {/* Compact portfolio box grid */}
-        <div className="min-h-64">
-          <motion.div
-            layout
-            key={`${activeFilter}-${showAll}`}
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"
-          >
-            <AnimatePresence mode="popLayout">
-              {filteredItems.map((item) => (
-                <motion.article
-                  layout
-                  key={item.id}
-                  variants={cardVariants}
-                  exit="exit"
-                  whileHover={{ y: -5 }}
-                  transition={{ layout: { type: "spring", stiffness: 200, damping: 26 } }}
-                  className="group relative bg-white border border-slate-200 rounded-lg overflow-hidden shadow-sm hover:shadow-xl hover:border-[#f96f1f]/35 transition-colors duration-300 cursor-pointer"
-                >
-                  {/* Square image box */}
-                  <div className="relative aspect-square overflow-hidden bg-slate-100">
-                    <img
-                      src={item.imageUrl}
-                      alt={item.title}
-                      className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
-                    />
-
-                    {/* Top badges */}
-                    <div className="absolute top-2 left-2 right-2 flex items-start justify-between gap-1 pointer-events-none">
-                      <span
-                        className="text-[8px] font-mono px-2 py-0.5 rounded-md uppercase tracking-wider border backdrop-blur-sm"
-                        style={{ background: "rgba(255,255,255,0.92)", color: "#1cb8df", borderColor: "rgba(28,184,223,0.25)" }}
-                      >
-                        {categoryLabel(item.category)}
-                      </span>
-                      {item.featured && (
-                        <span
-                          className="flex items-center gap-0.5 px-1.5 py-0.5 rounded-md text-[8px] font-bold uppercase tracking-wider"
-                          style={{ background: "rgba(249,111,31,0.92)", color: "#fff" }}
-                        >
-                          <Star className="h-2 w-2" />
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Hover overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-3">
-                      <motion.div
-                        initial={false}
-                        className="translate-y-3 group-hover:translate-y-0 transition-transform duration-300 ease-out space-y-2"
-                      >
-                        {item.stitchCount && (
-                          <div className="flex gap-2">
-                            <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-white/15 text-white border border-white/20">
-                              {item.stitchCount}
-                            </span>
-                            {item.colors != null && (
-                              <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-white/15 text-white border border-white/20">
-                                {item.colors} colors
-                              </span>
-                            )}
-                          </div>
-                        )}
-                        <p className="text-[10px] text-slate-200 leading-snug line-clamp-2">{item.details}</p>
-                        <div className="flex items-center justify-between">
-                          <span className="flex items-center gap-1 text-[9px] font-mono text-slate-300">
-                            <Cpu className="h-3 w-3" style={{ color: "#1cb8df" }} />
-                            {item.softwareUsed}
-                          </span>
-                          <span className="flex items-center gap-0.5 text-[9px] font-bold uppercase tracking-wider text-white">
-                            <Eye className="h-3 w-3" />
-                            View
-                          </span>
-                        </div>
-                      </motion.div>
-                    </div>
-
-                    {/* Corner accent on hover */}
-                    <div
-                      className="absolute bottom-0 left-0 h-0.5 w-0 group-hover:w-full transition-all duration-500 ease-out"
-                      style={{ background: "linear-gradient(90deg, #f96f1f, #1cb8df)" }}
-                    />
-                  </div>
-
-                  {/* Compact footer */}
-                  <div className="px-3 py-2.5 flex items-center justify-between gap-2 bg-white">
-                    <div className="min-w-0 flex-1">
-                      <h3 className="font-display font-bold text-xs sm:text-sm text-slate-900 tracking-tight truncate group-hover:text-[#f96f1f] transition-colors">
-                        {item.title}
-                      </h3>
-                      <p className="text-[9px] font-mono text-slate-400 uppercase tracking-wider mt-0.5 truncate">
-                        {item.softwareUsed}
-                      </p>
-                    </div>
-                    <div
-                      className="flex-shrink-0 w-6 h-6 rounded-md flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300"
-                      style={{ background: "rgba(249,111,31,0.1)", border: "1px solid rgba(249,111,31,0.25)" }}
-                    >
-                      <ArrowUpRight className="h-3 w-3" style={{ color: "#f96f1f" }} />
-                    </div>
-                  </div>
-                </motion.article>
-              ))}
-            </AnimatePresence>
-          </motion.div>
-
-          {filteredItems.length === 0 && (
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center text-slate-400 text-sm py-12 font-mono"
-            >
-              No items in this category.
-            </motion.p>
-          )}
+          
         </div>
 
       </div>

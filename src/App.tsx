@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { motion } from "motion/react";
 
 // Import modular layouts
 import Header from "./components/Header";
@@ -19,6 +20,7 @@ import FooterSection from "./components/FooterSection";
 import CookieCard from "./components/CookieCard";
 import PromoPopup from "./components/PromoPopup";
 import IntroSplash from "./components/IntroSplash";
+import FloatingDiscountCard from "./components/FloatingDiscountCard";
 
 type CatPage = "digitizing" | "vector" | "patches" | "before_after" | null;
 
@@ -67,15 +69,34 @@ export default function App() {
   };
 
   const openCatPage = (cat: "digitizing" | "vector" | "patches" | "before_after") => {
-    setCatPage(cat);
+    // Add smooth fade out animation before opening category page
+    const mainContent = document.querySelector('main');
+    if (mainContent) {
+      mainContent.style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out';
+      mainContent.style.opacity = '0';
+      mainContent.style.transform = 'translateY(-20px)';
+    }
+    
+    setTimeout(() => {
+      setCatPage(cat);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 400);
   };
 
   const closeCatPage = () => {
-    setCatPage(null);
-    // Scroll back to the preview section
+    // Add smooth fade out animation before closing category page
+    const categoryContent = document.querySelector('.category-page-content');
+    if (categoryContent) {
+      categoryContent.classList.add('fade-out');
+    }
+    
     setTimeout(() => {
-      document.getElementById("cat-preview")?.scrollIntoView({ behavior: "smooth" });
-    }, 100);
+      setCatPage(null);
+      // Scroll back to the preview section
+      setTimeout(() => {
+        document.getElementById("cat-preview")?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    }, 400);
   };
 
   // ── Category full-page view ──
@@ -101,7 +122,12 @@ export default function App() {
 
       <Header onQuoteClick={handleScrollToQuote} activeSection={activeTab} onCatPageOpen={openCatPage} />
 
-      <main className="flex-grow">
+      <motion.main 
+        className="flex-grow"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+      >
 
         {/* 1. Home */}
         <Hero onQuoteClick={handleScrollToQuote} />
@@ -114,7 +140,7 @@ export default function App() {
         <WhyChooseUs />
 
         {/* 4. Portfolio */}
-        <PortfolioShowcase />
+        <PortfolioShowcase onCatPageOpen={openCatPage} />
 
         {/* 5. Categories */}
         <CategoryDetailSections onViewMore={openCatPage} />
@@ -133,11 +159,12 @@ export default function App() {
         <OrderForm />
         <PaymentSection />
 
-      </main>
+      </motion.main>
 
       <FooterSection />
       <CookieCard />
       <PromoPopup />
+      <FloatingDiscountCard onQuoteClick={handleScrollToQuote} />
 
     </div>
   );

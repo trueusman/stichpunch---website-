@@ -1,6 +1,7 @@
 import React from "react";
 import { Award, Clock, Users, Globe, ShieldCheck, Handshake, Star, Package } from "lucide-react";
 import { motion } from "motion/react";
+import SectionHeading from "./SectionHeading";
 import logoImg from "../assets/images/stichpunch.png";
 import aboutImg from "../assets/images/about.png";
 
@@ -19,8 +20,8 @@ const stats = [
   },
   {
     icon: <Star className="h-6 w-6" style={{ color: "#1cb8df" }} />,
-    value: "5000+",
-    label: "Satisfied Customers",
+    value: "1500+",
+    label: "Happy Clients",
     sub: "Trusted by businesses worldwide.",
   },
   {
@@ -139,24 +140,13 @@ export default function AboutSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
 
         {/* Values header */}
-        <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="flex items-center justify-center gap-3 mb-3">
-            <div className="h-[2px] w-8 rounded" style={{ background: "#f96f1f" }} />
-            <span className="text-xs font-bold tracking-widest uppercase" style={{ color: "#f96f1f" }}>
-              OUR VALUES
-            </span>
-            <div className="h-[2px] w-8 rounded" style={{ background: "#f96f1f" }} />
-          </div>
-          <h3 className="font-display font-extrabold text-2xl sm:text-3xl" style={{ color: "#1B2A6B" }}>
-            The Principles That Drive Us
-          </h3>
-        </motion.div>
+        <SectionHeading
+          badge="Our Values"
+          badgeIcon={ShieldCheck}
+          title="The Principles That Drive Us"
+          accent="orange"
+          align="center"
+        />
 
         {/* Values 4-col grid */}
         <motion.div

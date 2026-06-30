@@ -159,7 +159,7 @@ export default function Hero({ onQuoteClick }: HeroProps) {
             {[
               { icon: <PackageCheck className="h-6 w-6" style={{ color: "#f96f1f" }} />, value: "100+", label: "Daily Orders" },
               { icon: <UserCheck className="h-6 w-6" style={{ color: "#f96f1f" }} />, value: "5+", label: "Years Experience" },
-              { icon: <Star className="h-6 w-6" style={{ color: "#f96f1f" }} />, value: "5000+", label: "Satisfied Customers" },
+              { icon: <Star className="h-6 w-6" style={{ color: "#f96f1f" }} />, value: "1500+", label: "Happy Clients" },
               { icon: <Globe className="h-6 w-6" style={{ color: "#f96f1f" }} />, value: "50+", label: "Countries Served" },
             ].map((stat, i) => (
               <div key={i} className="flex items-center gap-3 px-6 py-5">

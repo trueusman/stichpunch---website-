@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { HardDrive, HelpCircle, RefreshCw, FileCheck, CheckCircle2 } from "lucide-react";
 import { DIGITIZING_FORMATS, VECTOR_FORMATS } from "../data";
 import { motion, AnimatePresence } from "motion/react";
+import SectionHeading from "./SectionHeading";
 
 export default function FormatExplainer() {
   const [activeTab, setActiveTab] = useState<"digitizing" | "vector">("digitizing");
@@ -21,23 +22,14 @@ export default function FormatExplainer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <motion.div 
-          className="max-w-3xl mx-auto text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
-        >
-          <span className="text-xs font-mono font-bold tracking-widest px-3.5 py-1.5 rounded-full uppercase" style={{ color: "#1cb8df", background: "rgba(28,184,223,0.08)", border: "1px solid rgba(28,184,223,0.2)" }}>
-            File Deliverables
-          </span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 mt-4 leading-tight">
-            Industry Standard Machine &amp; Vector Formats
-          </h2>
-          <p className="text-slate-355 text-slate-500 mt-4 text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">
-            Never guess if your production files will load correctly. We deliver clean, double-checked native exports compatible instantly with your workshop systems.
-          </p>
-        </motion.div>
+        <SectionHeading
+          badge="File Deliverables"
+          badgeIcon={HardDrive}
+          title="Industry Standard Machine & Vector Formats"
+          subtitle="Never guess if your production files will load correctly. We deliver clean, double-checked native exports compatible instantly with your workshop systems."
+          accent="blue"
+          align="center"
+        />
 
         {/* Division Selector Toggles with active layout spring indicators */}
         <div className="flex border border-slate-200 max-w-lg mx-auto mb-14 bg-slate-50 p-1.5 rounded-2xl shadow-sm relative">

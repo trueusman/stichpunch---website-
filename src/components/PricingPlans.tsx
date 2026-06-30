@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, DollarSign } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
+import SectionHeading from "./SectionHeading";
 
 interface PricingPlansProps {
   onQuoteClick: () => void;
@@ -114,24 +115,14 @@ export default function PricingPlans({ onQuoteClick }: PricingPlansProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Section header */}
-        <div className="text-center mb-10">
-          <span
-            className="text-xs font-mono font-bold tracking-widest px-3.5 py-1.5 rounded-full uppercase"
-            style={{
-              color: "#f96f1f",
-              background: "rgba(249,111,31,0.08)",
-              border: "1px solid rgba(249,111,31,0.2)",
-            }}
-          >
-            Pricing Plans
-          </span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 mt-4 tracking-tight leading-tight">
-            Simple, Transparent Pricing
-          </h2>
-          <p className="text-slate-500 mt-3 text-sm sm:text-base">
-            No hidden fees. Pay once, get production-ready files.
-          </p>
-        </div>
+        <SectionHeading
+          badge="Pricing Plans"
+          badgeIcon={DollarSign}
+          title="Simple, Transparent Pricing"
+          subtitle="No hidden fees. Pay once, get production-ready files."
+          accent="orange"
+          align="center"
+        />
 
         {/* Tab switcher */}
         <div className="flex justify-center mb-12">
