@@ -19,6 +19,7 @@ import embroideryPuffImg from "./assets/images/embroidery_puff_logo_178215858550
 import jaketBack2Img from "./assets/images/jaket back .jpg";
 import digitiz3dPuffImg from "./assets/images/digitiz 3d puff logo.png";
 import patchesPngImg from "./assets/images/patches.png";
+import duckVectorImg from "./assets/images/duck-vector.png";
 import vectorJpegImg from "./assets/images/vector.jpeg";
 import vector2JpegImg from "./assets/images/vector (2).jpeg";
 import vectorArt2Img from "./assets/images/vector art (2).jpg";
@@ -216,6 +217,15 @@ export const PORTFOLIO_DATA: PortfolioItem[] = [
     category: "vector",
     imageUrl: vectorJpegImg,
     details: "Manual vector redraw with clean bezier paths, accurate color separation, and scalable output.",
+    softwareUsed: "Adobe Illustrator CC",
+    featured: true
+  },
+  {
+    id: "port-duck-vector",
+    title: "Duck Character Vector Design",
+    category: "vector",
+    imageUrl: duckVectorImg,
+    details: "Professional character vector design with vibrant colors, clean paths, and perfect scalability for any size.",
     softwareUsed: "Adobe Illustrator CC",
     featured: true
   },

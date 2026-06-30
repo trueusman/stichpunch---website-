@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 // Import modular layouts
 import Header from "./components/Header";
 import Hero from "./components/Hero";
+import TopBanner from "./components/TopBanner";
 import ServicesList from "./components/ServicesList";
 import WhyChooseUs from "./components/WhyChooseUs";
 import PricingPlans from "./components/PricingPlans";
@@ -104,6 +105,7 @@ export default function App() {
     return (
       <div className="relative min-h-screen bg-white">
         {showIntro && <IntroSplash onDone={() => setShowIntro(false)} />}
+        <TopBanner />
         <Header onQuoteClick={handleScrollToQuote} activeSection="" onCatPageOpen={openCatPage} />
         <CategoryPage
           category={catPage}
@@ -119,6 +121,9 @@ export default function App() {
     <div className="relative min-h-screen bg-navy-950 flex flex-col justify-between selection:bg-gold-500/20">
 
       {showIntro && <IntroSplash onDone={() => setShowIntro(false)} />}
+
+      {/* Top Banner - Static Center Text with Fade Animation */}
+      <TopBanner />
 
       <Header onQuoteClick={handleScrollToQuote} activeSection={activeTab} onCatPageOpen={openCatPage} />
 
