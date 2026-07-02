@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Menu, X, Mail, Clock, Facebook, Instagram, Twitter, Linkedin, Cpu, Layers, ShieldCheck, ChevronDown, GitCompare } from "lucide-react";
+import { Menu, X, Mail, Clock, Facebook, Instagram, Twitter, Linkedin, Cpu, Layers, ShieldCheck, ChevronDown, GitCompare, FileText } from "lucide-react";
 import logoImg from "../assets/images/stichpunch.png";
 
 interface HeaderProps {
@@ -12,7 +12,9 @@ export default function Header({ onQuoteClick, activeSection, onCatPageOpen }: H
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [catDropdown, setCatDropdown] = useState(false);
+  const [contactDropdown, setContactDropdown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const contactDropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -25,10 +27,24 @@ export default function Header({ onQuoteClick, activeSection, onCatPageOpen }: H
     { label: "About", href: "#about" },
     { label: "Services", href: "#services" },
     { label: "Portfolio", href: "#portfolio" },
-    { label: "Categories", href: "#cat-preview", hasDropdown: true },
+    { label: "Categories", href: "#cat-preview", hasDropdown: true, dropdownType: "category" },
     { label: "Pricing", href: "#pricing" },
     { label: "File Formats", href: "#formats" },
     { label: "Contact", href: "#contact" },
+  ];
+
+  const contactOptions = [
+    {
+      icon: <FileText className="h-4 w-4" style={{ color: "#f96f1f" }} />,
+      label: "Fill Quote Form",
+      desc: "Get detailed quote instantly",
+      action: () => {
+        setContactDropdown(false);
+        setTimeout(() => {
+          document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      },
+    },
   ];
 
   const categoryLinks = [
@@ -118,13 +134,16 @@ export default function Header({ onQuoteClick, activeSection, onCatPageOpen }: H
                 const isActive = activeSection === item.href.slice(1);
 
                 if (item.hasDropdown) {
+                  const isDropdownOpen = item.dropdownType === "category" ? catDropdown : contactDropdown;
+                  const setDropdownOpen = item.dropdownType === "category" ? setCatDropdown : setContactDropdown;
+                  
                   return (
                     <div
                       key={item.href}
-                      ref={dropdownRef}
+                      ref={item.dropdownType === "category" ? dropdownRef : contactDropdownRef}
                       className="relative"
-                      onMouseEnter={() => setCatDropdown(true)}
-                      onMouseLeave={() => setCatDropdown(false)}
+                      onMouseEnter={() => setDropdownOpen(true)}
+                      onMouseLeave={() => setDropdownOpen(false)}
                     >
                       <a
                         href={item.href}
@@ -136,11 +155,11 @@ export default function Header({ onQuoteClick, activeSection, onCatPageOpen }: H
                         }}
                       >
                         {item.label}
-                        <ChevronDown className={`h-3 w-3 transition-transform duration-200 ${catDropdown ? "rotate-180" : ""}`} />
+                        <ChevronDown className={`h-3 w-3 transition-transform duration-200 ${isDropdownOpen ? "rotate-180" : ""}`} />
                       </a>
 
                       {/* Dropdown */}
-                      {catDropdown && (
+                      {isDropdownOpen && (
                         <div
                           className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-64 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden z-50"
                           style={{ boxShadow: "0 20px 60px rgba(0,0,0,0.12)" }}
@@ -149,26 +168,46 @@ export default function Header({ onQuoteClick, activeSection, onCatPageOpen }: H
                           <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-white border-l border-t border-slate-100 rotate-45" />
 
                           <div className="p-2 pt-3">
-                            {categoryLinks.map((cat) => (
-                              <button
-                                key={cat.label}
-                                className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition-colors group/item text-left"
-                                onClick={() => { setCatDropdown(false); onCatPageOpen(cat.pageKey); }}
-                              >
-                                <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 bg-slate-100 group-hover/item:bg-white transition-colors">
-                                  {cat.icon}
-                                </div>
-                                <div>
-                                  <p className="text-xs font-bold text-slate-900 tracking-wide">{cat.label}</p>
-                                  <p className="text-[10px] text-slate-400 mt-0.5">{cat.desc}</p>
-                                </div>
-                              </button>
-                            ))}
+                            {item.dropdownType === "category" ? (
+                              categoryLinks.map((cat) => (
+                                <button
+                                  key={cat.label}
+                                  className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition-colors group/item text-left"
+                                  onClick={() => { setCatDropdown(false); onCatPageOpen(cat.pageKey); }}
+                                >
+                                  <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 bg-slate-100 group-hover/item:bg-white transition-colors">
+                                    {cat.icon}
+                                  </div>
+                                  <div>
+                                    <p className="text-xs font-bold text-slate-900 tracking-wide">{cat.label}</p>
+                                    <p className="text-[10px] text-slate-400 mt-0.5">{cat.desc}</p>
+                                  </div>
+                                </button>
+                              ))
+                            ) : (
+                              contactOptions.map((opt) => (
+                                <button
+                                  key={opt.label}
+                                  className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition-colors group/item text-left"
+                                  onClick={opt.action}
+                                >
+                                  <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 bg-slate-100 group-hover/item:bg-white transition-colors">
+                                    {opt.icon}
+                                  </div>
+                                  <div>
+                                    <p className="text-xs font-bold text-slate-900 tracking-wide">{opt.label}</p>
+                                    <p className="text-[10px] text-slate-400 mt-0.5">{opt.desc}</p>
+                                  </div>
+                                </button>
+                              ))
+                            )}
                           </div>
 
                           {/* Footer strip */}
                           <div className="px-4 py-2.5 border-t border-slate-100 bg-slate-50">
-                            <p className="text-[10px] text-slate-400 font-mono text-center tracking-wider uppercase">2–4 Hour Turnaround</p>
+                            <p className="text-[10px] text-slate-400 font-mono text-center tracking-wider uppercase">
+                              {item.dropdownType === "category" ? "2–4 Hour Turnaround" : "We Reply Within 2 Hours"}
+                            </p>
                           </div>
                         </div>
                       )}
@@ -231,8 +270,37 @@ export default function Header({ onQuoteClick, activeSection, onCatPageOpen }: H
           <div className="px-4 pt-3 pb-5 space-y-1">
             {menuItems.map((item) => {
               const isActive = activeSection === item.href.slice(1);
+              
+              if (item.hasDropdown && item.dropdownType === "contact") {
+                return (
+                  <div key={item.href} className="space-y-1">
+                    <div className={`mobile-nav-link block px-4 py-2.5 rounded-xl text-sm font-semibold ${isActive ? 'active' : ''}`}
+                      style={{ color: isActive ? "#1B2A6B" : "#64748b", background: isActive ? "rgba(28,184,223,0.08)" : "transparent" }}>
+                      {item.label}
+                    </div>
+                    <div className="pl-4 space-y-1">
+                      {contactOptions.map((opt) => (
+                        <button
+                          key={opt.label}
+                          onClick={() => {
+                            setIsOpen(false);
+                            opt.action();
+                          }}
+                          className="w-full text-left px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 rounded-lg transition-all"
+                        >
+                          {opt.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                );
+              }
+              
               return (
-                <a key={item.href} href={item.href} onClick={() => setIsOpen(false)}
+                <a 
+                  key={item.href} 
+                  href={item.href} 
+                  onClick={() => setIsOpen(false)}
                   className={`mobile-nav-link block px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${isActive ? 'active' : ''}`}
                   style={{ color: isActive ? "#1B2A6B" : "#64748b", background: isActive ? "rgba(28,184,223,0.08)" : "transparent" }}
                 >

@@ -177,6 +177,30 @@ Notes: ${formData.notes || "—"}`,
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
+          {/* Toggle Buttons - Above Badge */}
+          <div className="flex justify-center mb-6">
+            <div className="inline-flex items-center justify-center gap-0 bg-slate-100 rounded-full p-1 shadow-lg">
+              <button
+                onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                className="px-10 py-3.5 text-base font-bold text-white rounded-full transition-all w-[180px]"
+                style={{ background: "#f96f1f" }}
+              >
+                Get a Quote
+              </button>
+
+              <button
+                onClick={() => {
+                  const emailLink = document.createElement('a');
+                  emailLink.href = 'mailto:sales@stichpunch.com';
+                  emailLink.click();
+                }}
+                className="px-10 py-3.5 text-base font-bold text-slate-600 rounded-full transition-all hover:bg-slate-200 w-[180px] text-center"
+              >
+                Email Us
+              </button>
+            </div>
+          </div>
+
           <span className="inline-block text-sm font-black tracking-widest uppercase px-5 py-2 rounded-full border-2 mb-5 shadow-sm bg-white"
             style={{ color: "#1B2A6B", borderColor: "#1cb8df" }}>
             ORDER DESK

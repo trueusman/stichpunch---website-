@@ -4,6 +4,17 @@ import { motion } from "motion/react";
 
 const PAYMENT_METHODS = [
   {
+    name: "Visa",
+    description: "Pay securely with your Visa card.",
+    icon: (
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" className="h-14 w-14">
+        <rect x="4" y="12" width="40" height="24" rx="3" fill="#1A1F71"/>
+        <path d="M18.5 28.5l1.8-10.8h2.8l-1.8 10.8h-2.8zm13.4-10.5c-.6-.2-1.5-.5-2.6-.5-2.9 0-4.9 1.5-4.9 3.7 0 1.6 1.5 2.5 2.6 3 1.1.5 1.5.9 1.5 1.3 0 .7-.9 1-1.7 1-1.1 0-1.7-.2-2.7-.6l-.4-.2-.4 2.4c.7.3 2 .6 3.3.6 3.1 0 5-1.5 5.1-3.8 0-1.3-.8-2.2-2.5-3-.9-.5-1.5-.8-1.5-1.3 0-.4.5-.8 1.5-.8.9 0 1.5.2 2 .4l.2.1.4-2.3zm5.5-.3h-2.2c-.7 0-1.2.2-1.5.9l-4.2 10h3.1s.5-1.3.6-1.6h3.7c.1.3.4 1.6.4 1.6h2.7l-2.6-10.9zm-3.6 7c.2-.6 1.2-3.2 1.2-3.2s.3-.7.4-1.1l.2 1s.6 2.8.7 3.4h-2.5zm-17.6-7l-2.8 7.4-.3-1.5c-.5-1.7-2.1-3.6-4-4.5l2.5 9.6h3.1l4.7-11h-3.2z" fill="white"/>
+        <path d="M13.5 17.7h-4.8l-.1.3c3.7.9 6.1 3.1 7.1 5.8l-1-5.2c-.2-.7-.7-.9-1.2-.9z" fill="#F7B600"/>
+      </svg>
+    ),
+  },
+  {
     name: "PayPal",
     description: "Pay securely with your PayPal account.",
     icon: (
@@ -81,7 +92,7 @@ export default function PaymentSection() {
         </motion.div>
 
         {/* Payment cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
           {PAYMENT_METHODS.map((method, i) => (
             <motion.div
               key={method.name}
