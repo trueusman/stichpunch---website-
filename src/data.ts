@@ -14,10 +14,13 @@ import newDig6Img from "./assets/images/imgi_165_embroidery-digitizing-1-450x450
 import dgImg from "./assets/images/dg.jpg";
 import dg2Img from "./assets/images/dg (2).jpg";
 import degitizingImg from "./assets/images/degitizing.jpg";
-import digitizngImg from "./assets/images/digitizng.jpg";
+import digitizngImg from "./assets/images/digitizng.png";
 import embroideryPuffImg from "./assets/images/embroidery_puff_logo_1782158585504.jpg";
 import jaketBack2Img from "./assets/images/jaket back .jpg";
 import digitiz3dPuffImg from "./assets/images/digitiz 3d puff logo.png";
+import embr3dPuffLogoImg from "./assets/images/embr 3d puff logo.png";
+import embr3dpuffLogoImg from "./assets/images/embr 3dpuff logo.png";
+import latherPatcheImg from "./assets/images/lather patche.png";
 import patchesPngImg from "./assets/images/patches.png";
 import duckVectorImg from "./assets/images/duck-vector.png";
 import vectorJpegImg from "./assets/images/vector.jpeg";
@@ -208,6 +211,39 @@ export const PORTFOLIO_DATA: PortfolioItem[] = [
     category: "embroidery",
     imageUrl: embroideryPuffImg,
     details: "3D puff embroidery with raised foam effect for caps and apparel.",
+    softwareUsed: "Wilcom Embroidery Studio",
+    featured: true
+  },
+  {
+    id: "port-embr-3d-puff",
+    title: "3D Puff Embroidery Logo",
+    category: "embroidery",
+    imageUrl: embr3dPuffLogoImg,
+    details: "Premium 3D puff embroidery with raised foam effect for professional branding on caps and apparel.",
+    stitchCount: "9,500 Stitches",
+    colors: 3,
+    softwareUsed: "Wilcom Embroidery Studio",
+    featured: true
+  },
+  {
+    id: "port-embr-3dpuff-logo",
+    title: "Premium 3D Puff Logo",
+    category: "embroidery",
+    imageUrl: embr3dpuffLogoImg,
+    details: "High-quality 3D puff embroidery with detailed foam effect for structured caps and premium garments.",
+    stitchCount: "8,800 Stitches",
+    colors: 4,
+    softwareUsed: "Wilcom Embroidery Studio",
+    featured: true
+  },
+  {
+    id: "port-leather-patch",
+    title: "Leather Patch Design",
+    category: "embroidery",
+    imageUrl: latherPatcheImg,
+    details: "Custom leather patch with embroidered or engraved detailing for premium apparel and accessories.",
+    stitchCount: "5,200 Stitches",
+    colors: 2,
     softwareUsed: "Wilcom Embroidery Studio",
     featured: true
   },
